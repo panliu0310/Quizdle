@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Quizdle</string>
+    <string name="hello_home_fragment">Hello home fragment</string>
+    <string name="hello_level_fragment">Hello level fragment</string>
+    <string name="hello_battle_fragment">Hello battle fragment</string>
+    <string name="hello_discuss_fragment">Hello discuss fragment</string>
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="主頁"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/level"
+        android:title="闖關"
+        android:icon="@drawable/paper"/>
+    <item
+        android:id="@+id/battle"
+        android:title="對戰"
+        android:icon="@drawable/swords"/>
+    <item
+        android:id="@+id/discuss"
+        android:title="討論"
+        android:icon="@drawable/discuss"/>
+</menu>
