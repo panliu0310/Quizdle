@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "827721459667",
+    "project_id": "quizdle-c3b82",
+    "storage_bucket": "quizdle-c3b82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827721459667:android:0794128f875d1c889f3126",
+        "android_client_info": {
+          "package_name": "edu.cuhk.csci3310.quizdle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827721459667-jlavqf638v1hmngu6ket6ojc3u37p6gp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa71QeapR_gRpNmx_EoQyFrXl1i0i0dVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827721459667-jlavqf638v1hmngu6ket6ojc3u37p6gp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
