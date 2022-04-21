@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
-        bottomNavigationView.setSelectedItemId(0);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.home);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -71,20 +72,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
-            case 0:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+            case R.id.home:
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, homeFragment).commit();
                 return true;
 
-            case 1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, levelFragment).commit();
+            case R.id.level:
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, levelFragment).commit();
                 return true;
 
-            case 2:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, battleFragment).commit();
+            case R.id.battle:
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, battleFragment).commit();
                 return true;
 
-            case 3:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, discussFragment).commit();
+            case R.id.discuss:
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, discussFragment).commit();
                 return true;
         }
         return false;
