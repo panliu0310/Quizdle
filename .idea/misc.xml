@@ -3,14 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_login.xml" value="0.1296875" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_main.xml" value="0.12239583333333333" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/fragment_battle.xml" value="0.12239583333333333" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/fragment_discuss.xml" value="0.12239583333333333" />
-        <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/fragment_home.xml" value="0.6" />
+        <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/fragment_home.xml" value="0.4" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/fragment_level.xml" value="0.12239583333333333" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/menu/bottom_nav_menu.xml" value="0.12239583333333333" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>
   </component>
