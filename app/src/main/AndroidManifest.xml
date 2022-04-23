@@ -11,14 +11,16 @@
         android:theme="@style/Theme.Quizdle">
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity
+            android:name=".MainActivity"/>
     </application>
 
 </manifest>
