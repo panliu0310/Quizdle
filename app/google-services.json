@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "827721459667-dk13qcvsuumbidg7pkoljprep7pp8bu7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.cuhk.csci3310.quizdle",
+            "certificate_hash": "52b97aff733d1d7395593ae0501be92bbd83b0f0"
+          }
+        },
+        {
           "client_id": "827721459667-jlavqf638v1hmngu6ket6ojc3u37p6gp.apps.googleusercontent.com",
           "client_type": 3
         }
