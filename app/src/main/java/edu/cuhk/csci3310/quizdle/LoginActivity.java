@@ -24,6 +24,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import edu.cuhk.csci3310.quizdle.model.User;
+import edu.cuhk.csci3310.quizdle.util.UserUtil;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +40,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mFirebaseAuth;
     private GoogleSignInClient mGoogleSignInClient;
+
+    private FirebaseFirestore mFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Google SignInButton: Click to begin Google SignIn
         signInButton = findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(this);
+
+        // Enable Firestore logging
+        FirebaseFirestore.setLoggingEnabled(true);
+        mFirestore = FirebaseFirestore.getInstance();
     }
 
     private void checkUser() {
@@ -117,6 +128,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (authResult.getAdditionalUserInfo().isNewUser()){
                             // user is new - Account Created
                             Log.d(TAG, "onSuccess: Account Created...\n" + email);
+                            createAccount();
                             Toast.makeText(LoginActivity.this, "Account Created...\n" + email, Toast.LENGTH_SHORT).show();
                         } else {
                             // existing user - Logged In
@@ -136,5 +148,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Log.d(TAG, "onFailure: Log in falied" + e.getMessage());
                     }
                 });
+    }
+
+    private void createAccount(){
+        // create "User" data set in firebase
+        CollectionReference newUser = mFirestore.collection("users");
+        User user = UserUtil.createNewUser(this);
+        newUser.add(user);
     }
 }
