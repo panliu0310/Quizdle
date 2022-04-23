@@ -33,8 +33,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static final int RC_SIGN_IN = 9001;
 
-    private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mFirebaseAuth;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
