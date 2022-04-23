@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:title="主頁"
+        android:title="個人主頁"
         android:icon="@drawable/home"/>
     <item
-        android:id="@+id/level"
-        android:title="闖關"
+        android:id="@+id/singlePlayer"
+        android:title="單人模式"
         android:icon="@drawable/paper"/>
     <item
         android:id="@+id/battle"
-        android:title="對戰"
+        android:title="對戰模式"
         android:icon="@drawable/swords"/>
     <item
         android:id="@+id/discuss"
-        android:title="討論"
+        android:title="開放討論"
         android:icon="@drawable/discuss"/>
 </menu>

@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -17,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     BottomNavigationView bottomNavigationView;
 
     HomeFragment homeFragment = new HomeFragment();
-    LevelFragment levelFragment = new LevelFragment();
+    SinglePlayerFragment singlePlayerFragment = new SinglePlayerFragment();
     BattleFragment battleFragment = new BattleFragment();
     DiscussFragment discussFragment = new DiscussFragment();
 
@@ -44,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, homeFragment).commit();
                 return true;
 
-            case R.id.level:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, levelFragment).commit();
+            case R.id.singlePlayer:
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, singlePlayerFragment).commit();
                 return true;
 
             case R.id.battle:
