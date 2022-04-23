@@ -11,13 +11,73 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_test"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margintop_common"
+            android:layout_marginStart="@dimen/marginstart_common"
+            android:layout_marginEnd="@dimen/marginend_common"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/hello_home_fragment" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="@dimen/margintop_common"
+                android:layout_marginStart="@dimen/marginstart_common"
+                android:src="@drawable/home"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/marginstart_common"
+                android:text="username"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_level"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_common"
+                android:text="level"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toBottomOf="@+id/tv_username"/>
+
+            <TextView
+                android:id="@+id/tv_experience"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_common"
+                android:text="exp"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toBottomOf="@+id/tv_level"/>
+
+            <TextView
+                android:id="@+id/tv_win"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_common"
+                android:text="win: XX/XX"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toBottomOf="@+id/tv_experience"/>
+
+            <TextView
+                android:id="@+id/tv_coin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_common"
+                android:text="coin"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toBottomOf="@+id/tv_win"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/btn_logout"
@@ -25,7 +85,7 @@
             android:layout_height="50dp"
             android:text="Logout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_test"/>
+            app:layout_constraintTop_toBottomOf="@+id/cl_profile"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
