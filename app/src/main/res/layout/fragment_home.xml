@@ -31,51 +31,45 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                android:id="@+id/tv_username"
+            <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
+                android:id="@+id/ppv_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="@dimen/marginstart_common"
-                android:text="username"
+                app:profileName="name"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                android:id="@+id/tv_level"
+            <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
+                android:id="@+id/ppv_level"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginstart_common"
-                android:text="level"
+                app:profileName="level"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
-                app:layout_constraintTop_toBottomOf="@+id/tv_username"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_name"/>
 
-            <TextView
-                android:id="@+id/tv_experience"
+            <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
+                android:id="@+id/ppv_experience"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginstart_common"
-                android:text="exp"
+                app:profileName="experience"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
-                app:layout_constraintTop_toBottomOf="@+id/tv_level"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_level"/>
 
-            <TextView
-                android:id="@+id/tv_win"
+            <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
+                android:id="@+id/ppv_win"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginstart_common"
-                android:text="win: XX/XX"
+                app:profileName="win"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
-                app:layout_constraintTop_toBottomOf="@+id/tv_experience"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_experience"/>
 
-            <TextView
-                android:id="@+id/tv_coin"
+            <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
+                android:id="@+id/ppv_coin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginstart_common"
-                android:text="coin"
+                app:profileName="experience"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
-                app:layout_constraintTop_toBottomOf="@+id/tv_win"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_win"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
