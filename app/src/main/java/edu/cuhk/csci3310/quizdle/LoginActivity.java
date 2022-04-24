@@ -154,6 +154,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // create "User" data set in firebase
         CollectionReference newUser = mFirestore.collection("users");
         User user = UserUtil.createNewUser(this);
-        newUser.add(user);
+        newUser.add(user)
+                .addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        Log.d(TAG, "New user successfully added on Firestore!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding new user", e);
+                    }
+                });
     }
 }

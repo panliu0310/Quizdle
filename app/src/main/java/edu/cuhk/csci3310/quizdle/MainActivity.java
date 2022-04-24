@@ -1,8 +1,11 @@
 package edu.cuhk.csci3310.quizdle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,7 +13,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private String TAG = "HomePage";
+    private String TAG = "MainActivity";
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     BottomNavigationView bottomNavigationView;
 
@@ -18,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     SinglePlayerFragment singlePlayerFragment = new SinglePlayerFragment();
     BattleFragment battleFragment = new BattleFragment();
     DiscussFragment discussFragment = new DiscussFragment();
+
+    private Uri mImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null){
+            mImageUri = data.getData();
+
+
+        }
+
     }
 
     @Override

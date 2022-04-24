@@ -1,6 +1,7 @@
 package edu.cuhk.csci3310.quizdle;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,11 +25,13 @@ import com.google.firebase.auth.FirebaseUser;
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     private FirebaseAuth mFirebaseAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
-    Button logout;
+    private ImageButton ibIcon;
+    private Button btnLogout;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -57,8 +61,16 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        logout = view.findViewById(R.id.btn_logout);
-        logout.setOnClickListener(new View.OnClickListener() {
+
+        ibIcon = view.findViewById(R.id.ib_icon);
+        ibIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
+        btnLogout = view.findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 revokeAccess();
@@ -87,6 +99,14 @@ public class HomeFragment extends Fragment {
                         startActivity(new Intent(getContext(), LoginActivity.class));
                     }
                 });
+    }
+
+    // pick image from device
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        //startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
 }

@@ -21,13 +21,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/iv_icon"
+            <ImageButton
+                android:id="@+id/ib_icon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="@dimen/margintop_common"
                 android:layout_marginStart="@dimen/marginstart_common"
                 android:src="@drawable/home"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -36,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:profileName="name"
-                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintStart_toEndOf="@id/ib_icon"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
@@ -44,7 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:profileName="level"
-                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintStart_toEndOf="@id/ib_icon"
                 app:layout_constraintTop_toBottomOf="@id/ppv_name"/>
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
@@ -52,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:profileName="experience"
-                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintStart_toEndOf="@id/ib_icon"
                 app:layout_constraintTop_toBottomOf="@id/ppv_level"/>
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
@@ -60,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:profileName="win"
-                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintStart_toEndOf="@id/ib_icon"
                 app:layout_constraintTop_toBottomOf="@id/ppv_experience"/>
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
@@ -68,7 +70,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:profileName="experience"
-                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintStart_toEndOf="@id/ib_icon"
                 app:layout_constraintTop_toBottomOf="@id/ppv_win"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
