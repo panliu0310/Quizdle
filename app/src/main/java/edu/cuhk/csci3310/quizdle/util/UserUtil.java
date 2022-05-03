@@ -8,13 +8,16 @@ public class UserUtil {
 
     private static final String TAG = "UserUtil";
 
-    public static User createNewUser(Context context) {
+    public static User createNewUser(String email) {
         User user = new User();
 
-        user.setName("NewUser");
+        user.setEmail(email);
+        user.setUsername(email);
         user.setLevel(1);
-        user.setExperience("0/100");
-        user.setWin("0/0");
+        user.setExperience(0);
+        user.setUpgradeRequired(100);
+        user.setVictory(0);
+        user.setTotalMatch(0);
         user.setCoin(0);
 
         return user;

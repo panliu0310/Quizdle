@@ -34,16 +34,18 @@ public class ProfilePairView extends ConstraintLayout {
         } finally {
             a.recycle();
         }
-        fetchProfileFromFirestore();
-        setField();
+        setName();
     }
 
-    private void setField(){
+    private void setName(){
         tvName.setText(name);
+    }
+
+    public void setContent(String content){
         tvContent.setText(content);
     }
 
-    public void fetchProfileFromFirestore(){
-        content = "testing";
+    public void setContent(String content1, String content2){
+        tvContent.setText(content1 + "/" + content2);
     }
 }

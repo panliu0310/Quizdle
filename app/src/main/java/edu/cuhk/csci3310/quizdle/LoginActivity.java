@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     SignInButton signInButton;
 
+    private String email = "";
     private static final String TAG = "LoginActivity";
 
     public static final int RC_SIGN_IN = 9001;
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
                         // get user info
                         String uid = firebaseUser.getUid();
-                        String email = firebaseUser.getEmail();
+                        email = firebaseUser.getEmail();
 
                         Log.d(TAG, "onSuccess: Email: " + email);
                         Log.d(TAG, "onSuccess: UID: " + uid);
@@ -153,7 +154,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void createAccount(){
         // create "User" data set in firebase
         CollectionReference newUser = mFirestore.collection("users");
-        User user = UserUtil.createNewUser(this);
+        User user = UserUtil.createNewUser(email);
         newUser.add(user)
                 .addOnSuccessListener(new OnSuccessListener() {
                     @Override

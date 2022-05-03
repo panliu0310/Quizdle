@@ -21,17 +21,30 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import edu.cuhk.csci3310.quizdle.customview.ProfilePairView;
 
 public class HomeFragment extends Fragment {
 
+    private String email = "";
     private static final String TAG = "HomeFragment";
     private static final int PICK_IMAGE_REQUEST = 1;
+
+    ProfilePairView ppvUsername;
+    ProfilePairView ppvLevel;
+    ProfilePairView ppvExperience;
+    ProfilePairView ppvVictory;
+    ProfilePairView ppvCoin;
 
     private FirebaseAuth mFirebaseAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
-    private ImageButton ibIcon;
-    private Button btnLogout;
+    private FirebaseFirestore mFirestore;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -54,6 +67,10 @@ public class HomeFragment extends Fragment {
         // initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         checkUser();
+
+        // Enable Firestore logging
+        FirebaseFirestore.setLoggingEnabled(true);
+        mFirestore = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -62,29 +79,39 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ibIcon = view.findViewById(R.id.ib_icon);
+        ImageButton ibIcon = view.findViewById(R.id.ib_icon);
         ibIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFileChooser();
             }
         });
-        btnLogout = view.findViewById(R.id.btn_logout);
+        Button btnLogout = view.findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 revokeAccess();
             }
         });
+        ppvUsername = view.findViewById(R.id.ppv_username);
+        ppvLevel = view.findViewById(R.id.ppv_level);
+        ppvExperience = view.findViewById(R.id.ppv_experience);
+        ppvVictory = view.findViewById(R.id.ppv_victory);
+        ppvCoin = view.findViewById(R.id.ppv_coin);
+        setField();
         return view;
     }
 
     private void checkUser(){
         // get current user
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
         if (firebaseUser == null){
             // user not logged in
             startActivity(new Intent(getContext(), LoginActivity.class));
+        } else {
+            // set email to fetch data
+            email = firebaseUser.getEmail();
         }
     }
 
@@ -107,6 +134,36 @@ public class HomeFragment extends Fragment {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         //startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    // set ppv content
+    private void setField(){
+        CollectionReference usersRef = mFirestore.collection("users");
+        usersRef.whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                ppvUsername.setContent(String.valueOf(document.getData().get("username")));
+                                ppvLevel.setContent(String.valueOf(document.getData().get("level")));
+                                ppvExperience.setContent(
+                                        String.valueOf(document.getData().get("experience")),
+                                        String.valueOf(document.getData().get("upgradeRequired"))
+                                );
+                                ppvVictory.setContent(
+                                        String.valueOf(document.getData().get("victory")),
+                                        String.valueOf(document.getData().get("totalMatch"))
+                                );
+                                ppvCoin.setContent(String.valueOf(document.getData().get("coin")));
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
 }

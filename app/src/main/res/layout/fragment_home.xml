@@ -34,10 +34,10 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
-                android:id="@+id/ppv_name"
+                android:id="@+id/ppv_username"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:profileName="name"
+                app:profileName="username"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 app:profileName="level"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
-                app:layout_constraintTop_toBottomOf="@id/ppv_name"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_username"/>
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
                 android:id="@+id/ppv_experience"
@@ -58,10 +58,10 @@
                 app:layout_constraintTop_toBottomOf="@id/ppv_level"/>
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
-                android:id="@+id/ppv_win"
+                android:id="@+id/ppv_victory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:profileName="win"
+                app:profileName="victory"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
                 app:layout_constraintTop_toBottomOf="@id/ppv_experience"/>
 
@@ -69,9 +69,9 @@
                 android:id="@+id/ppv_coin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:profileName="experience"
+                app:profileName="coin"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
-                app:layout_constraintTop_toBottomOf="@id/ppv_win"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_victory"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
