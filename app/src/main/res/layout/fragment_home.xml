@@ -79,14 +79,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Logout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_profile"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

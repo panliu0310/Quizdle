@@ -86,13 +86,6 @@ public class HomeFragment extends Fragment {
                 openFileChooser();
             }
         });
-        Button btnLogout = view.findViewById(R.id.btn_logout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                revokeAccess();
-            }
-        });
         ppvUsername = view.findViewById(R.id.ppv_username);
         ppvLevel = view.findViewById(R.id.ppv_level);
         ppvExperience = view.findViewById(R.id.ppv_experience);
@@ -113,19 +106,6 @@ public class HomeFragment extends Fragment {
             // set email to fetch data
             email = firebaseUser.getEmail();
         }
-    }
-
-    // disconnect google account
-    public void revokeAccess() {
-        mGoogleSignInClient.revokeAccess()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.d(TAG, "successfully sign out");
-                        mFirebaseAuth.signOut();
-                        startActivity(new Intent(getContext(), LoginActivity.class));
-                    }
-                });
     }
 
     // pick image from device
