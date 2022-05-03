@@ -3,4 +3,5 @@
     <dimen name="margintop_common">16dp</dimen>
     <dimen name="marginstart_common">16dp</dimen>
     <dimen name="marginend_common">16dp</dimen>
+    <dimen name="corner_common">12dp</dimen>
 </resources>

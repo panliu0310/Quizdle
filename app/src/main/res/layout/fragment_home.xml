@@ -9,7 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/purple_200">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_profile"
@@ -18,13 +19,15 @@
             android:layout_marginTop="@dimen/margintop_common"
             android:layout_marginStart="@dimen/marginstart_common"
             android:layout_marginEnd="@dimen/marginend_common"
+            android:paddingBottom="16dp"
+            android:background="@drawable/bg_corner_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
                 android:id="@+id/ib_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="87dp"
+                android:layout_height="87dp"
                 android:layout_marginTop="@dimen/margintop_common"
                 android:layout_marginStart="@dimen/marginstart_common"
                 android:src="@drawable/home"
@@ -37,6 +40,7 @@
                 android:id="@+id/ppv_username"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margintop_common"
                 app:profileName="username"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
                 app:layout_constraintTop_toTopOf="parent"/>
