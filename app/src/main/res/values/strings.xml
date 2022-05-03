@@ -4,4 +4,7 @@
     <string name="hello_level_fragment">Hello level fragment</string>
     <string name="hello_battle_fragment">Hello battle fragment</string>
     <string name="hello_discuss_fragment">Hello discuss fragment</string>
+    <string name="setting">setting</string>
+    <string name="content_description_setting">setting</string>
+    <string name="hello_setting_activity">setting activity</string>
 </resources>

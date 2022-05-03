@@ -3,11 +3,14 @@ package edu.cuhk.csci3310.quizdle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,7 +33,31 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        setToolbar();
+
+        setBottomNavigationView();
+    }
+
+    private void setToolbar(){
+        // assigning ID of the toolbar to a variable
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // using toolbar as ActionBar
+        setSupportActionBar(toolbar);
+        ImageButton ibSetting = (ImageButton) findViewById(R.id.ib_setting);
+        ibSetting.setImageResource(R.drawable.settings);
+        ibSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            // incrementing the value of textView
+            public void onClick( View view ) {
+                // start SettingActivity
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+            }
+        });
+    }
+
+    private void setBottomNavigationView(){
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
     }

@@ -52,4 +52,5 @@ dependencies {
 
     // Firestore
     implementation 'com.google.firebase:firebase-firestore:24.1.1'
+
 }
