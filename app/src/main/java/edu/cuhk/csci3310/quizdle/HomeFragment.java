@@ -66,7 +66,9 @@ public class HomeFragment extends Fragment {
 
         // initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
-        checkUser();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+        assert firebaseUser != null;
+        email = firebaseUser.getEmail();
 
         // Enable Firestore logging
         FirebaseFirestore.setLoggingEnabled(true);
@@ -93,19 +95,6 @@ public class HomeFragment extends Fragment {
         ppvCoin = view.findViewById(R.id.ppv_coin);
         setField();
         return view;
-    }
-
-    private void checkUser(){
-        // get current user
-        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-
-        if (firebaseUser == null){
-            // user not logged in
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        } else {
-            // set email to fetch data
-            email = firebaseUser.getEmail();
-        }
     }
 
     // pick image from device

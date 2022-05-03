@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import edu.cuhk.csci3310.quizdle.dialogfragment.ModifyUsernameDialogFragment;
+
 public class SettingActivity extends AppCompatActivity {
 
     private String TAG = "SettingActivity";
@@ -24,20 +26,34 @@ public class SettingActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mFirebaseAuth;
 
+    private String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
         setToolbar();
+
+        // get data from intent
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
         // initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
+        Button btnModifyUsername = (Button) findViewById(R.id.btn_modify_username);
+        btnModifyUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModifyUsernameDialogFragment fragment = ModifyUsernameDialogFragment.newInstance(username);
+                fragment.show(getSupportFragmentManager(), TAG);
+            }
+        });
         Button btnLogout = (Button) findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +68,7 @@ public class SettingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

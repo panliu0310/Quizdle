@@ -37,11 +37,19 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <Button
+        android:id="@+id/btn_modify_username"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Modify Username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"/>
+
+    <Button
         android:id="@+id/btn_logout"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="Logout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_modify_username"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

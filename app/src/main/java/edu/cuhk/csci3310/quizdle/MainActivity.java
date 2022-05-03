@@ -8,11 +8,20 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -26,12 +35,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     BattleFragment battleFragment = new BattleFragment();
     DiscussFragment discussFragment = new DiscussFragment();
 
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseFirestore mFirestore;
+
     private Uri mImageUri;
+    private String username;
+    private String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // initialize Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        checkUser();
+        // Enable Firestore logging
+        FirebaseFirestore.setLoggingEnabled(true);
+        mFirestore = FirebaseFirestore.getInstance();
 
         setToolbar();
 
@@ -48,10 +69,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         ibSetting.setOnClickListener(new View.OnClickListener() {
             @Override
 
-            // incrementing the value of textView
             public void onClick( View view ) {
                 // start SettingActivity
-                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                startSettingActivity();
             }
         });
     }
@@ -74,10 +94,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null){
             mImageUri = data.getData();
-
-
         }
-
     }
 
     @Override
@@ -103,4 +120,38 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+    private void checkUser(){
+        // get current user
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        if (firebaseUser == null){
+            // user not logged in
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            // set email to fetch data
+            email = firebaseUser.getEmail();
+        }
+    }
+
+    private void startSettingActivity(){
+        CollectionReference usersRef = mFirestore.collection("users");
+        usersRef.whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                username = String.valueOf(document.getData().get("username"));
+                            }
+                            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                            intent.putExtra("username", username);
+                            startActivity(intent);
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
 }
