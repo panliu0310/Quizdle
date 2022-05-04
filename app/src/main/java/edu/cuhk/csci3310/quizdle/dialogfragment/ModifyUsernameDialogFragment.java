@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -35,6 +37,8 @@ public class ModifyUsernameDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_modify_username_dialog, container, false);
+        EditText etUsername = view.findViewById(R.id.et_username);
+        etUsername.setText(username);
         return view;
     }
 }
