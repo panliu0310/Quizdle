@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quizdle">
         <activity
+            android:name=".BattleMatchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BattleHobbyActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingActivity"
             android:exported="false" />
         <activity

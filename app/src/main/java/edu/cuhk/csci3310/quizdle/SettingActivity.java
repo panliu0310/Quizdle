@@ -46,7 +46,7 @@ public class SettingActivity extends AppCompatActivity {
 
         // initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
-        Button btnModifyUsername = (Button) findViewById(R.id.btn_modify_username);
+        Button btnModifyUsername = findViewById(R.id.btn_modify_username);
         btnModifyUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +54,7 @@ public class SettingActivity extends AppCompatActivity {
                 fragment.show(getSupportFragmentManager(), TAG);
             }
         });
-        Button btnLogout = (Button) findViewById(R.id.btn_logout);
+        Button btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,11 +65,10 @@ public class SettingActivity extends AppCompatActivity {
 
     private void setToolbar(){
         // assigning ID of the toolbar to a variable
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
