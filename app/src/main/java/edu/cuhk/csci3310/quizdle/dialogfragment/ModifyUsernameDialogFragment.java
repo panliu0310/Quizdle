@@ -1,20 +1,21 @@
 package edu.cuhk.csci3310.quizdle.dialogfragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +35,8 @@ import edu.cuhk.csci3310.quizdle.R;
 public class ModifyUsernameDialogFragment extends DialogFragment {
 
     String TAG = "ModifyUsernameDialogFragment";
+
+    private FragmentActivity activity;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseFirestore mFirestore;
@@ -55,6 +58,8 @@ public class ModifyUsernameDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = getActivity();
+
         username = getArguments().getString("username");
 
         // initialize Firebase Auth
@@ -95,6 +100,10 @@ public class ModifyUsernameDialogFragment extends DialogFragment {
             // check username length
             Log.d(TAG, "username length invalid");
             this.dismiss();
+            AlertMessageDialogFragment fragment = AlertMessageDialogFragment.newInstance("Username length invalid! Make sure the " +
+                    "length of your name is between 6 to 30!");
+            fragment.show(activity.getSupportFragmentManager(), TAG);
+            return;
         }
 
         // check existence of the username in database
@@ -112,6 +121,10 @@ public class ModifyUsernameDialogFragment extends DialogFragment {
                                 updateUsername(username);
                             } else {
                                 Log.d(TAG, "username exist");
+                                AlertMessageDialogFragment fragment = AlertMessageDialogFragment.newInstance("Username exists in database! " +
+                                        "Please use another username!");
+                                // cannot directly use getActivity().getSupportFragmentManager() since this is in an override method
+                                fragment.show(activity.getSupportFragmentManager(), TAG);
                                 dismiss();
                             }
                         }
