@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BattleHobbyActivity extends AppCompatActivity {
+public class BattleLobbyActivity extends AppCompatActivity {
 
     private String TAG = "BattleHobbyActivity";
 
@@ -42,7 +41,7 @@ public class BattleHobbyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battle_hobby);
+        setContentView(R.layout.activity_battle_lobby);
         setToolbar();
 
         database = FirebaseDatabase.getInstance();
@@ -122,7 +121,7 @@ public class BattleHobbyActivity extends AppCompatActivity {
                 // join the room
                 btnCreateRoom.setText("CREATE ROOM");
                 btnCreateRoom.setEnabled(true);
-                Intent intent = new Intent(BattleHobbyActivity.this, BattleMatchActivity.class);
+                Intent intent = new Intent(BattleLobbyActivity.this, BattleMatchActivity.class);
                 intent.putExtra("roomName", roomName);
                 startActivity(intent);
 
@@ -147,7 +146,7 @@ public class BattleHobbyActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot1 : rooms){
                     roomsList.add(snapshot1.getKey());
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(BattleHobbyActivity.this,
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(BattleLobbyActivity.this,
                             android.R.layout.simple_list_item_1, roomsList);
                     lvRooms.setAdapter(adapter);
                 }

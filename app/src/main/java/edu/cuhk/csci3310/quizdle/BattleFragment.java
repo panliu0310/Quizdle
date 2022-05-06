@@ -65,7 +65,7 @@ public class BattleFragment extends Fragment {
         btnBattle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), BattleHobbyActivity.class);
+                Intent intent = new Intent(getContext(), BattleLobbyActivity.class);
                 intent.putExtra("username", username);
                 startActivity(intent);
             }

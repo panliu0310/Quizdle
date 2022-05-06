@@ -13,7 +13,7 @@
             android:name=".BattleMatchActivity"
             android:exported="false" />
         <activity
-            android:name=".BattleHobbyActivity"
+            android:name=".BattleLobbyActivity"
             android:exported="false" />
         <activity
             android:name=".SettingActivity"
