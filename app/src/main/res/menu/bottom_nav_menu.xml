@@ -5,6 +5,10 @@
         android:title="個人主頁"
         android:icon="@drawable/home"/>
     <item
+        android:id="@+id/create"
+        android:title="創造模式"
+        android:icon="@drawable/writing"/>
+    <item
         android:id="@+id/singlePlayer"
         android:title="單人模式"
         android:icon="@drawable/paper"/>

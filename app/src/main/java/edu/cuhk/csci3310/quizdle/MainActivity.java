@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     BottomNavigationView bottomNavigationView;
 
     HomeFragment homeFragment = new HomeFragment();
+    CreateFragment createFragment = new CreateFragment();
     SinglePlayerFragment singlePlayerFragment = new SinglePlayerFragment();
     BattleFragment battleFragment = new BattleFragment();
     DiscussFragment discussFragment = new DiscussFragment();
@@ -103,6 +104,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (item.getItemId()) {
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, homeFragment).commit();
+                return true;
+
+            case R.id.create:
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, createFragment).commit();
                 return true;
 
             case R.id.singlePlayer:
