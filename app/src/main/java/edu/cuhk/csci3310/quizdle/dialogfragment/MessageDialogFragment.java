@@ -13,14 +13,14 @@ import androidx.fragment.app.DialogFragment;
 
 import edu.cuhk.csci3310.quizdle.R;
 
-public class AlertMessageDialogFragment extends DialogFragment {
+public class MessageDialogFragment extends DialogFragment {
 
-    String TAG = "AlertMessageDialogFragment";
+    String TAG = "MessageDialogFragment";
 
     String message = "";
 
-    public static AlertMessageDialogFragment newInstance(String message) {
-        AlertMessageDialogFragment fragment = new AlertMessageDialogFragment();
+    public static MessageDialogFragment newInstance(String message) {
+        MessageDialogFragment fragment = new MessageDialogFragment();
 
         // Supply num input as an argument.
         Bundle args = new Bundle();
@@ -41,7 +41,7 @@ public class AlertMessageDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.fragment_alert_message_dialog, null);
+        View view = inflater.inflate(R.layout.fragment_message_dialog, null);
         TextView tvTitle = view.findViewById(R.id.tv_title);
         tvTitle.setText(message);
         // Inflate and set the layout for the dialog
