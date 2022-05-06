@@ -22,13 +22,4 @@
         android:imeOptions="actionDone"
         android:inputType="text"/>
 
-    <Button
-        android:id="@+id/btn_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/et_username"
-        android:text="ok"/>
-
 </RelativeLayout>

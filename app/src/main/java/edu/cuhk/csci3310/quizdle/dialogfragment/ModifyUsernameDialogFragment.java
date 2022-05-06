@@ -1,6 +1,10 @@
 package edu.cuhk.csci3310.quizdle.dialogfragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,19 +69,24 @@ public class ModifyUsernameDialogFragment extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_modify_username_dialog, container, false);
+    public Dialog onCreateDialog(Bundle savedInstanceState){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        // Get the layout inflater
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.fragment_modify_username_dialog, null);
         EditText etUsername = view.findViewById(R.id.et_username);
         etUsername.setText(username);
-        Button btnOk = view.findViewById(R.id.btn_ok);
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validateUsername(String.valueOf(etUsername.getText()));
-            }
-        });
-        return view;
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(view)
+                // Add action buttons
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        validateUsername(String.valueOf(etUsername.getText()));
+                    }
+                });
+        return builder.create();
     }
 
     private void validateUsername(String username){
