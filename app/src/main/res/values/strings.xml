@@ -10,4 +10,6 @@
     <string name="hello_setting_activity">setting activity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="question_set_mode">Question Set Mode</string>
+    <string name="endless_mode">Endless Mode</string>
 </resources>
