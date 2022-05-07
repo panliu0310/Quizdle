@@ -4,6 +4,12 @@
         <attr name="profileName"/>
     </declare-styleable>
 
+    <declare-styleable name="DropDownMenuView">
+        <attr name="dropDownMenuName"/>
+    </declare-styleable>
+
     <attr name="profileName" format="string"/>
+
+    <attr name="dropDownMenuName" format="string"/>
 
 </resources>
