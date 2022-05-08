@@ -38,7 +38,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_create_question_form"
+        android:id="@+id/cl_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margintop_common"
@@ -51,34 +51,107 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/tv_greeting"
+        <ScrollView
+            android:id="@+id/sv_create_question_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margintop_common"
-            android:layout_marginStart="@dimen/marginstart_common"
-            android:layout_marginEnd="@dimen/marginend_common"
-            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <edu.cuhk.csci3310.quizdle.customview.DropDownMenuView
-            android:id="@+id/ddmv_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margintop_common"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_greeting"
-            app:dropDownMenuName="category"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_create_question_form"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <edu.cuhk.csci3310.quizdle.customview.DropDownMenuView
-            android:id="@+id/ddmv_subcategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margintop_common"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ddmv_category"
-            app:dropDownMenuName="subcategory"/>
+                <TextView
+                    android:id="@+id/tv_greeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    android:layout_marginStart="@dimen/marginstart_common"
+                    android:layout_marginEnd="@dimen/marginend_common"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <edu.cuhk.csci3310.quizdle.customview.DropDownMenuView
+                    android:id="@+id/ddmv_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_greeting"
+                    app:dropDownMenuName="category"/>
+
+                <edu.cuhk.csci3310.quizdle.customview.DropDownMenuView
+                    android:id="@+id/ddmv_subcategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ddmv_category"
+                    app:dropDownMenuName="subcategory"/>
+
+                <edu.cuhk.csci3310.quizdle.customview.TextInputView
+                    android:id="@+id/tiv_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ddmv_subcategory"
+                    app:textInputName="question"/>
+
+                <edu.cuhk.csci3310.quizdle.customview.TextInputView
+                    android:id="@+id/tiv_true_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tiv_question"
+                    app:textInputName="True Answer"/>
+
+                <edu.cuhk.csci3310.quizdle.customview.TextInputView
+                    android:id="@+id/tiv_false_answer_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tiv_true_answer"
+                    app:textInputName="False Answer 1"/>
+
+                <edu.cuhk.csci3310.quizdle.customview.TextInputView
+                    android:id="@+id/tiv_false_answer_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tiv_false_answer_1"
+                    app:textInputName="False Answer 2"/>
+
+                <edu.cuhk.csci3310.quizdle.customview.TextInputView
+                    android:id="@+id/tiv_false_answer_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tiv_false_answer_2"
+                    app:textInputName="False Answer 3"/>
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margintop_common"
+                    android:text="submit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tiv_false_answer_3"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
