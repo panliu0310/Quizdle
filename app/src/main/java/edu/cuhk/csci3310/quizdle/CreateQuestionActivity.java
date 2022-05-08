@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import edu.cuhk.csci3310.quizdle.customview.DropDownMenuView;
@@ -19,6 +20,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     TextView tvGreeting;
     DropDownMenuView ddmvCategory;
     DropDownMenuView ddmvSubcategory;
+    Button btnSubmit;
 
     private String username;
 
@@ -35,6 +37,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         tvGreeting = findViewById(R.id.tv_greeting);
         ddmvCategory = findViewById(R.id.ddmv_category);
         ddmvSubcategory = findViewById(R.id.ddmv_subcategory);
+        btnSubmit = findViewById(R.id.btn_submit);
 
         tvGreeting.setText(String.format(getString(R.string.create_question_greeting),username));
 
@@ -50,6 +53,14 @@ public class CreateQuestionActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitForm();
+            }
+        });
+
     }
 
     private void setToolbar(){
@@ -69,6 +80,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
     private void setCategoryDropDownMenu(){
         ddmvCategory.setSpinner(this);
+    }
+
+    private void submitForm(){
+        // TODO: get values in the custom view and push to the firebase
     }
 
 }
