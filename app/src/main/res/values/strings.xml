@@ -8,6 +8,7 @@
     <string name="setting">setting</string>
     <string name="content_description_setting">setting</string>
     <string name="hello_setting_activity">setting activity</string>
+    <string name="create_question_greeting">Hello %s! We are delighted to hear your thought!</string>
     <string name="question_set_mode">Question Set Mode</string>
     <string name="endless_mode">Endless Mode</string>
 
@@ -17,7 +18,7 @@
         <item>Mathematics</item>
         <item>Computer Science</item>
     </string-array>
-
+    
     <string-array name="mathsubcategory">
         <item>Algebra</item>
         <item>Arithmetic</item>

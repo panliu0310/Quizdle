@@ -51,13 +51,24 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
         app:layout_constraintBottom_toBottomOf="parent">
 
+        <TextView
+            android:id="@+id/tv_greeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margintop_common"
+            android:layout_marginStart="@dimen/marginstart_common"
+            android:layout_marginEnd="@dimen/marginend_common"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <edu.cuhk.csci3310.quizdle.customview.DropDownMenuView
             android:id="@+id/ddmv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margintop_common"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_greeting"
             app:dropDownMenuName="category"/>
 
         <edu.cuhk.csci3310.quizdle.customview.DropDownMenuView
