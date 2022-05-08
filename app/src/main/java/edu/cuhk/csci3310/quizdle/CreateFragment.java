@@ -1,64 +1,91 @@
 package edu.cuhk.csci3310.quizdle;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 public class CreateFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private String TAG = "CreateFragment";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String email = "";
+    private String username = "";
+
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseFirestore mFirestore;
 
     public CreateFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CreateFragment newInstance(String param1, String param2) {
-        CreateFragment fragment = new CreateFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static CreateFragment newInstance() {
+        return new CreateFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // initialize Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+        assert firebaseUser != null;
+        email = firebaseUser.getEmail();
+
+        // Enable Firestore logging
+        FirebaseFirestore.setLoggingEnabled(true);
+        mFirestore = FirebaseFirestore.getInstance();
+
+        getUserUsername(email);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create, container, false);
+        View view = inflater.inflate(R.layout.fragment_create, container, false);
+        Button btnCreate = view.findViewById(R.id.btn_create);
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CreateQuestionActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+            }
+        });
+        return view;
+    }
+
+    private void getUserUsername(String email){
+        CollectionReference usersRef = mFirestore.collection("users");
+        usersRef.whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                username = String.valueOf(document.getData().get("username"));
+                            }
+                        }
+                        Log.d(TAG, "username: " + username);
+                    }
+                });
     }
 }
