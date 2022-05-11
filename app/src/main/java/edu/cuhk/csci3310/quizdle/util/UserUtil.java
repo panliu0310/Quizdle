@@ -1,7 +1,5 @@
 package edu.cuhk.csci3310.quizdle.util;
 
-import android.content.Context;
-
 import edu.cuhk.csci3310.quizdle.model.User;
 
 public class UserUtil {

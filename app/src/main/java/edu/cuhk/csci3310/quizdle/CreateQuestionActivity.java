@@ -1,5 +1,6 @@
 package edu.cuhk.csci3310.quizdle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -11,7 +12,17 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import edu.cuhk.csci3310.quizdle.customview.DropDownMenuView;
+import edu.cuhk.csci3310.quizdle.customview.TextInputView;
+import edu.cuhk.csci3310.quizdle.dialogfragment.MessageDialogFragment;
+import edu.cuhk.csci3310.quizdle.model.UnvQuestion;
+import edu.cuhk.csci3310.quizdle.util.UnvQuestionUtil;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -20,9 +31,16 @@ public class CreateQuestionActivity extends AppCompatActivity {
     TextView tvGreeting;
     DropDownMenuView ddmvCategory;
     DropDownMenuView ddmvSubcategory;
+    TextInputView tivQuestion;
+    TextInputView tivTrueAnswer;
+    TextInputView tivFalseAnswer1;
+    TextInputView tivFalseAnswer2;
+    TextInputView tivFalseAnswer3;
     Button btnSubmit;
 
     private String username;
+
+    private FirebaseFirestore mFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +52,21 @@ public class CreateQuestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
 
+        // Enable Firestore logging
+        FirebaseFirestore.setLoggingEnabled(true);
+        mFirestore = FirebaseFirestore.getInstance();
+
         tvGreeting = findViewById(R.id.tv_greeting);
         ddmvCategory = findViewById(R.id.ddmv_category);
         ddmvSubcategory = findViewById(R.id.ddmv_subcategory);
+        tivQuestion = findViewById(R.id.tiv_question);
+        tivTrueAnswer = findViewById(R.id.tiv_true_answer);
+        tivFalseAnswer1 = findViewById(R.id.tiv_false_answer_1);
+        tivFalseAnswer2 = findViewById(R.id.tiv_false_answer_2);
+        tivFalseAnswer3 = findViewById(R.id.tiv_false_answer_3);
         btnSubmit = findViewById(R.id.btn_submit);
 
-        tvGreeting.setText(String.format(getString(R.string.create_question_greeting),username));
+        tvGreeting.setText(String.format(getString(R.string.create_question_greeting), username));
 
         setCategoryDropDownMenu();
 
@@ -50,6 +77,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 // set subcategory drop down menu
                 ddmvSubcategory.setSpinner(CreateQuestionActivity.this, item.toString());
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
@@ -57,13 +85,13 @@ public class CreateQuestionActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitForm();
+                validateForm();
             }
         });
 
     }
 
-    private void setToolbar(){
+    private void setToolbar() {
         // assigning ID of the toolbar to a variable
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // using toolbar as ActionBar
@@ -78,12 +106,56 @@ public class CreateQuestionActivity extends AppCompatActivity {
         });
     }
 
-    private void setCategoryDropDownMenu(){
+    private void setCategoryDropDownMenu() {
         ddmvCategory.setSpinner(this);
     }
 
-    private void submitForm(){
+    private void validateForm() {
         // TODO: get values in the custom view and push to the firebase
+        String category = ddmvCategory.dropdown.getSelectedItem().toString();
+        String subcategory = ddmvSubcategory.dropdown.getSelectedItem().toString();
+        String question = tivQuestion.etInput.getText().toString();
+        String trueAnswer = tivTrueAnswer.etInput.getText().toString();
+        String falseAnswer1 = tivFalseAnswer1.etInput.getText().toString();
+        String falseAnswer2 = tivFalseAnswer2.etInput.getText().toString();
+        String falseAnswer3 = tivFalseAnswer3.etInput.getText().toString();
+        Log.d(TAG, "category: " + category);
+        Log.d(TAG, "subcategory: " + subcategory);
+        Log.d(TAG, "question: " + question);
+        Log.d(TAG, "trueAnswer: " + trueAnswer);
+        Log.d(TAG, "falseAnswer1: " + falseAnswer1);
+        Log.d(TAG, "falseAnswer2: " + falseAnswer2);
+        Log.d(TAG, "falseAnswer3: " + falseAnswer3);
+        if (tivQuestion.etInput.getText().toString().equals("") ||
+                tivTrueAnswer.etInput.getText().toString().equals("") ||
+                tivFalseAnswer1.etInput.getText().toString().equals("") ||
+                tivFalseAnswer2.etInput.getText().toString().equals("") ||
+                tivFalseAnswer3.etInput.getText().toString().equals("")
+        ) {
+            MessageDialogFragment fragment = MessageDialogFragment.newInstance("Invalid input! Please try again.");
+            fragment.show(getSupportFragmentManager(), TAG);
+        } else {
+            // create "UnvQuestion" data set in firebase
+            CollectionReference newUnvQuestion = mFirestore.collection("unvQuestions");
+            UnvQuestion unvQuestion = UnvQuestionUtil.createNewUnvQuestion(category, subcategory, question, trueAnswer, falseAnswer1, falseAnswer2, falseAnswer3);
+            newUnvQuestion.add(unvQuestion)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "New unvQuestion successfully added on Firestore!");
+                            finish();
+                            MessageDialogFragment fragment = MessageDialogFragment.newInstance("We have received your submission! " +
+                                    "Your question will be available to everyone if it pass our verification!");
+                            fragment.show(getSupportFragmentManager(), TAG);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding new unvQuestion", e);
+                        }
+                    });
+        }
     }
 
 }
