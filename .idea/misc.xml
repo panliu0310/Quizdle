@@ -34,7 +34,10 @@
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/category_list_item.xml" value="0.23037628173828123" />
         <entry key="app/src/main/res/layout/fragment_battle.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/fragment_create.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_level.xml" value="0.10953369140625001" />
+        <entry key="app/src/main/res/layout/item_category.xml" value="0.34307169154070427" />
       </map>
     </option>
   </component>

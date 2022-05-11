@@ -2,7 +2,11 @@ package edu.cuhk.csci3310.quizdle;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,17 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.LinkedList;
 
-import edu.cuhk.csci3310.quizdle.CategoryListAdapter;
+import edu.cuhk.csci3310.quizdle.adapter.CategoryListAdapter;
 import edu.cuhk.csci3310.quizdle.model.Category;
 
 public class QuestionSetActivity extends AppCompatActivity {
@@ -30,8 +31,10 @@ public class QuestionSetActivity extends AppCompatActivity {
     private final String TAG = "QuestionSetActivity";
     private LinkedList<String> category = new LinkedList<String>();
     private RecyclerView mRecyclerView;
-    private CategoryListAdapter mAdapter;
+    //private CategoryListAdapter mAdapter;
     private FirebaseFirestore mFirestore;
+    private FirestoreRecyclerAdapter mAdapter;
+
 
     final String mDrawableFilePath = "android.resource://edu.cuhk.csci3310.quizdle/drawable/";
     private RecyclerView mFirestoreList;
@@ -43,39 +46,36 @@ public class QuestionSetActivity extends AppCompatActivity {
 
         setToolbar();
 
-        /*mFirestore = FirebaseFirestore.getInstance();
-        mRecyclerView.setAdapter(mAdapter);
+        mFirestore = FirebaseFirestore.getInstance();
+        mFirestoreList = findViewById(R.id.category_rv);
 
         //Query
         Query query = mFirestore.collection("questions");
-        FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<>();
+        FirestoreRecyclerOptions<Category> options = new FirestoreRecyclerOptions.Builder<Category>()
+                .setQuery(query, Category.class)
+                .build();
 
-
-        // get question categories from database
-        /*CollectionReference questionSetRef = mFirestore.collection("questions");
-        questionSetRef.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                category.add(document.getId());
-                                Log.d(TAG, document.getId());
-                            }
-                        }else {
-                            Log.d(TAG, "Error getting category documents: ", task.getException());
-                        }
-                    }
-                });
-
-        mAdapter = new CategoryListAdapter(this, category);
-        mRecyclerView = findViewById(R.id.category_rv);
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));*/
+        mAdapter = new CategoryListAdapter(options);
+        mFirestoreList.setHasFixedSize(true);
+        mFirestoreList.setLayoutManager(new LinearLayoutManager(this));
+        mFirestoreList.setAdapter(mAdapter);
 
         Log.d(TAG, "QuestionSetActivity");
 
 
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAdapter.stopListening();
     }
 
     private void setToolbar(){
