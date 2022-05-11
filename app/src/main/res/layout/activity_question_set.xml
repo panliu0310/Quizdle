@@ -36,12 +36,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--<androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/category_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />-->
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
