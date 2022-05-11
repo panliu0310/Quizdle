@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -144,9 +145,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d(TAG, "New unvQuestion successfully added on Firestore!");
                             finish();
-                            MessageDialogFragment fragment = MessageDialogFragment.newInstance("We have received your submission! " +
-                                    "Your question will be available to everyone if it pass our verification!");
-                            fragment.show(getSupportFragmentManager(), TAG);
+                            Toast.makeText(getApplicationContext(), "We have received your submission! " +
+                                    "Your question will be available to everyone if it passes our verification!", Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
