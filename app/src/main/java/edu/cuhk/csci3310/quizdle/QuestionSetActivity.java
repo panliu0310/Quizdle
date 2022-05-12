@@ -29,12 +29,8 @@ import edu.cuhk.csci3310.quizdle.model.Category;
 public class QuestionSetActivity extends AppCompatActivity {
 
     private final String TAG = "QuestionSetActivity";
-    private LinkedList<String> category = new LinkedList<String>();
-    private RecyclerView mRecyclerView;
-    //private CategoryListAdapter mAdapter;
+    private CategoryListAdapter mAdapter;
     private FirebaseFirestore mFirestore;
-    private FirestoreRecyclerAdapter mAdapter;
-
 
     final String mDrawableFilePath = "android.resource://edu.cuhk.csci3310.quizdle/drawable/";
     private RecyclerView mFirestoreList;
@@ -54,7 +50,7 @@ public class QuestionSetActivity extends AppCompatActivity {
         FirestoreRecyclerOptions<Category> options = new FirestoreRecyclerOptions.Builder<Category>()
                 .setQuery(query, Category.class)
                 .build();
-
+        Log.d(TAG, options.toString());
         mAdapter = new CategoryListAdapter(options);
         mFirestoreList.setHasFixedSize(true);
         mFirestoreList.setLayoutManager(new LinearLayoutManager(this));

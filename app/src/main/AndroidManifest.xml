@@ -25,6 +25,9 @@
             android:name=".QuestionSetActivity"
             android:exported="false" />
         <activity
+            android:name=".SubCategorySelectActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:noHistory="true">
