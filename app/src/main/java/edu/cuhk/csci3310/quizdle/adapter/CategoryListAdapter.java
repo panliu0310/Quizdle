@@ -1,7 +1,6 @@
 package edu.cuhk.csci3310.quizdle.adapter;
 
-import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,19 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.Query;
 
-import edu.cuhk.csci3310.quizdle.QuestionSetActivity;
 import edu.cuhk.csci3310.quizdle.R;
+import edu.cuhk.csci3310.quizdle.SubCategorySelectActivity;
 import edu.cuhk.csci3310.quizdle.model.Category;
 
 
@@ -30,6 +27,7 @@ public class CategoryListAdapter extends FirestoreRecyclerAdapter<Category, Cate
 
     final String TAG = "CategoryListAdapter";
     final String mDrawableFilePath = "android.resource://edu.cuhk.csci3310.quizdle/drawable/category_";
+    LinkedList<ArrayList<String>> subCategoryList = new LinkedList<java.util.ArrayList<String>>();
 
     public CategoryListAdapter(@NonNull FirestoreRecyclerOptions<Category> options) {
         super(options);
@@ -49,11 +47,16 @@ public class CategoryListAdapter extends FirestoreRecyclerAdapter<Category, Cate
         holder.nameTextView.setText(name);
         holder.imageItemView
                 .setImageURI(Uri.parse(mDrawableFilePath+name.toLowerCase().substring(0,3)));
-        Log.d(TAG, name);
+        if (category.getSubCategory() != null) {
+            subCategoryList.add(category.getSubCategory());
+            Log.d(TAG, subCategoryList.toString());
+        }
     }
 
-    class CategoryViewHolder extends RecyclerView.ViewHolder{
+    public class CategoryViewHolder extends RecyclerView.ViewHolder{
 
+        public static final String CATEGORY = "edu.cuhk.csci3310.cusweetspot.extra.CATEGORY";
+        public static final String SUBCATEGORY = "edu.cuhk.csci3310.cusweetspot.extra.SUBCATEGORY";
         private TextView nameTextView;
         private ImageView imageItemView;
 
@@ -67,7 +70,13 @@ public class CategoryListAdapter extends FirestoreRecyclerAdapter<Category, Cate
                 @Override
                 public void onClick(View view) {
                     int mPosition = getLayoutPosition();
-                    Log.d(TAG, "Image OnClick "+mPosition);
+                    Intent intent = new Intent(view.getContext(), SubCategorySelectActivity.class);
+                    intent.putExtra(CATEGORY, nameTextView.getText().toString());
+                    intent.putExtra(SUBCATEGORY, subCategoryList.get(mPosition));
+                    view.getContext().startActivity(intent);
+
+                    Log.d(TAG, "Image OnClick "
+                            + nameTextView.getText().toString().replace(" ",""));
                 }
             });
         }
