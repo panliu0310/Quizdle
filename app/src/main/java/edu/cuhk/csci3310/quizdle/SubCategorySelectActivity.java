@@ -46,7 +46,7 @@ public class SubCategorySelectActivity extends AppCompatActivity {
         subCategory = intent.getStringArrayListExtra(CategoryListAdapter.CategoryViewHolder.SUBCATEGORY);
 
         mAdapter = new SubCategoryListAdapter(this, category, subCategory);
-        mRecyclerView = findViewById(R.id.subcategory_rv);
+        mRecyclerView = findViewById(R.id.rv_subcategory);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

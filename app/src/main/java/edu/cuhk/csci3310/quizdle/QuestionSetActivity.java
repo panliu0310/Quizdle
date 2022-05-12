@@ -43,7 +43,7 @@ public class QuestionSetActivity extends AppCompatActivity {
         setToolbar();
 
         mFirestore = FirebaseFirestore.getInstance();
-        mFirestoreList = findViewById(R.id.category_rv);
+        mFirestoreList = findViewById(R.id.rv_category);
 
         //Query
         Query query = mFirestore.collection("questions");
