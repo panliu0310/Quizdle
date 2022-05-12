@@ -69,6 +69,12 @@ public class DropDownMenuView extends ConstraintLayout {
         // set spinner item for subcategory
         int resource = R.array.empty;
         switch (category){
+            case "Basic Knowledge":
+                resource = R.array.basicknowledgesubcategory;
+                break;
+            case "English":
+                resource = R.array.englishsubcategory;
+                break;
             case "Mathematics":
                 resource = R.array.mathsubcategory;
                 break;
