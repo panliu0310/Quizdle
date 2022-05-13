@@ -1,16 +1,18 @@
 package edu.cuhk.csci3310.quizdle.model;
 
 public class Question {
-    public static final String FIELD_CATEGORY = "category";
-    public static final String FIELD_SUBCATEGORY = "subcategory";
+    //public static final String FIELD_CATEGORY = "category";
+    //public static final String FIELD_SUBCATEGORY = "subcategory";
     public static final String FIELD_QUESTION_SET_NAME = "questionSetName";
     public static final String FIELD_QUESTION_SET_DESCRIPTION = "questionSetDescription";
-    public static final String FIELD_QUESTION_1 = "question1";
 
-    private String category;
-    private String subcategory;
+    //private String category;
+    //private String subcategory;
     private String questionSetName;
     private String questionSetDescription;
+    private int questionNumber;
+    private String question; private String trueAnswer; private String falseAnswer1; private String falseAnswer2; private String falseAnswer3;
+    /*
     private String question1; private String question1TrueAnswer; private String question1FalseAnswer1; private String question1FalseAnswer2; private String question1FalseAnswer3;
     private String question2; private String question2TrueAnswer; private String question2FalseAnswer1; private String question2FalseAnswer2; private String question2FalseAnswer3;
     private String question3; private String question3TrueAnswer; private String question3FalseAnswer1; private String question3FalseAnswer2; private String question3FalseAnswer3;
@@ -21,11 +23,14 @@ public class Question {
     private String question8; private String question8TrueAnswer; private String question8FalseAnswer1; private String question8FalseAnswer2; private String question8FalseAnswer3;
     private String question9; private String question9TrueAnswer; private String question9FalseAnswer1; private String question9FalseAnswer2; private String question9FalseAnswer3;
     private String question10; private String question10TrueAnswer; private String question10FalseAnswer1; private String question10FalseAnswer2; private String question10FalseAnswer3;
-
+    */
     public Question() {}
 
-    public Question(String category, String subcategory, String questionSetName, String questionSetDescription,
-                    String question1, String question1TrueAnswer, String question1FalseAnswer1, String question1FalseAnswer2, String question1FalseAnswer3,
+    public Question(//String category, String subcategory,
+                    String questionSetName, String questionSetDescription, int questionNumber,
+                    String question, String trueAnswer, String falseAnswer1, String falseAnswer2, String falseAnswer3
+                    /*
+                    String question1, String question1TrueAnswer, String question1FalseAnswer1, String question1FalseAnswer2, String question1FalseAnswer3
                     String question2, String question2TrueAnswer, String question2FalseAnswer1, String question2FalseAnswer2, String question2FalseAnswer3,
                     String question3, String question3TrueAnswer, String question3FalseAnswer1, String question3FalseAnswer2, String question3FalseAnswer3,
                     String question4, String question4TrueAnswer, String question4FalseAnswer1, String question4FalseAnswer2, String question4FalseAnswer3,
@@ -34,12 +39,17 @@ public class Question {
                     String question7, String question7TrueAnswer, String question7FalseAnswer1, String question7FalseAnswer2, String question7FalseAnswer3,
                     String question8, String question8TrueAnswer, String question8FalseAnswer1, String question8FalseAnswer2, String question8FalseAnswer3,
                     String question9, String question9TrueAnswer, String question9FalseAnswer1, String question9FalseAnswer2, String question9FalseAnswer3,
-                    String question10, String question10TrueAnswer, String question10FalseAnswer1, String question10FalseAnswer2, String question10FalseAnswer3)
+                    String question10, String question10TrueAnswer, String question10FalseAnswer1, String question10FalseAnswer2, String question10FalseAnswer3
+                    */
+    )
     {
-        this.category = category;
-        this.subcategory = subcategory;
+        //this.category = category;
+        //this.subcategory = subcategory;
         this.questionSetName = questionSetName;
         this.questionSetDescription = questionSetDescription;
+        this.questionNumber = questionNumber;
+        this.question = question; this.trueAnswer = trueAnswer; this.falseAnswer1 = falseAnswer1; this.falseAnswer2 = falseAnswer2; this.falseAnswer3 = falseAnswer3;
+        /*
         this.question1 = question1; this.question1TrueAnswer = question1TrueAnswer; this.question1FalseAnswer1 = question1FalseAnswer1; this.question1FalseAnswer2 = question1FalseAnswer2; this.question1FalseAnswer3 = question1FalseAnswer3;
         this.question2 = question2; this.question2TrueAnswer = question2TrueAnswer; this.question2FalseAnswer1 = question2FalseAnswer1; this.question2FalseAnswer2 = question2FalseAnswer2; this.question2FalseAnswer3 = question2FalseAnswer3;
         this.question3 = question3; this.question3TrueAnswer = question3TrueAnswer; this.question3FalseAnswer1 = question3FalseAnswer1; this.question3FalseAnswer2 = question3FalseAnswer2; this.question3FalseAnswer3 = question3FalseAnswer3;
@@ -50,8 +60,10 @@ public class Question {
         this.question8 = question8; this.question8TrueAnswer = question8TrueAnswer; this.question8FalseAnswer1 = question8FalseAnswer1; this.question8FalseAnswer2 = question8FalseAnswer2; this.question8FalseAnswer3 = question8FalseAnswer3;
         this.question9 = question9; this.question9TrueAnswer = question9TrueAnswer; this.question9FalseAnswer1 = question9FalseAnswer1; this.question9FalseAnswer2 = question9FalseAnswer2; this.question9FalseAnswer3 = question9FalseAnswer3;
         this.question10 = question10; this.question10TrueAnswer = question10TrueAnswer; this.question10FalseAnswer1 = question10FalseAnswer1; this.question10FalseAnswer2 = question10FalseAnswer2; this.question10FalseAnswer3 = question10FalseAnswer3;
+        */
     }
 
+    /*
     public String getCategory() { return category; }
 
     public void setCategory(String category) { this.category = category; }
@@ -59,6 +71,7 @@ public class Question {
     public String getSubcategory() { return subcategory; }
 
     public void setSubcategory(String subcategory) { this.subcategory = subcategory; }
+    */
 
     public String getQuestionSetName() { return questionSetName; }
 
@@ -68,6 +81,21 @@ public class Question {
 
     public void setQuestionSetDescription(String questionSetDescription) { this.questionSetDescription = questionSetDescription; }
 
+    public int getQuestionNumber() { return questionNumber; }
+
+    public void setQuestionNumber(int questionNumber) { this.questionNumber = questionNumber; }
+
+    public String getQuestion() { return question; }
+
+    public String getTrueAnswer() { return trueAnswer; }
+
+    public String getFalseAnswer1() { return falseAnswer1; }
+
+    public String getFalseAnswer2() { return falseAnswer2; }
+
+    public String getFalseAnswer3() { return falseAnswer3; }
+
+    /*
     public String getQuestion1() { return question1; }
 
     public String getQuestion1TrueAnswer() { return question1TrueAnswer; }
@@ -167,5 +195,6 @@ public class Question {
     public String getQuestion10FalseAnswer2() { return question10FalseAnswer2; }
 
     public String getQuestion10FalseAnswer3() { return question10FalseAnswer3; }
+    */
 
 }

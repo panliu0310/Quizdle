@@ -76,31 +76,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <edu.cuhk.csci3310.quizdle.customview.DropDownMenuView
-                    android:id="@+id/ddmv_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margintop_common"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_greeting"
-                    app:dropDownMenuName="category"/>
-
-                <edu.cuhk.csci3310.quizdle.customview.DropDownMenuView
-                    android:id="@+id/ddmv_subcategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margintop_common"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ddmv_category"
-                    app:dropDownMenuName="subcategory"/>
-
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_set_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ddmv_subcategory"
+                    app:layout_constraintTop_toBottomOf="@id/tv_greeting"
                     app:textInputName="Question Set Name"/>
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView

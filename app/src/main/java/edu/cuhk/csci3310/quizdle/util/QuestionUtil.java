@@ -7,7 +7,10 @@ public class QuestionUtil {
     private static final String TAG = "QuestionUtil";
 
     public static Question createNewQuestion(
-            String category, String subcategory, String questionSetName, String questionSetDescription,
+            //String category, String subcategory,
+            String questionSetName, String questionSetDescription, int questionNumber,
+            String question, String trueAnswer, String falseAnswer1, String falseAnswer2, String falseAnswer3
+            /*
             String question1, String question1TrueAnswer, String question1FalseAnswer1, String question1FalseAnswer2, String question1FalseAnswer3,
             String question2, String question2TrueAnswer, String question2FalseAnswer1, String question2FalseAnswer2, String question2FalseAnswer3,
             String question3, String question3TrueAnswer, String question3FalseAnswer1, String question3FalseAnswer2, String question3FalseAnswer3,
@@ -17,10 +20,15 @@ public class QuestionUtil {
             String question7, String question7TrueAnswer, String question7FalseAnswer1, String question7FalseAnswer2, String question7FalseAnswer3,
             String question8, String question8TrueAnswer, String question8FalseAnswer1, String question8FalseAnswer2, String question8FalseAnswer3,
             String question9, String question9TrueAnswer, String question9FalseAnswer1, String question9FalseAnswer2, String question9FalseAnswer3,
-            String question10, String question10TrueAnswer, String question10FalseAnswer1, String question10FalseAnswer2, String question10FalseAnswer3)
+            String question10, String question10TrueAnswer, String question10FalseAnswer1, String question10FalseAnswer2, String question10FalseAnswer3
+            */
+            )
     {
         return new Question(
-                category, subcategory, questionSetName, questionSetDescription,
+                //category, subcategory,
+                questionSetName, questionSetDescription, questionNumber,
+                question, trueAnswer, falseAnswer1, falseAnswer2, falseAnswer3
+                /*
                 question1, question1TrueAnswer, question1FalseAnswer1, question1FalseAnswer2, question1FalseAnswer3,
                 question2, question2TrueAnswer, question2FalseAnswer1, question2FalseAnswer2, question2FalseAnswer3,
                 question3, question3TrueAnswer, question3FalseAnswer1, question3FalseAnswer2, question3FalseAnswer3,
@@ -31,6 +39,7 @@ public class QuestionUtil {
                 question8, question8TrueAnswer, question8FalseAnswer1, question8FalseAnswer2, question8FalseAnswer3,
                 question9, question9TrueAnswer, question9FalseAnswer1, question9FalseAnswer2, question9FalseAnswer3,
                 question10, question10TrueAnswer, question10FalseAnswer1, question10FalseAnswer2, question10FalseAnswer3
+                */
         );
     }
 }
