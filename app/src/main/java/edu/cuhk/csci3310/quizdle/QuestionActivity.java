@@ -28,6 +28,7 @@ import java.util.List;
 
 import edu.cuhk.csci3310.quizdle.adapter.CategoryListAdapter;
 import edu.cuhk.csci3310.quizdle.adapter.SubCategoryListAdapter;
+import edu.cuhk.csci3310.quizdle.dialogfragment.MessageDialogFragment;
 import edu.cuhk.csci3310.quizdle.model.Question;
 
 public class QuestionActivity extends AppCompatActivity {
@@ -89,7 +90,8 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
-        setButtonOnclickListener();
+        setChoiceButtonOnclickListener();
+        setNextQuestionButtonOnclickListener();
 
     }
 
@@ -101,8 +103,10 @@ public class QuestionActivity extends AppCompatActivity {
         String[] falseAnsList= {question.getFalseAns1(), question.getFalseAns2(), question.getFalseAns3()};
         correctAns = ran.nextInt(4);
         int falseAnsNum = 0;
-        Log.d(TAG, "CorrectAns"+correctAns);
+        Log.d(TAG, "CorrectAns" + correctAns);
         for (int i = 0; i < buttonList.length; i++){
+            buttonList[i].setEnabled(true);
+            buttonList[i].setBackgroundColor(getColor(R.color.purple_500));
             Log.d(TAG, falseAnsNum+"");
             if (i == correctAns){
                 buttonList[i].setText(question.getTrueAns());
@@ -113,10 +117,11 @@ public class QuestionActivity extends AppCompatActivity {
         }
         toolbar.setTitle(category + " - " + questionSetName + ": Question " + displayNum);
         tvQuestion.setText(question.getQuestion());
+        tvExplanation.setVisibility(View.INVISIBLE);
+        btnNextQuestion.setVisibility(View.INVISIBLE);
     }
 
-    private void setButtonOnclickListener(){
-
+    private void setChoiceButtonOnclickListener(){
         View.OnClickListener btnOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +129,8 @@ public class QuestionActivity extends AppCompatActivity {
                 String btnText = (String) btn.getText();
                 if(btnText.equals(questionSet.get(questionNum).getTrueAns())){
                     v.setBackgroundColor(getResources().getColor(R.color.correct));
+                    score += 100;
+                    tvScore.setText(score + "");
                 }else {
                     v.setBackgroundColor(getResources().getColor(R.color.incorrect));
                 }
@@ -132,16 +139,36 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 tvExplanation.setVisibility(View.VISIBLE);
                 tvExplanation.setText(questionSet.get(questionNum).getExplanation());
+                if (questionNum + 1 == questionSet.size()){
+                    btnNextQuestion.setText("Finish");
+                }
                 btnNextQuestion.setVisibility(View.VISIBLE);
+
             }
         };
 
-
-        for (int i = 0; i < buttonList.length; i++){
-                buttonList[i].setOnClickListener(btnOnClickListener);
+        for (Button button : buttonList) {
+            button.setOnClickListener(btnOnClickListener);
         }
 
+    }
 
+    private void setNextQuestionButtonOnclickListener(){
+        View.OnClickListener btnOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                questionNum++;
+                if (questionNum == questionSet.size()){
+                    MessageDialogFragment fragment = MessageDialogFragment
+                            .newInstance("Completed! You got " + score + "marks.");
+                    // cannot directly use getActivity().getSupportFragmentManager() since this is in an override method
+                    fragment.show(getSupportFragmentManager(), TAG);
+                }else {
+                    updateQuestion();
+                }
+            }
+        };
+        btnNextQuestion.setOnClickListener(btnOnClickListener);
     }
 
     /*private void setToolbar(String title){
