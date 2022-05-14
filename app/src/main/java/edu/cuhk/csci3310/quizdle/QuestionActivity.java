@@ -160,7 +160,7 @@ public class QuestionActivity extends AppCompatActivity {
                 questionNum++;
                 if (questionNum == questionSet.size()){
                     MessageDialogFragment fragment = MessageDialogFragment
-                            .newInstance("Completed! You got " + score + "marks.");
+                            .newInstance("Completed! You got " + score + " marks.");
                     // cannot directly use getActivity().getSupportFragmentManager() since this is in an override method
                     fragment.show(getSupportFragmentManager(), TAG);
                 }else {
