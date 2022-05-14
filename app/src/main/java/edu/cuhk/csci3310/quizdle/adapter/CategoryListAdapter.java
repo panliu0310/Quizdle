@@ -55,8 +55,8 @@ public class CategoryListAdapter extends FirestoreRecyclerAdapter<Category, Cate
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder{
 
-        public static final String CATEGORY = "edu.cuhk.csci3310.cusweetspot.extra.CATEGORY";
-        public static final String SUBCATEGORY = "edu.cuhk.csci3310.cusweetspot.extra.SUBCATEGORY";
+        public static final String CATEGORY = "edu.cuhk.csci3310.quizdle.extra.CATEGORY";
+        public static final String SUBCATEGORY = "edu.cuhk.csci3310.quizdle.extra.SUBCATEGORY";
         private TextView nameTextView;
         private ImageView imageItemView;
 

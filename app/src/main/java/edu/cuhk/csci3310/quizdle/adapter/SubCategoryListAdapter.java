@@ -19,7 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
+import edu.cuhk.csci3310.quizdle.QuestionActivity;
 import edu.cuhk.csci3310.quizdle.R;
+import edu.cuhk.csci3310.quizdle.SubCategorySelectActivity;
 
 
 public class SubCategoryListAdapter extends Adapter<SubCategoryListAdapter.SubCategoryViewHolder> {
@@ -38,7 +40,9 @@ public class SubCategoryListAdapter extends Adapter<SubCategoryListAdapter.SubCa
         this.mCategory = category;
     }
 
-    class SubCategoryViewHolder extends RecyclerView.ViewHolder{
+    public class SubCategoryViewHolder extends RecyclerView.ViewHolder{
+        public static final String CATEGORY = "edu.cuhk.csci3310.quizdle.extra.CATEGORY";
+        public static final String SUBCATEGORY = "edu.cuhk.csci3310.quizdle.extra.SUBCATEGORY";
         public ImageView imageItemView;
         public TextView subCategoryTextView;
         final SubCategoryListAdapter mAdapter;
@@ -49,7 +53,19 @@ public class SubCategoryListAdapter extends Adapter<SubCategoryListAdapter.SubCa
             subCategoryTextView = itemView.findViewById(R.id.subcategory_item_name);
             this.mAdapter = adapter;
 
-            //TODO: Set onClickHandler, send intent to question set
+            imageItemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int mPosition = getLayoutPosition();
+                    Intent intent = new Intent(view.getContext(), QuestionActivity.class);
+                    intent.putExtra(CATEGORY, mCategory);
+                    intent.putExtra(SUBCATEGORY, mSubCategoryList.get(mPosition));
+                    view.getContext().startActivity(intent);
+
+                    Log.d(TAG, "Image OnClick "
+                            + mCategory + " " + mSubCategoryList.get(mPosition));
+                }
+            });
         }
     }
 
