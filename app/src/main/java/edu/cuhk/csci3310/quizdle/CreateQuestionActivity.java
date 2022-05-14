@@ -23,6 +23,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import edu.cuhk.csci3310.quizdle.customview.DropDownMenuView;
 import edu.cuhk.csci3310.quizdle.customview.TextInputView;
@@ -107,7 +110,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
     private void setToolbar() {
         // assigning ID of the toolbar to a variable
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -148,7 +151,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         }
         //Log.d(TAG, "category: " + category);
         //Log.d(TAG, "subcategory: " + subcategory);
-        if (questionSetName.equals("") || questionSetDescription.equals("") ||
+        if (!(questionSetName.equals("") || questionSetDescription.equals("") ||
                 questions[0].equals("") || trueAnswers[0].equals("") || falseAnswers1[0].equals("") || falseAnswers2[0].equals("") || falseAnswers3[0].equals("") ||
                 questions[1].equals("") || trueAnswers[1].equals("") || falseAnswers1[1].equals("") || falseAnswers2[1].equals("") || falseAnswers3[1].equals("") ||
                 questions[2].equals("") || trueAnswers[2].equals("") || falseAnswers1[2].equals("") || falseAnswers2[2].equals("") || falseAnswers3[2].equals("") ||
@@ -159,11 +162,15 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 questions[7].equals("") || trueAnswers[7].equals("") || falseAnswers1[7].equals("") || falseAnswers2[7].equals("") || falseAnswers3[7].equals("") ||
                 questions[8].equals("") || trueAnswers[8].equals("") || falseAnswers1[8].equals("") || falseAnswers2[8].equals("") || falseAnswers3[8].equals("") ||
                 questions[9].equals("") || trueAnswers[9].equals("") || falseAnswers1[9].equals("") || falseAnswers2[9].equals("") || falseAnswers3[9].equals("")
-                ) {
+        )) {
             MessageDialogFragment fragment = MessageDialogFragment.newInstance("Some fields are empty! Please try again.");
             fragment.show(getSupportFragmentManager(), TAG);
         } else {
-            DocumentReference customizeRef = mFirestore.collection("questions").document("Mathematics");
+            // create a HashMap to store subcategory
+            Map<String, Object> subcategoryDetail = new HashMap<>();
+
+            DocumentReference customizeRef = mFirestore.collection("questions").document("Customize");
+
             customizeRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -171,16 +178,22 @@ public class CreateQuestionActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            String documentObject = document.getData().get("subCategory").toString();
-                            Log.d(TAG, documentObject);
-                            if (documentObject.contains(questionSetName)){
+
+                            //Object documentObject = document.getData().get("subCategory");
+                            List<String> documentList = (List<String>) document.get("subCategory");
+
+                            if (documentList.contains(questionSetName)){
                                 Log.d(TAG, "such question set name exists");
                                 MessageDialogFragment fragment = MessageDialogFragment.newInstance("Question set name exists in database! " +
                                         "Please use another name!");
                                 fragment.show(getSupportFragmentManager(), TAG);
                             } else {
                                 Log.d(TAG, "not contain such question set name");
-                                // add customize questions on Firebase;
+                                // update subCategory attribute in customize document schema
+                                documentList.add(questionSetName);
+                                subcategoryDetail.put("subCategory", documentList);
+                                customizeRef.update(subcategoryDetail);
+                                // add question documents on Firebase
                                 addCustomizeQuestion();
                             }
 
@@ -240,16 +253,20 @@ public class CreateQuestionActivity extends AppCompatActivity {
             falseAnswers3[i] = tivFalseAnswer3List.get(i).etInput.getText().toString();
         }
 
-        CollectionReference questionSetRef = mFirestore.collection("questions").document("Mathematics").collection(questionSetName);
+        CollectionReference questionSetRef = mFirestore.collection("questions").document("Customize").collection(questionSetName);
 
+        // if success, toast
+        final boolean[] success = {false};
         for (int i = 0; i < 10; i++){
-            Question newQuestion = QuestionUtil.createNewQuestion(questionSetName, questionSetDescription, i, questions[i], trueAnswers[i], falseAnswers1[i], falseAnswers2[i], falseAnswers3[i]);
+            Question newQuestion = QuestionUtil.createNewQuestion(questionSetName, questionSetDescription, i + 1, questions[i], trueAnswers[i], falseAnswers1[i], falseAnswers2[i], falseAnswers3[i]);
             int finalI = i + 1;
             questionSetRef.add(newQuestion)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "New Question " + finalI + "successfully added on Firestore!");
+                            Log.d(TAG, "New Question " + finalI + " successfully added on Firestore!");
+                            success[0] = true;
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -259,6 +276,11 @@ public class CreateQuestionActivity extends AppCompatActivity {
                         }
                     });
         }
+        if (success[0]){
+            Toast.makeText(getApplicationContext(), "We have received your submission! " +
+                    "Your question will be available to everyone", Toast.LENGTH_LONG).show();
+        }
+
 
     }
 
