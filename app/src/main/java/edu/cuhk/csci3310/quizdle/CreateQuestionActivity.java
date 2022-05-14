@@ -45,10 +45,11 @@ public class CreateQuestionActivity extends AppCompatActivity {
     TextInputView tivQuestionSetName;
     TextInputView tivQuestionSetDescription;
     ArrayList<TextInputView> tivQuestionList = new ArrayList<>();
-    ArrayList<TextInputView> tivTrueAnswerList =new ArrayList<>();
-    ArrayList<TextInputView> tivFalseAnswer1List =new ArrayList<>();
-    ArrayList<TextInputView> tivFalseAnswer2List =new ArrayList<>();
-    ArrayList<TextInputView> tivFalseAnswer3List =new ArrayList<>();
+    ArrayList<TextInputView> tivTrueAnswerList = new ArrayList<>();
+    ArrayList<TextInputView> tivFalseAnswer1List = new ArrayList<>();
+    ArrayList<TextInputView> tivFalseAnswer2List = new ArrayList<>();
+    ArrayList<TextInputView> tivFalseAnswer3List = new ArrayList<>();
+    ArrayList<TextInputView> tivExplanationList = new ArrayList<>();
     Button btnSubmit;
 
     private String username;
@@ -79,6 +80,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         tivFalseAnswer1List.add(findViewById(R.id.tiv_question_1_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_2_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_3_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_4_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_5_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_6_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_7_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_8_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_9_false_answer_1)); tivFalseAnswer1List.add(findViewById(R.id.tiv_question_10_false_answer_1));
         tivFalseAnswer2List.add(findViewById(R.id.tiv_question_1_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_2_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_3_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_4_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_5_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_6_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_7_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_8_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_9_false_answer_2)); tivFalseAnswer2List.add(findViewById(R.id.tiv_question_10_false_answer_2));
         tivFalseAnswer3List.add(findViewById(R.id.tiv_question_1_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_2_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_3_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_4_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_5_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_6_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_7_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_8_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_9_false_answer_3)); tivFalseAnswer3List.add(findViewById(R.id.tiv_question_10_false_answer_3));
+        tivExplanationList.add(findViewById(R.id.tiv_question_1_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_2_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_3_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_4_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_5_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_6_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_7_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_8_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_9_explanation)); tivExplanationList.add(findViewById(R.id.tiv_question_10_explanation));
         btnSubmit = findViewById(R.id.btn_submit);
 
         tvGreeting.setText(String.format(getString(R.string.create_question_greeting), username));
@@ -136,32 +138,34 @@ public class CreateQuestionActivity extends AppCompatActivity {
         String questionSetDescription = tivQuestionSetDescription.etInput.getText().toString();
         Log.d(TAG, "questionSetName: " + questionSetName);
         Log.d(TAG, "questionSetDescription: " + questionSetDescription);
-        String[] questions = new String[10]; String[] trueAnswers = new String[10]; String[] falseAnswers1 = new String[10]; String[] falseAnswers2 = new String[10]; String[] falseAnswers3 = new String[10];
+        String[] questions = new String[10]; String[] trueAnswers = new String[10]; String[] falseAnswers1 = new String[10]; String[] falseAnswers2 = new String[10]; String[] falseAnswers3 = new String[10]; String[] explanations = new String[10];
         for (int i = 0; i < tivQuestionList.size(); i++){
             questions[i] = tivQuestionList.get(i).etInput.getText().toString();
             trueAnswers[i] = tivTrueAnswerList.get(i).etInput.getText().toString();
             falseAnswers1[i] = tivFalseAnswer1List.get(i).etInput.getText().toString();
             falseAnswers2[i] = tivFalseAnswer2List.get(i).etInput.getText().toString();
             falseAnswers3[i] = tivFalseAnswer3List.get(i).etInput.getText().toString();
+            explanations[i] = tivExplanationList.get(i).etInput.getText().toString();
             Log.d(TAG, "question" + (i+1) + ": " + questions[i]);
             Log.d(TAG, "question" + (i+1) + "TrueAnswer: " + trueAnswers[i]);
             Log.d(TAG, "question" + (i+1) + "FalseAnswer1: " + falseAnswers1[i]);
             Log.d(TAG, "question" + (i+1) + "FalseAnswer2: " + falseAnswers2[i]);
             Log.d(TAG, "question" + (i+1) + "FalseAnswer3: " + falseAnswers3[i]);
+            Log.d(TAG, "question" + (i+1) + "Explanation: " + explanations[i]);
         }
         //Log.d(TAG, "category: " + category);
         //Log.d(TAG, "subcategory: " + subcategory);
         if (!(questionSetName.equals("") || questionSetDescription.equals("") ||
-                questions[0].equals("") || trueAnswers[0].equals("") || falseAnswers1[0].equals("") || falseAnswers2[0].equals("") || falseAnswers3[0].equals("") ||
-                questions[1].equals("") || trueAnswers[1].equals("") || falseAnswers1[1].equals("") || falseAnswers2[1].equals("") || falseAnswers3[1].equals("") ||
-                questions[2].equals("") || trueAnswers[2].equals("") || falseAnswers1[2].equals("") || falseAnswers2[2].equals("") || falseAnswers3[2].equals("") ||
-                questions[3].equals("") || trueAnswers[3].equals("") || falseAnswers1[3].equals("") || falseAnswers2[3].equals("") || falseAnswers3[3].equals("") ||
-                questions[4].equals("") || trueAnswers[4].equals("") || falseAnswers1[4].equals("") || falseAnswers2[4].equals("") || falseAnswers3[4].equals("") ||
-                questions[5].equals("") || trueAnswers[5].equals("") || falseAnswers1[5].equals("") || falseAnswers2[5].equals("") || falseAnswers3[5].equals("") ||
-                questions[6].equals("") || trueAnswers[6].equals("") || falseAnswers1[6].equals("") || falseAnswers2[6].equals("") || falseAnswers3[6].equals("") ||
-                questions[7].equals("") || trueAnswers[7].equals("") || falseAnswers1[7].equals("") || falseAnswers2[7].equals("") || falseAnswers3[7].equals("") ||
-                questions[8].equals("") || trueAnswers[8].equals("") || falseAnswers1[8].equals("") || falseAnswers2[8].equals("") || falseAnswers3[8].equals("") ||
-                questions[9].equals("") || trueAnswers[9].equals("") || falseAnswers1[9].equals("") || falseAnswers2[9].equals("") || falseAnswers3[9].equals("")
+                questions[0].equals("") || trueAnswers[0].equals("") || falseAnswers1[0].equals("") || falseAnswers2[0].equals("") || falseAnswers3[0].equals("") || explanations[0].equals("") ||
+                questions[1].equals("") || trueAnswers[1].equals("") || falseAnswers1[1].equals("") || falseAnswers2[1].equals("") || falseAnswers3[1].equals("") || explanations[1].equals("") ||
+                questions[2].equals("") || trueAnswers[2].equals("") || falseAnswers1[2].equals("") || falseAnswers2[2].equals("") || falseAnswers3[2].equals("") || explanations[2].equals("") ||
+                questions[3].equals("") || trueAnswers[3].equals("") || falseAnswers1[3].equals("") || falseAnswers2[3].equals("") || falseAnswers3[3].equals("") || explanations[3].equals("") ||
+                questions[4].equals("") || trueAnswers[4].equals("") || falseAnswers1[4].equals("") || falseAnswers2[4].equals("") || falseAnswers3[4].equals("") || explanations[4].equals("") ||
+                questions[5].equals("") || trueAnswers[5].equals("") || falseAnswers1[5].equals("") || falseAnswers2[5].equals("") || falseAnswers3[5].equals("") || explanations[5].equals("") ||
+                questions[6].equals("") || trueAnswers[6].equals("") || falseAnswers1[6].equals("") || falseAnswers2[6].equals("") || falseAnswers3[6].equals("") || explanations[6].equals("") ||
+                questions[7].equals("") || trueAnswers[7].equals("") || falseAnswers1[7].equals("") || falseAnswers2[7].equals("") || falseAnswers3[7].equals("") || explanations[7].equals("") ||
+                questions[8].equals("") || trueAnswers[8].equals("") || falseAnswers1[8].equals("") || falseAnswers2[8].equals("") || falseAnswers3[8].equals("") || explanations[8].equals("") ||
+                questions[9].equals("") || trueAnswers[9].equals("") || falseAnswers1[9].equals("") || falseAnswers2[9].equals("") || falseAnswers3[9].equals("") || explanations[9].equals("")
         )) {
             MessageDialogFragment fragment = MessageDialogFragment.newInstance("Some fields are empty! Please try again.");
             fragment.show(getSupportFragmentManager(), TAG);
@@ -205,52 +209,20 @@ public class CreateQuestionActivity extends AppCompatActivity {
                     }
                 }
             });
-
-            /*
-            Question question = QuestionUtil.createNewQuestion(//category, subcategory,
-                    questionSetName, questionSetDescription,
-                    question1, question1TrueAnswer, question1FalseAnswer1, question1FalseAnswer2, question1FalseAnswer3,
-                    question2, question2TrueAnswer, question2FalseAnswer1, question2FalseAnswer2, question2FalseAnswer3,
-                    question3, question3TrueAnswer, question3FalseAnswer1, question3FalseAnswer2, question3FalseAnswer3,
-                    question4, question4TrueAnswer, question4FalseAnswer1, question4FalseAnswer2, question4FalseAnswer3,
-                    question5, question5TrueAnswer, question5FalseAnswer1, question5FalseAnswer2, question5FalseAnswer3,
-                    question6, question6TrueAnswer, question6FalseAnswer1, question6FalseAnswer2, question6FalseAnswer3,
-                    question7, question7TrueAnswer, question7FalseAnswer1, question7FalseAnswer2, question7FalseAnswer3,
-                    question8, question8TrueAnswer, question8FalseAnswer1, question8FalseAnswer2, question8FalseAnswer3,
-                    question9, question9TrueAnswer, question9FalseAnswer1, question9FalseAnswer2, question9FalseAnswer3,
-                    question10, question10TrueAnswer, question10FalseAnswer1, question10FalseAnswer2, question10FalseAnswer3);
-
-            questionRef.document("customize").collection(questionSetName).add(question)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "New Question successfully added on Firestore!");
-                            finish();
-                            Toast.makeText(getApplicationContext(), "We have received your submission! " +
-                                    "Your question will be available to everyone if it passes our verification!", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding new unvQuestion", e);
-                        }
-                    });
-            */
-
         }
     }
 
     private void addCustomizeQuestion(){
         String questionSetName = tivQuestionSetName.etInput.getText().toString();
         String questionSetDescription = tivQuestionSetDescription.etInput.getText().toString();
-        String[] questions = new String[10]; String[] trueAnswers = new String[10]; String[] falseAnswers1 = new String[10]; String[] falseAnswers2 = new String[10]; String[] falseAnswers3 = new String[10];
+        String[] questions = new String[10]; String[] trueAnswers = new String[10]; String[] falseAnswers1 = new String[10]; String[] falseAnswers2 = new String[10]; String[] falseAnswers3 = new String[10]; String[] explanations = new String[10];
         for (int i = 0; i < tivQuestionList.size(); i++){
             questions[i] = tivQuestionList.get(i).etInput.getText().toString();
             trueAnswers[i] = tivTrueAnswerList.get(i).etInput.getText().toString();
             falseAnswers1[i] = tivFalseAnswer1List.get(i).etInput.getText().toString();
             falseAnswers2[i] = tivFalseAnswer2List.get(i).etInput.getText().toString();
             falseAnswers3[i] = tivFalseAnswer3List.get(i).etInput.getText().toString();
+            explanations[i] = tivExplanationList.get(i).etInput.getText().toString();
         }
 
         CollectionReference questionSetRef = mFirestore.collection("questions").document("Customize").collection(questionSetName);
@@ -258,7 +230,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         // if success, toast
         final boolean[] success = {false};
         for (int i = 0; i < 10; i++){
-            Question newQuestion = QuestionUtil.createNewQuestion(questionSetName, questionSetDescription, i + 1, questions[i], trueAnswers[i], falseAnswers1[i], falseAnswers2[i], falseAnswers3[i]);
+            Question newQuestion = QuestionUtil.createNewQuestion(questionSetName, questionSetDescription, i + 1, questions[i], trueAnswers[i], falseAnswers1[i], falseAnswers2[i], falseAnswers3[i], explanations[i]);
             int finalI = i + 1;
             questionSetRef.add(newQuestion)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
