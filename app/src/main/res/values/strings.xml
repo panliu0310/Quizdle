@@ -15,8 +15,18 @@
     <string-array name="empty"/>
 
     <string-array name="category">
+        <item>Basic Knowledge</item>
+        <item>English</item>
         <item>Mathematics</item>
         <item>Computer Science</item>
+    </string-array>
+    
+    <string-array name="basicknowledgesubcategory">
+        <item>CUHK</item>
+    </string-array>
+
+    <string-array name="englishsubcategory">
+        <item>Grammar_I</item>
     </string-array>
     
     <string-array name="mathsubcategory">
