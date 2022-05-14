@@ -3,14 +3,145 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BattleMatchActivity">
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/purple_500"
+                android:theme="@style/Theme.Quizdle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="Battle Mode"
+                app:titleTextColor="@color/white"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
+        android:id="@+id/tv_question"
+        android:layout_width="342dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:text="Question"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_score" />
+
+    <Button
+        android:id="@+id/btn_choice_a"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:text="A"
+        app:layout_constraintEnd_toStartOf="@+id/btn_choice_b"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+
+    <Button
+        android:id="@+id/btn_choice_b"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="28dp"
+        android:text="B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+
+    <Button
+        android:id="@+id/btn_choice_c"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="55dp"
+        android:text="C"
+        app:layout_constraintEnd_toStartOf="@+id/btn_choice_d"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_choice_a" />
+
+    <Button
+        android:id="@+id/btn_choice_d"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="30dp"
+        android:text="D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_choice_b" />
+
+    <TextView
+        android:id="@+id/tv_explanation"
+        android:layout_width="366dp"
+        android:layout_height="141dp"
+        android:layout_marginTop="30dp"
+        android:text="Explanation"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_choice_c" />
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="74dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="248dp"
+        android:text="0"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
+
+    <TextView
+        android:id="@+id/label_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Score:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_question"
+        app:layout_constraintEnd_toStartOf="@+id/tv_score"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="hello battle match"/>
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
+        app:layout_constraintVertical_bias="0.521" />
+
+    <Button
+        android:id="@+id/btn_next_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Next Question"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_explanation" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

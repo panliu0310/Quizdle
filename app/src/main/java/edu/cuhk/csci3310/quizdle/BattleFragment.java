@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import edu.cuhk.csci3310.quizdle.battle.BattleLobbyActivity;
+
 public class BattleFragment extends Fragment {
 
     private String TAG = "BattleFragment";
