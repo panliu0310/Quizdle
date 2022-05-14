@@ -8,6 +8,7 @@ public class Question {
     private String falseAns1;
     private String falseAns2;
     private String falseAns3;
+    private String explanation;
 
     public String getQuestion() {
         return question;
@@ -22,6 +23,7 @@ public class Question {
     public String getFalseAns3() {
         return falseAns3;
     }
+    public String getExplanation() {return explanation; }
 
     public void setQuestion(String question) {
         this.question = question;
@@ -30,5 +32,6 @@ public class Question {
     public void setFalseAns1(String falseAns1) { this.falseAns1 = falseAns1; }
     public void setFalseAns2(String falseAns2) { this.falseAns2 = falseAns2; }
     public void setFalseAns3(String falseAns3) { this.falseAns3 = falseAns3; }
+    public void setExplanation(String explanation) { this.explanation = explanation; }
 
 }

@@ -127,7 +127,11 @@ public class QuestionActivity extends AppCompatActivity {
                 }else {
                     v.setBackgroundColor(getResources().getColor(R.color.incorrect));
                 }
+                for (Button choice_btn: buttonList ){
+                    choice_btn.setEnabled(false);
+                }
                 tvExplanation.setVisibility(View.VISIBLE);
+                tvExplanation.setText(questionSet.get(questionNum).getExplanation());
                 btnNextQuestion.setVisibility(View.VISIBLE);
             }
         };
