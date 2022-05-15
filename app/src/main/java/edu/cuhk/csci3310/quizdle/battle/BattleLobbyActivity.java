@@ -93,10 +93,13 @@ public class BattleLobbyActivity extends AppCompatActivity {
                 Log.d(TAG, "btnCreateRoom clicked");
                 btnCreateRoom.setText("CREATING ROOM");
                 btnCreateRoom.setEnabled(false);
-                roomName = username;
                 roomRef = database.getReference("rooms/" + roomName + "/player1");
                 addRoomEventListener();
                 roomRef.setValue(username);
+                roomRef = database.getReference("rooms/" + roomName + "/player1ready");
+                roomRef.setValue("false");
+                roomRef = database.getReference("rooms/" + roomName + "/player2ready");
+                roomRef.setValue("false");
             }
         });
     }
