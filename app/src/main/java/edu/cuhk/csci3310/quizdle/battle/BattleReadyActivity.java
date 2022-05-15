@@ -46,6 +46,7 @@ public class BattleReadyActivity extends AppCompatActivity {
     DatabaseReference roomsRef;
     DatabaseReference roomNameRef;
     DatabaseReference readyRef;
+    DatabaseReference startRef;
     DatabaseReference categoryRef;
 
     @Override
@@ -80,6 +81,7 @@ public class BattleReadyActivity extends AppCompatActivity {
         setCategoryItemListener();
 
         setButtonReadyListener();
+        setButtonStartListener();
 
         addRoomDataEventListener();
     }
@@ -146,6 +148,16 @@ public class BattleReadyActivity extends AppCompatActivity {
         });
     }
 
+    private void setButtonStartListener(){
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startRef = database.getReference("rooms/" + roomName + "/start");
+                startRef.setValue("true");
+            }
+        });
+    }
+
     private void addRoomDataEventListener(){
         roomNameRef = database.getReference("rooms/" + roomName);
         roomNameRef.addValueEventListener(new ValueEventListener() {
@@ -172,7 +184,7 @@ public class BattleReadyActivity extends AppCompatActivity {
 
                 // set imageview ready data
                 if (snapshot.child("player1ready").getValue() != null) {
-                    if (snapshot.child("player1ready").getValue().toString().equals("false")){
+                    if (snapshot.child("player1ready").getValue().toString().equals("false")) {
                         player1Ready = false;
                         ivReadyPlayer1.setVisibility(View.INVISIBLE);
                     } else {
@@ -181,7 +193,7 @@ public class BattleReadyActivity extends AppCompatActivity {
                     }
                 }
                 if (snapshot.child("player2ready").getValue() != null) {
-                    if (snapshot.child("player2ready").getValue().toString().equals("false")){
+                    if (snapshot.child("player2ready").getValue().toString().equals("false")) {
                         player2Ready = false;
                         ivReadyPlayer2.setVisibility(View.INVISIBLE);
                     } else {
@@ -195,6 +207,15 @@ public class BattleReadyActivity extends AppCompatActivity {
                     btnStart.setVisibility(View.VISIBLE);
                 } else {
                     btnStart.setVisibility(View.INVISIBLE);
+                }
+
+                // set button start onClick event
+                if (snapshot.child("start").getValue() != null) {
+                    if (snapshot.child("start").getValue().toString().equals("true")) {
+                        Intent intent = new Intent(BattleReadyActivity.this, BattleMatchActivity.class);
+                        intent.putExtra("category", category);
+                        startActivity(intent);
+                    }
                 }
             }
 

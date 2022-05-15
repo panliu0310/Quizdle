@@ -100,6 +100,8 @@ public class BattleLobbyActivity extends AppCompatActivity {
                 roomRef.setValue("false");
                 roomRef = database.getReference("rooms/" + roomName + "/player2ready");
                 roomRef.setValue("false");
+                roomRef = database.getReference("rooms/" + roomName + "/start");
+                roomRef.setValue("false");
             }
         });
     }
