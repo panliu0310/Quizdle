@@ -22,6 +22,8 @@
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/menu/top_app_bar.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/liuho/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/layout/activity_battle_lobby.xml" value="0.25698699951171877" />
+        <entry key="app/src/main/res/layout/activity_complete_question_summary.xml" value="0.4106674194335937" />
+        <entry key="app/src/main/res/layout/activity_create_question.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
         <entry key="app/src/main/res/layout/activity_question.xml" value="0.40192260742187524" />
         <entry key="app/src/main/res/layout/activity_question_set.xml" value="0.1" />

@@ -34,6 +34,9 @@ import edu.cuhk.csci3310.quizdle.model.Question;
 public class QuestionActivity extends AppCompatActivity {
 
     public String TAG = "QuestionActivity";
+    public static final String CATEGORY = "edu.cuhk.csci3310.quizdle.extra.CATEGORY";
+    public static final String QUESTIONSET = "edu.cuhk.csci3310.quizdle.extra.QUESTIONSET";
+    public static final String SCORE = "edu.cuhk.csci3310.quizdle.extra.SCORE";
 
     private FirebaseFirestore mFirestore;
 
@@ -159,10 +162,11 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 questionNum++;
                 if (questionNum == questionSet.size()){
-                    MessageDialogFragment fragment = MessageDialogFragment
-                            .newInstance("Completed! You got " + score + " marks.");
-                    // cannot directly use getActivity().getSupportFragmentManager() since this is in an override method
-                    fragment.show(getSupportFragmentManager(), TAG);
+                    Intent intent = new Intent(view.getContext(), CompleteQuestionSummaryActivity.class);
+                    intent.putExtra(CATEGORY, category);
+                    intent.putExtra(QUESTIONSET, questionSetName);
+                    intent.putExtra(SCORE, Integer.toString(score));
+                    view.getContext().startActivity(intent);
                 }else {
                     updateQuestion();
                 }
