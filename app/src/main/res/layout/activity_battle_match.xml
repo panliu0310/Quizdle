@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_score" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_score_player_1" />
 
     <Button
         android:id="@+id/btn_choice_a"
@@ -107,28 +107,28 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_choice_c" />
 
     <TextView
-        android:id="@+id/tv_score"
-        android:layout_width="74dp"
-        android:layout_height="26dp"
+        android:id="@+id/tv_score_player_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="248dp"
         android:text="0"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_score_player_2"
         app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
 
     <TextView
-        android:id="@+id/label_score"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_score_player_2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Score:"
+        android:layout_marginTop="12dp"
+        android:text="0"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_question"
-        app:layout_constraintEnd_toStartOf="@+id/tv_score"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
-        app:layout_constraintVertical_bias="0.521" />
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@+id/tv_score_player_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
 
     <Button
         android:id="@+id/btn_next_question"

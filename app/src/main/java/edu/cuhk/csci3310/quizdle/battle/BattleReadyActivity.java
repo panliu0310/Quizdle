@@ -42,12 +42,11 @@ public class BattleReadyActivity extends AppCompatActivity {
     boolean player2Ready;
 
     FirebaseDatabase database;
-    DatabaseReference roomRef;
-    DatabaseReference roomsRef;
     DatabaseReference roomNameRef;
     DatabaseReference readyRef;
     DatabaseReference startRef;
     DatabaseReference categoryRef;
+    DatabaseReference battleRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +67,6 @@ public class BattleReadyActivity extends AppCompatActivity {
         } else {
             role = "guest";
         }
-
 
         // set view names
         ddmvCategory = findViewById(R.id.ddmv_category);
@@ -154,6 +152,17 @@ public class BattleReadyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startRef = database.getReference("rooms/" + roomName + "/start");
                 startRef.setValue("true");
+
+                battleRef = database.getReference("battles/" + roomName + "/player1");
+                battleRef.setValue(usernamePlayer1);
+                battleRef = database.getReference("battles/" + roomName + "/player2");
+                battleRef.setValue(usernamePlayer2);
+                battleRef = database.getReference("battles/" + roomName + "/category");
+                battleRef.setValue(category);
+                battleRef = database.getReference("battles/" + roomName + "/player1Score");
+                battleRef.setValue(0);
+                battleRef = database.getReference("battles/" + roomName + "/player2Score");
+                battleRef.setValue(0);
             }
         });
     }
@@ -214,6 +223,10 @@ public class BattleReadyActivity extends AppCompatActivity {
                     if (snapshot.child("start").getValue().toString().equals("true")) {
                         Intent intent = new Intent(BattleReadyActivity.this, BattleMatchActivity.class);
                         intent.putExtra("category", category);
+                        intent.putExtra("role", role);
+                        intent.putExtra("roomName", roomName);
+                        intent.putExtra("usernamePlayer1", usernamePlayer1);
+                        intent.putExtra("usernamePlayer2", usernamePlayer2);
                         startActivity(intent);
                     }
                 }
