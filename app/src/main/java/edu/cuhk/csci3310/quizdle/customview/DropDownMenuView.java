@@ -21,6 +21,7 @@ public class DropDownMenuView extends ConstraintLayout {
 
     TextView tvName;
     public Spinner dropdown;
+    public ArrayAdapter<CharSequence> arrayAdapter;
 
     private final String name;
 
@@ -56,14 +57,19 @@ public class DropDownMenuView extends ConstraintLayout {
 
             // create an adapter to describe how the items are displayed, adapters are used in several places in android.
             // There are multiple variations of this, but this is the basic variant.
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, resource, android.R.layout.simple_spinner_item);;
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-            adapter.notifyDataSetChanged();
+            arrayAdapter = ArrayAdapter.createFromResource(context, resource, android.R.layout.simple_spinner_item);;
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+            arrayAdapter.notifyDataSetChanged();
             // set the spinners adapter to the previously created one.
-            dropdown.setAdapter(adapter);
+            dropdown.setAdapter(arrayAdapter);
         }
     }
 
+    public void setItemByName(String name){
+        dropdown.setSelection(arrayAdapter.getPosition(name));
+    }
+
+    /*
     public void setSpinner(Context context, String category){
         Log.d(TAG, "category is: " + category);
         // set spinner item for subcategory
@@ -87,5 +93,6 @@ public class DropDownMenuView extends ConstraintLayout {
         adapter.notifyDataSetChanged();
         dropdown.setAdapter(adapter);
     }
+    */
 
 }

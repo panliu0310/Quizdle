@@ -16,28 +16,9 @@
 
     <string-array name="category">
         <item>Basic Knowledge</item>
+        <item>Customize</item>
         <item>English</item>
         <item>Mathematics</item>
-        <item>Computer Science</item>
-    </string-array>
-
-    <string-array name="basicknowledgesubcategory">
-        <item>CUHK</item>
-    </string-array>
-
-    <string-array name="englishsubcategory">
-        <item>Grammar_I</item>
-    </string-array>
-
-    <string-array name="mathsubcategory">
-        <item>Algebra</item>
-        <item>Arithmetic</item>
-        <item>Geometry</item>
-    </string-array>
-
-    <string-array name="cssubcategory">
-        <item>Computer Organisation</item>
-        <item>Data Structure</item>
     </string-array>
 
 </resources>
