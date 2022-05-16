@@ -120,7 +120,7 @@ public class HomeFragment extends Fragment {
                                 ppvLevel.setContent(String.valueOf(document.getData().get("level")));
                                 ppvExperience.setContent(
                                         String.valueOf(document.getData().get("experience")),
-                                        String.valueOf(document.getData().get("upgradeRequired"))
+                                        String.valueOf(document.getData().get("expBound"))
                                 );
                                 ppvVictory.setContent(
                                         String.valueOf(document.getData().get("victory")),

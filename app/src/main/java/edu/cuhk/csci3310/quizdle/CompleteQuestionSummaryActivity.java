@@ -14,12 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.cuhk.csci3310.quizdle.model.Question;
 import edu.cuhk.csci3310.quizdle.model.User;
@@ -37,9 +41,11 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
     private User user;
     private int score = 0;
     private int level = 0;
+    private int expBound = 0;
     private int coins = 0;
 
     Toolbar tvToolbar;
+    TextView tvCongrats;
     TextView tvExp;
     TextView tvLevel;
     TextView tvCoin;
@@ -57,13 +63,16 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         score = Integer.parseInt(intent.getStringExtra(QuestionActivity.SCORE));
 
         tvToolbar = findViewById(R.id.toolbar);
+        tvCongrats = findViewById(R.id.tv_congrats);
         tvExp = findViewById(R.id.tv_exp);
         tvLevel = findViewById(R.id.tv_level);
         tvCoin = findViewById(R.id.tv_coin);
         btnReturn = findViewById(R.id.btn_main_menu);
 
-        tvToolbar.setTitle("Completed " + category + " - " + questionSetName + "!!");
+        tvToolbar.setTitle("Completed " + category + " - " + questionSetName);
+        tvCongrats.setText("Congratulations!!");
 
+        // get user data from firebase
         mFirestore = FirebaseFirestore.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
@@ -76,18 +85,38 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     Log.d(TAG, task.getResult().toString());
+                    String documentId = task.getResult().getDocuments().get(0).getId();
                     user = task.getResult().toObjects(User.class).get(0);
 
                     coins  = score / 10 + user.getCoin();
                     score += user.getExperience();
+
                     level = (int) Math.floor(Math.log(score/100)/Math.log(2)) + 1;
+                    expBound = (int) (100 * Math.pow(2,level-1));
+                    if (score == expBound){
+                        level++;
+                        expBound *= 2;
+                    }
+
                     tvExp.setText(user.getExperience() + " -> " + score);
                     tvCoin.setText(user.getCoin() + " -> " + coins);
                     tvLevel.setText(user.getLevel() + " -> " + level);
-                    user.setExperience(score);
+                    /* user.setExperience(score);
                     user.setLevel(level);
-                    user.setCoin(coins);
+                    user.setCoin(coins);*/
+                    Map<String, Object> userDetail = new HashMap<>();
+                    userDetail.put("coin", coins);
+                    userDetail.put("experience", score);
+                    userDetail.put("level", level);
+                    userDetail.put("expBound", expBound);
 
+                    mFirestore.collection("users").document(documentId)
+                            .update(userDetail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Log.d(TAG, "updated user info");
+                        }
+                    });
 
                 }else {
                     Log.d(TAG, "Error getting user data: ", task.getException());
