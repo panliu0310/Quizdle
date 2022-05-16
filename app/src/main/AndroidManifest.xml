@@ -13,10 +13,13 @@
             android:name=".CreateQuestionActivity"
             android:exported="false" />
         <activity
-            android:name=".BattleMatchActivity"
+            android:name=".battle.BattleMatchActivity"
             android:exported="false" />
         <activity
-            android:name=".BattleLobbyActivity"
+            android:name=".battle.BattleLobbyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".battle.BattleReadyActivity"
             android:exported="false" />
         <activity
             android:name=".SettingActivity"
@@ -29,6 +32,9 @@
             android:exported="false" />
         <activity
             android:name=".QuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CompleteQuestionSummaryActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

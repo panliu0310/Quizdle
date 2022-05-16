@@ -16,6 +16,8 @@ public class Question {
     private String falseAns3;
     private String explanation;
 
+    public Question(){}
+
     public Question(String questionSetName, String questionSetDescription, int questionNumber,
                     String question, String trueAns, String falseAns1, String falseAns2, String falseAns3, String explanation
     )
