@@ -12,6 +12,7 @@ public class User {
     private String username;
     private int level;
     private int experience;
+    private int expBound;
     private int upgradeRequired;
     private int victory;
     private int totalMatch;
@@ -19,12 +20,13 @@ public class User {
 
     public User() {}
 
-    public User(String email, String username, int level, int experience,
+    public User(String email, String username, int level, int experience, int expBound,
                 int upgradeRequired, int victory, int totalMatch, int coin) {
         this.email = email;
         this.username = username;
         this.level = level;
         this.experience = experience;
+        this.expBound = 100;
         this.upgradeRequired = upgradeRequired;
         this.victory = victory;
         this.totalMatch = totalMatch;
@@ -46,6 +48,10 @@ public class User {
     public int getExperience() { return experience; }
 
     public void setExperience(int experience) { this.experience = experience; }
+
+    public int getExpBound() {return expBound; }
+
+    public void setExpBound(int expBound) { this.expBound = expBound; }
 
     public int getUpgradeRequired() { return upgradeRequired; }
 

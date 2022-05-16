@@ -13,6 +13,7 @@ public class UserUtil {
         user.setUsername(email);
         user.setLevel(1);
         user.setExperience(0);
+        user.setExpBound(100);
         user.setUpgradeRequired(100);
         user.setVictory(0);
         user.setTotalMatch(0);

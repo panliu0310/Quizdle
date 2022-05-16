@@ -30,11 +30,24 @@
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/menu/bottom_nav_menu.xml" value="0.12239583333333333" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/menu/top_app_bar.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/liuho/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_battle_lobby.xml" value="0.25698699951171877" />
+        <entry key="app/src/main/res/layout/activity_complete_question_summary.xml" value="0.4106674194335937" />
+        <entry key="app/src/main/res/layout/activity_create_question.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
         <entry key="app/src/main/res/layout/activity_question_set.xml" value="0.2675033569335938" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/fragment_battle.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/fragment_level.xml" value="0.27190856933593754" />
+        <entry key="app/src/main/res/layout/fragment_create.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_discuss.xml" value="0.11875" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17618560791015625" />
+        <entry key="app/src/main/res/layout/fragment_level.xml" value="0.10953369140625001" />
+        <entry key="app/src/main/res/layout/fragment_message_dialog.xml" value="0.11875" />
+        <entry key="app/src/main/res/layout/item_category.xml" value="0.34307169154070427" />
+        <entry key="app/src/main/res/layout/item_subcategory.xml" value="0.13451086956521738" />
+        <entry key="app/src/main/res/layout/view_drop_down_menu.xml" value="0.11875" />
+        <entry key="app/src/main/res/layout/view_profile_pair.xml" value="0.11875" />
+        <entry key="app/src/main/res/layout/view_text_input.xml" value="0.11875" />
       </map>
     </option>
   </component>
