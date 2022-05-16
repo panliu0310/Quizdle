@@ -26,6 +26,7 @@ import edu.cuhk.csci3310.quizdle.SubCategorySelectActivity;
 
 public class SubCategoryListAdapter extends Adapter<SubCategoryListAdapter.SubCategoryViewHolder> {
     private static final String TAG = "SubCategoryListAdapter";
+    final String mCustomizeDrawableFilePath = "android.resource://edu.cuhk.csci3310.quizdle/drawable/category_cus";
     final String mDrawableFilePath = "android.resource://edu.cuhk.csci3310.quizdle/drawable/subcategory_";
     private Context context;
 
@@ -83,6 +84,9 @@ public class SubCategoryListAdapter extends Adapter<SubCategoryListAdapter.SubCa
         holder.imageItemView.setImageURI(Uri.parse(mDrawableFilePath
                 + mCategory.toLowerCase().substring(0,3) + "_"
                 + mCategoryName.toLowerCase().substring(0,3)));
+        if(mCategory.equals("Customize")){
+            holder.imageItemView.setImageURI(Uri.parse(mCustomizeDrawableFilePath));
+        }
     }
 
     public long getItemId(int position) {

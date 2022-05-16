@@ -91,7 +91,7 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                     coins  = score / 10 + user.getCoin();
                     score += user.getExperience();
 
-                    level = (int) Math.floor(Math.log(score/100)/Math.log(2)) + 1;
+                    level = (int) Math.floor(Math.log(score/100)/Math.log(2)) + 2;
                     expBound = (int) (100 * Math.pow(2,level-1));
                     if (score == expBound){
                         level++;
