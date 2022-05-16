@@ -50,12 +50,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_score_player_1" />
 
+    <TextView
+        android:id="@+id/tv_choice_player_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text=""
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_score_player_2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+
+    <TextView
+        android:id="@+id/tv_choice_player_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text=""
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@+id/tv_score_player_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+
     <Button
         android:id="@+id/btn_choice_a"
         android:layout_width="140dp"
         android:layout_height="60dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:text="A"
         app:layout_constraintEnd_toStartOf="@+id/btn_choice_b"
         app:layout_constraintHorizontal_bias="0.197"
@@ -66,7 +90,7 @@
         android:id="@+id/btn_choice_b"
         android:layout_width="140dp"
         android:layout_height="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="28dp"
         android:text="B"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +101,7 @@
         android:layout_width="140dp"
         android:layout_height="60dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="35dp"
         android:text="C"
         app:layout_constraintEnd_toStartOf="@+id/btn_choice_d"
         app:layout_constraintHorizontal_bias="0.197"
@@ -88,7 +112,7 @@
         android:id="@+id/btn_choice_d"
         android:layout_width="140dp"
         android:layout_height="60dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="30dp"
         android:text="D"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,6 +141,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_score_player_2"
         app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
+
+    <TextView
+        android:id="@+id/tv_timer"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="10"
+        app:layout_constraintStart_toEndOf="@id/tv_score_player_1"
+        app:layout_constraintEnd_toStartOf="@id/tv_score_player_2"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
 
     <TextView
         android:id="@+id/tv_score_player_2"

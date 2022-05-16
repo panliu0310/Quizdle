@@ -159,9 +159,9 @@ public class BattleReadyActivity extends AppCompatActivity {
                 battleRef.setValue(usernamePlayer2);
                 battleRef = database.getReference("battles/" + roomName + "/category");
                 battleRef.setValue(category);
-                battleRef = database.getReference("battles/" + roomName + "/player1Score");
+                battleRef = database.getReference("battles/" + roomName + "/player1score");
                 battleRef.setValue(0);
-                battleRef = database.getReference("battles/" + roomName + "/player2Score");
+                battleRef = database.getReference("battles/" + roomName + "/player2score");
                 battleRef.setValue(0);
             }
         });

@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,40 +26,46 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import edu.cuhk.csci3310.quizdle.R;
-import edu.cuhk.csci3310.quizdle.dialogfragment.MessageDialogFragment;
 import edu.cuhk.csci3310.quizdle.model.Question;
 
 public class BattleMatchActivity extends AppCompatActivity {
 
     private String TAG = "BattleMatchActivity";
 
-    private String usernamePlayer1 = "";
-    private String usernamePlayer2 = "";
+    private String usernamePlayer1 = ""; private String usernamePlayer2 = "";
     private String role = "";
     private String roomName = "";
     private String category;
     private String questionSetName;
     public List<Question> questionSet;
     private int questionNum = 0;
-    private int scorePlayer1 = 0;
-    private int scorePlayer2 = 0;
+    private int scorePlayer1 = 0; private int scorePlayer2 = 0;
+    private String choicePlayer1 = ""; private String choicePlayer2 = "";
     private int correctAns;
 
     private FirebaseFirestore mFirestore;
     FirebaseDatabase database;
     DatabaseReference roomNameRef;
+    DatabaseReference roomRef;
     DatabaseReference roomsRef;
     DatabaseReference questionRef;
+    DatabaseReference scoreRef;
 
     TextView tvScorePlayer1; TextView tvScorePlayer2;
+    TextView tvTimer;
     TextView tvQuestion;
+    TextView tvChoicePlayer1; TextView tvChoicePlayer2;
     Button btnA, btnB, btnC, btnD, btnNextQuestion;
     Button[] buttonList;
     TextView tvExplanation;
     Toolbar toolbar;
+
+    CountDownTimer countDownTimer15s;
+    CountDownTimer countDownTimer3s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,21 +88,50 @@ public class BattleMatchActivity extends AppCompatActivity {
 
         // set view name
         tvScorePlayer1 = findViewById(R.id.tv_score_player_1); tvScorePlayer2 = findViewById(R.id.tv_score_player_2);
+        tvTimer = findViewById(R.id.tv_timer);
         tvQuestion = findViewById(R.id.tv_question);
+        tvChoicePlayer1 = findViewById(R.id.tv_choice_player_1); tvChoicePlayer2 = findViewById(R.id.tv_choice_player_2);
         tvExplanation = findViewById(R.id.tv_explanation);
         btnA = findViewById(R.id.btn_choice_a); btnB = findViewById(R.id.btn_choice_b); btnC = findViewById(R.id.btn_choice_c); btnD = findViewById(R.id.btn_choice_d);
         btnNextQuestion = findViewById(R.id.btn_next_question);
         buttonList = new Button[]{btnA, btnB, btnC, btnD};
+
+        createTimers();
 
         // getSubcategoryRandom() -> getQuestionSet() -> setQuestionViews()
         getSubcategoryRandom();
 
         getRoomData();
 
+        setChoiceButtonOnclickListener();
+
     }
 
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
+    }
+
+    private void createTimers() {
+        countDownTimer15s = new CountDownTimer(15000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                tvTimer.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
+            }
+
+            public void onFinish() {
+                sendResultOfOneQuestion();
+                Log.d(TAG, "timer finish");
+            }
+        };
+
+        countDownTimer3s = new CountDownTimer(3000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                tvTimer.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
+            }
+
+            public void onFinish() {
+                tvTimer.setText("Done.");
+            }
+        };
     }
 
     private void getSubcategoryRandom() {
@@ -153,16 +188,38 @@ public class BattleMatchActivity extends AppCompatActivity {
         roomNameRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "onDataChange!");
                 // set textview username with score data
-                if (snapshot.child("player1Score").getValue() != null) {
-                    scorePlayer1 = ((Long) snapshot.child("player1Score").getValue()).intValue();
+                if (snapshot.child("player1score").getValue() != null) {
+                    scorePlayer1 = ((Long) snapshot.child("player1score").getValue()).intValue();
                     Log.d(TAG, "usernamePlayer1: " + usernamePlayer1);
                     tvScorePlayer1.setText(usernamePlayer1 + ": " + scorePlayer1);
                 }
-                if (snapshot.child("player2Score").getValue() != null) {
-                    scorePlayer2 = ((Long) snapshot.child("player2Score").getValue()).intValue();
+                if (snapshot.child("player2score").getValue() != null) {
+                    scorePlayer2 = ((Long) snapshot.child("player2score").getValue()).intValue();
                     Log.d(TAG, "usernamePlayer2: " + usernamePlayer2);
                     tvScorePlayer2.setText(usernamePlayer2 + ": " + scorePlayer2);
+                }
+
+                // after calling sendResultOfOneQuestion()
+                // add score to players
+                if (snapshot.child("player1correct").getValue() != null) {
+                    tvChoicePlayer1.setText(snapshot.child("player1correct").getValue().toString());
+                    Log.d(TAG, "set tvChoicePlayer1 to: " + snapshot.child("player1correct").getValue().toString());
+                    if (tvChoicePlayer1.getText().equals("correct") && role.equals("host")) {
+                        scorePlayer1 += 100;
+                    }
+                    // after getting the score, clear the record in database
+                    clearDatabase();
+                }
+                if (snapshot.child("player2correct").getValue() != null) {
+                    tvChoicePlayer2.setText(snapshot.child("player2correct").getValue().toString());
+                    Log.d(TAG, "set tvChoicePlayer2 to: " + snapshot.child("player2correct").getValue().toString());
+                    if (tvChoicePlayer2.getText().equals("correct") && role.equals("guest")) {
+                        scorePlayer2 += 100;
+                    }
+                    // after getting the score, clear the record in database
+                    clearDatabase();
                 }
             }
 
@@ -183,13 +240,12 @@ public class BattleMatchActivity extends AppCompatActivity {
         Random ran = new Random();
         correctAns = ran.nextInt(4); // correctAns will be 0, 1, 2, 3
         int falseAnsNum = 0;
-        Log.d(TAG, "CorrectAns" + correctAns);
+        Log.d(TAG, "CorrectAns: " + correctAns);
 
         // set text with 4 buttons
         for (int i = 0; i < buttonList.length; i++) {
             buttonList[i].setEnabled(true);
             buttonList[i].setBackgroundColor(getColor(R.color.purple_500));
-            Log.d(TAG, falseAnsNum+"");
             // if i is the correctAns, set text with true answer
             // else set text with false answers
             if (i == correctAns){
@@ -204,6 +260,89 @@ public class BattleMatchActivity extends AppCompatActivity {
         tvQuestion.setText(question.getQuestion());
         tvExplanation.setVisibility(View.INVISIBLE);
         btnNextQuestion.setVisibility(View.INVISIBLE);
+        countDownTimer15s.start();
+    }
+
+    private void setChoiceButtonOnclickListener(){
+        View.OnClickListener btnOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button btn = (Button) v;
+                if (role.equals("host")) {
+                    choicePlayer1 = (String) btn.getText();
+                    roomRef = database.getReference("battles/" + roomName + "/player1choice");
+                    roomRef.setValue(btn.getText());
+                    if (buttonList[0].equals(btn)) {
+                        tvChoicePlayer1.setText("A");
+                    } else if (buttonList[1].equals(btn)) {
+                        tvChoicePlayer1.setText("B");
+                    } else if (buttonList[2].equals(btn)) {
+                        tvChoicePlayer1.setText("C");
+                    } else {
+                        tvChoicePlayer1.setText("D");
+                    }
+                } else if (role.equals("guest")) {
+                    choicePlayer2 = (String) btn.getText();
+                    roomRef = database.getReference("battles/" + roomName + "/player2choice");
+                    roomRef.setValue(btn.getText());
+                    if (buttonList[0].equals(btn)) {
+                        tvChoicePlayer2.setText("A");
+                    } else if (buttonList[1].equals(btn)) {
+                        tvChoicePlayer2.setText("B");
+                    } else if (buttonList[2].equals(btn)) {
+                        tvChoicePlayer2.setText("C");
+                    } else {
+                        tvChoicePlayer2.setText("D");
+                    }
+                }
+            }
+        };
+
+        for (Button button : buttonList) {
+            button.setOnClickListener(btnOnClickListener);
+        }
+
+    }
+
+    private void sendResultOfOneQuestion() {
+        Log.d(TAG, "sendResultOfOneQuestion() is called!");
+        if (choicePlayer1.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("host")) {
+            roomRef = database.getReference("battles/" + roomName + "/player1correct");
+            roomRef.setValue("correct");
+            Log.d(TAG, "set player1correct!");
+        } else if (!choicePlayer1.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("host")) {
+            roomRef = database.getReference("battles/" + roomName + "/player1correct");
+            roomRef.setValue("wrong");
+            Log.d(TAG, "set player1wrong!");
+        }
+
+        if (choicePlayer2.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("guest")) {
+            roomRef = database.getReference("battles/" + roomName + "/player2correct");
+            roomRef.setValue("correct");
+            Log.d(TAG, "set player2correct!");
+        } else if (!choicePlayer1.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("guest")) {
+            roomRef = database.getReference("battles/" + roomName + "/player2correct");
+            roomRef.setValue("wrong");
+            Log.d(TAG, "set player2wrong!");
+        }
+    }
+
+    private void clearDatabase() {
+        Log.d(TAG, "clearDatabase() is called!");
+        Log.d(TAG, "score of player 1: " + scorePlayer1);
+        Log.d(TAG, "score of player 2: " + scorePlayer2);
+        roomRef = database.getReference("battles/" + roomName + "/player1correct");
+        roomRef.removeValue();
+        Log.d(TAG, "removed player1correct!");
+        roomRef = database.getReference("battles/" + roomName + "/player2correct");
+        roomRef.removeValue();
+        Log.d(TAG, "removed player2correct!");
+        roomRef = database.getReference("battles/" + roomName + "/player1choice");
+        roomRef.removeValue();
+        Log.d(TAG, "removed player1choice!");
+        roomRef = database.getReference("battles/" + roomName + "/player2choice");
+        roomRef.removeValue();
+        Log.d(TAG, "removed player2choice!");
     }
 
 }
