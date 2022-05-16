@@ -129,7 +129,10 @@ public class BattleMatchActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                tvTimer.setText("Done.");
+                questionNum += 1;
+                tvChoicePlayer1.setText(""); tvChoicePlayer2.setText("");
+                choicePlayer1 = ""; choicePlayer2 = "";
+                setQuestionViews();
             }
         };
     }
@@ -207,7 +210,9 @@ public class BattleMatchActivity extends AppCompatActivity {
                     tvChoicePlayer1.setText(snapshot.child("player1correct").getValue().toString());
                     Log.d(TAG, "set tvChoicePlayer1 to: " + snapshot.child("player1correct").getValue().toString());
                     if (tvChoicePlayer1.getText().equals("correct") && role.equals("host")) {
-                        scorePlayer1 += 100;
+                        scorePlayer1 += 50;
+                        roomRef = database.getReference("battles/" + roomName + "/player1score");
+                        roomRef.setValue(scorePlayer1);
                     }
                     // after getting the score, clear the record in database
                     clearDatabase();
@@ -216,7 +221,9 @@ public class BattleMatchActivity extends AppCompatActivity {
                     tvChoicePlayer2.setText(snapshot.child("player2correct").getValue().toString());
                     Log.d(TAG, "set tvChoicePlayer2 to: " + snapshot.child("player2correct").getValue().toString());
                     if (tvChoicePlayer2.getText().equals("correct") && role.equals("guest")) {
-                        scorePlayer2 += 100;
+                        scorePlayer2 += 50;
+                        roomRef = database.getReference("battles/" + roomName + "/player2score");
+                        roomRef.setValue(scorePlayer2);
                     }
                     // after getting the score, clear the record in database
                     clearDatabase();
@@ -232,7 +239,6 @@ public class BattleMatchActivity extends AppCompatActivity {
 
     private void setQuestionViews() {
         // get the question in questionSet in Class Question format
-        Log.d(TAG, "setQuestionViews() is being called");
         Log.d(TAG, questionSet.toString());
         Question question = questionSet.get(questionNum);
         int displayNum = questionNum + 1;
@@ -305,7 +311,6 @@ public class BattleMatchActivity extends AppCompatActivity {
     }
 
     private void sendResultOfOneQuestion() {
-        Log.d(TAG, "sendResultOfOneQuestion() is called!");
         if (choicePlayer1.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("host")) {
             roomRef = database.getReference("battles/" + roomName + "/player1correct");
             roomRef.setValue("correct");
@@ -324,6 +329,16 @@ public class BattleMatchActivity extends AppCompatActivity {
             roomRef = database.getReference("battles/" + roomName + "/player2correct");
             roomRef.setValue("wrong");
             Log.d(TAG, "set player2wrong!");
+        }
+        tvExplanation.setText(questionSet.get(questionNum).getExplanation());
+        if (questionNum == questionSet.size()) {
+            // finish all questions
+            // TODO: end game
+        } else {
+            for (Button choice_btn: buttonList ){
+                choice_btn.setEnabled(false);
+            }
+            countDownTimer3s.start();
         }
     }
 
