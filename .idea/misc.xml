@@ -24,8 +24,9 @@
         <entry key="app/src/main/res/layout/activity_battle_lobby.xml" value="0.25698699951171877" />
         <entry key="app/src/main/res/layout/activity_complete_question_summary.xml" value="0.4106674194335937" />
         <entry key="app/src/main/res/layout/activity_create_question.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_endless_question.xml" value="0.16460287911551325" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
-        <entry key="app/src/main/res/layout/activity_question.xml" value="0.40192260742187524" />
+        <entry key="app/src/main/res/layout/activity_question.xml" value="0.17511520737327188" />
         <entry key="app/src/main/res/layout/activity_question_set.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/activity_subcategory_select.xml" value="0.16197916666666667" />
