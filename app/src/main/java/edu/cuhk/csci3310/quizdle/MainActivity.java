@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     HomeFragment homeFragment = new HomeFragment();
     SinglePlayerFragment singlePlayerFragment = new SinglePlayerFragment();
     BattleFragment battleFragment = new BattleFragment();
-    DiscussFragment discussFragment = new DiscussFragment();
+    SettingFragment settingFragment = new SettingFragment();
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseFirestore mFirestore;
@@ -62,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void setToolbar(){
         // assigning ID of the toolbar to a variable
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Quizdle");
         // using toolbar as ActionBar
-        setSupportActionBar(toolbar);
+        /*setSupportActionBar(toolbar);
         ImageButton ibSetting = (ImageButton) findViewById(R.id.ib_setting);
         ibSetting.setImageResource(R.drawable.settings);
         ibSetting.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 // start SettingActivity
                 startSettingActivity();
             }
-        });
+        });*/
     }
 
     private void setBottomNavigationView(){
@@ -113,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, battleFragment).commit();
                 return true;
 
-            case R.id.discuss:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, discussFragment).commit();
+            case R.id.setting:
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, settingFragment).commit();
                 return true;
         }
         return false;
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 username = String.valueOf(document.getData().get("username"));
                             }
-                            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                            Intent intent = new Intent(MainActivity.this, SettingFragment.class);
                             intent.putExtra("username", username);
                             startActivity(intent);
                         } else {

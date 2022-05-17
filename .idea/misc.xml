@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/layout/activity_complete_question_summary.xml" value="0.4106674194335937" />
         <entry key="app/src/main/res/layout/activity_create_question.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_endless_question.xml" value="0.8267076764787946" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.11145833333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
         <entry key="app/src/main/res/layout/activity_question.xml" value="0.17511520737327188" />
         <entry key="app/src/main/res/layout/activity_question_set.xml" value="0.1" />
@@ -43,6 +44,7 @@
         <entry key="app/src/main/res/layout/view_drop_down_menu.xml" value="0.11875" />
         <entry key="app/src/main/res/layout/view_profile_pair.xml" value="0.11875" />
         <entry key="app/src/main/res/layout/view_text_input.xml" value="0.11875" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2296875" />
       </map>
     </option>
   </component>

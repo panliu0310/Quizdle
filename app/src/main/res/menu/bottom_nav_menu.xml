@@ -13,7 +13,7 @@
         android:title="Battle Mode"
         android:icon="@drawable/swords"/>
     <item
-        android:id="@+id/discuss"
-        android:title="Discussion"
-        android:icon="@drawable/discuss"/>
+        android:id="@+id/setting"
+        android:title="Setting"
+        android:icon="@drawable/settings"/>
 </menu>
