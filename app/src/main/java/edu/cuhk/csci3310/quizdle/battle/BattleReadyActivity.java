@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +44,7 @@ public class BattleReadyActivity extends AppCompatActivity {
     boolean player2Ready;
 
     FirebaseDatabase database;
+    DatabaseReference roomRef;
     DatabaseReference roomNameRef;
     DatabaseReference readyRef;
     DatabaseReference startRef;
@@ -84,6 +87,26 @@ public class BattleReadyActivity extends AppCompatActivity {
         addRoomDataEventListener();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (role.equals("host")) {
+            removePlayer1();
+        } else {
+            removePlayer2();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        if (role.equals("host")) {
+            removePlayer1();
+        } else {
+            removePlayer2();
+        }
+    }
+
     private void setToolbar(){
         // assigning ID of the toolbar to a variable
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -95,6 +118,11 @@ public class BattleReadyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //What to do on back clicked
                 finish();
+                if (role.equals("host")) {
+                    removePlayer1();
+                } else {
+                    removePlayer2();
+                }
             }
         });
     }
@@ -153,6 +181,11 @@ public class BattleReadyActivity extends AppCompatActivity {
                 startRef = database.getReference("rooms/" + roomName + "/start");
                 startRef.setValue("true");
 
+                // delete the waiting ready room
+                roomRef = database.getReference("rooms/" + roomName);
+                roomRef.removeValue();
+
+                // create battle
                 battleRef = database.getReference("battles/" + roomName + "/player1");
                 battleRef.setValue(usernamePlayer1);
                 battleRef = database.getReference("battles/" + roomName + "/player2");
@@ -184,6 +217,9 @@ public class BattleReadyActivity extends AppCompatActivity {
                     usernamePlayer1 = snapshot.child("player1").getValue().toString();
                     Log.d(TAG, "usernamePlayer1: " + usernamePlayer1);
                     tvUsernamePlayer1.setText(usernamePlayer1);
+                    if (usernamePlayer1.equals("")) {
+                        alertPlayer2ToLeave();
+                    }
                 }
                 if (snapshot.child("player2").getValue() != null) {
                     usernamePlayer2 = snapshot.child("player2").getValue().toString();
@@ -228,6 +264,7 @@ public class BattleReadyActivity extends AppCompatActivity {
                         intent.putExtra("usernamePlayer1", usernamePlayer1);
                         intent.putExtra("usernamePlayer2", usernamePlayer2);
                         startActivity(intent);
+                        database.getReference("rooms/" + roomName + "/start").removeValue();
                     }
                 }
             }
@@ -237,6 +274,43 @@ public class BattleReadyActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void removePlayer1() {
+        // player 1 exit
+        roomRef = database.getReference("rooms/" + roomName + "/player1");
+        roomRef.setValue("");
+        roomRef = database.getReference("rooms/" + roomName + "/player1ready");
+        roomRef.setValue("false");
+        database.getReference("rooms/" + roomName).removeValue();
+    }
+
+    private void removePlayer2() {
+        // player 2 exit
+        roomRef = database.getReference("rooms/" + roomName + "/player2");
+        roomRef.setValue("");
+        roomRef = database.getReference("rooms/" + roomName + "/player2ready");
+        roomRef.setValue("false");
+    }
+
+    private void alertPlayer2ToLeave() {
+        if (role.equals("guest")) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle("Player 1 leaves")
+                    .setMessage("The host leaves the room.")
+                    .setNegativeButton(android.R.string.no, null)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            if (!BattleReadyActivity.this.isFinishing()) {
+                                finish();
+                            }
+                        }
+                    })
+                    .create();
+            if (!BattleReadyActivity.this.isFinishing()) {
+                alertDialog.show();
+            }
+        }
     }
 
 }

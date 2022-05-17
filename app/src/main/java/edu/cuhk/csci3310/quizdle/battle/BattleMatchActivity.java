@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -107,6 +108,21 @@ public class BattleMatchActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), " You cannot leave during battle! ", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (role.equals("host")) {
+            removePlayer1();
+        } else {
+            removePlayer2();
+        }
+    }
+
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
     }
@@ -156,6 +172,7 @@ public class BattleMatchActivity extends AppCompatActivity {
                         Log.d(TAG, "win status: tie");
                     }
                     startActivity(intent);
+                    deleteBattle();
                 } else {
                     setQuestionViews();
                 }
@@ -261,6 +278,11 @@ public class BattleMatchActivity extends AppCompatActivity {
                     } else {
                         winner = "";
                     }
+                }
+
+                // delete battle in database if both players leave
+                if (snapshot.child("player1left").getValue() != null && snapshot.child("player2left").getValue() != null) {
+                    deleteBattle();
                 }
             }
 
@@ -378,6 +400,29 @@ public class BattleMatchActivity extends AppCompatActivity {
         roomRef = database.getReference("battles/" + roomName + "/player1choice");
         roomRef.removeValue();
         roomRef = database.getReference("battles/" + roomName + "/player2choice");
+        roomRef.removeValue();
+    }
+
+    private void removePlayer1() {
+        // player 1 exit
+        database.getReference("battles/" + roomName + "/player1").setValue("");
+        if (usernamePlayer2.equals("")) {
+            // if both player exits, delete battles
+            database.getReference("battles/" + roomName).removeValue();
+        }
+    }
+
+    private void removePlayer2() {
+        // player 2 exit
+        database.getReference("battles/" + roomName + "/player2").setValue("");
+        if (usernamePlayer1.equals("")) {
+            // if both player exits, delete battles
+            database.getReference("battles/" + roomName).removeValue();
+        }
+    }
+
+    private void deleteBattle() {
+        roomRef = database.getReference("battles/" + roomName);
         roomRef.removeValue();
     }
 
