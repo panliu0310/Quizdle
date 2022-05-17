@@ -155,7 +155,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         }
         //Log.d(TAG, "category: " + category);
         //Log.d(TAG, "subcategory: " + subcategory);
-        if (!(questionSetName.equals("") || questionSetDescription.equals("") ||
+        if ((questionSetName.equals("") || questionSetDescription.equals("") ||
                 questions[0].equals("") || trueAnswers[0].equals("") || falseAnswers1[0].equals("") || falseAnswers2[0].equals("") || falseAnswers3[0].equals("") || explanations[0].equals("") ||
                 questions[1].equals("") || trueAnswers[1].equals("") || falseAnswers1[1].equals("") || falseAnswers2[1].equals("") || falseAnswers3[1].equals("") || explanations[1].equals("") ||
                 questions[2].equals("") || trueAnswers[2].equals("") || falseAnswers1[2].equals("") || falseAnswers2[2].equals("") || falseAnswers3[2].equals("") || explanations[2].equals("") ||
@@ -173,7 +173,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             // create a HashMap to store subcategory
             Map<String, Object> subcategoryDetail = new HashMap<>();
 
-            DocumentReference customizeRef = mFirestore.collection("questions").document("Customize");
+            DocumentReference customizeRef = mFirestore.collection("questions").document("Mathematics");
 
             customizeRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -225,7 +225,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             explanations[i] = tivExplanationList.get(i).etInput.getText().toString();
         }
 
-        CollectionReference questionSetRef = mFirestore.collection("questions").document("Customize").collection(questionSetName);
+        CollectionReference questionSetRef = mFirestore.collection("questions").document("Mathematics").collection(questionSetName);
 
         // if success, toast
         final boolean[] success = {false};

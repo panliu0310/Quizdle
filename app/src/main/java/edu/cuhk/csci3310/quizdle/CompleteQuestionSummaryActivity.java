@@ -42,7 +42,10 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
     private int score = 0;
     private int level = 0;
     private int expBound = 0;
+    private int victory = 0;
+    private int totalMatch = 0;
     private int coins = 0;
+    private String winStatus = "";
 
     Toolbar tvToolbar;
     TextView tvCongrats;
@@ -60,7 +63,11 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         category = intent.getStringExtra(QuestionActivity.CATEGORY);
         questionSetName = intent.getStringExtra(QuestionActivity.QUESTIONSET);
-        score = Integer.parseInt(intent.getStringExtra(QuestionActivity.SCORE));
+        Log.d(TAG, intent.getStringExtra(QuestionActivity.SCORE));
+        //score = Integer.parseInt(intent.getStringExtra(QuestionActivity.SCORE));
+        score = 100;
+        winStatus = intent.getStringExtra("winStatus");
+        Log.d(TAG, "win status: " + winStatus);
 
         tvToolbar = findViewById(R.id.toolbar);
         tvCongrats = findViewById(R.id.tv_congrats);
@@ -70,7 +77,6 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         btnReturn = findViewById(R.id.btn_main_menu);
 
         tvToolbar.setTitle("Completed " + category + " - " + questionSetName);
-        tvCongrats.setText("Congratulations!!");
 
         // get user data from firebase
         mFirestore = FirebaseFirestore.getInstance();
@@ -88,12 +94,33 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                     String documentId = task.getResult().getDocuments().get(0).getId();
                     user = task.getResult().toObjects(User.class).get(0);
 
-                    coins  = score / 10 + user.getCoin();
-                    score += user.getExperience();
+                    switch (winStatus) {
+                        case "win":
+                            // if user is winner, he gets more coins and experiences
+                            tvCongrats.setText("You Win!");
+                            coins = 20 + score / 10 + user.getCoin(); // user get 20 bonus coins
+                            score = 100 + score + user.getExperience(); // user get 100 bonus experiences
+                            break;
+                        case "tie":
+                            tvCongrats.setText("Tie!");
+                            coins = 10 + score / 10 + user.getCoin(); // user get 10 bonus coins
+                            score = 50 + score + user.getExperience(); // user get 50 bonus experiences
+                            break;
+                        case "lose":
+                            tvCongrats.setText("You Lose...");
+                            coins = 5 + score / 10 + user.getCoin(); // user get 5 bonus coins
+                            score = 20 + score + user.getExperience(); // user get 20 bonus experiences
+                            break;
+                        case "":
+                            // this part is for single player
+                            tvCongrats.setText("Congratulations!!");
+                            coins = score / 10 + user.getCoin();
+                            score = score + user.getExperience();
+                    }
 
                     level = (int) Math.floor(Math.log(score/100)/Math.log(2)) + 2;
                     expBound = (int) (100 * Math.pow(2,level-1));
-                    if (score == expBound){
+                    while (score >= expBound){
                         level++;
                         expBound *= 2;
                     }

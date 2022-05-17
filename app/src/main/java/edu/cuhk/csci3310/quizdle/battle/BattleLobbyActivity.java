@@ -1,4 +1,4 @@
-package edu.cuhk.csci3310.quizdle;
+package edu.cuhk.csci3310.quizdle.battle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.cuhk.csci3310.quizdle.R;
 
 public class BattleLobbyActivity extends AppCompatActivity {
 
@@ -49,10 +51,11 @@ public class BattleLobbyActivity extends AppCompatActivity {
         // get the player name
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        Log.d("TAG", "Received username: " + username);
+        Log.d(TAG, "Received username: " + username);
         // assign player's name to the room name
-        roomName = username;
+        roomName = username + "'s room";
 
+        // set view names
         lvRooms = findViewById(R.id.lv_rooms);
         btnCreateRoom = findViewById(R.id.btn_create_room);
 
@@ -90,10 +93,15 @@ public class BattleLobbyActivity extends AppCompatActivity {
                 Log.d(TAG, "btnCreateRoom clicked");
                 btnCreateRoom.setText("CREATING ROOM");
                 btnCreateRoom.setEnabled(false);
-                roomName = username;
                 roomRef = database.getReference("rooms/" + roomName + "/player1");
                 addRoomEventListener();
                 roomRef.setValue(username);
+                roomRef = database.getReference("rooms/" + roomName + "/player1ready");
+                roomRef.setValue("false");
+                roomRef = database.getReference("rooms/" + roomName + "/player2ready");
+                roomRef.setValue("false");
+                roomRef = database.getReference("rooms/" + roomName + "/start");
+                roomRef.setValue("false");
             }
         });
     }
@@ -121,7 +129,8 @@ public class BattleLobbyActivity extends AppCompatActivity {
                 // join the room
                 btnCreateRoom.setText("CREATE ROOM");
                 btnCreateRoom.setEnabled(true);
-                Intent intent = new Intent(BattleLobbyActivity.this, BattleMatchActivity.class);
+                Intent intent = new Intent(BattleLobbyActivity.this, BattleReadyActivity.class);
+                intent.putExtra("username", username);
                 intent.putExtra("roomName", roomName);
                 startActivity(intent);
 
