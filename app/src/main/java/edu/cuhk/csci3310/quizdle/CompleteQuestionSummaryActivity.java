@@ -37,7 +37,7 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
     private String email = "";
 
     private String category;
-    private String questionSetName;
+    private String questionSetName = "";
     private User user;
     private int score = 0;
     private int level = 0;
@@ -62,7 +62,9 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         // get information from intent
         Intent intent = getIntent();
         category = intent.getStringExtra(QuestionActivity.CATEGORY);
-        questionSetName = intent.getStringExtra(QuestionActivity.QUESTIONSET);
+        if (intent.getStringExtra("questionSetName") != null){
+            questionSetName = intent.getStringExtra(QuestionActivity.QUESTIONSET);
+        }
         score = intent.getIntExtra(QuestionActivity.SCORE, 0);
         if (intent.getStringExtra("winStatus") != null){
             winStatus = intent.getStringExtra("winStatus");
@@ -74,7 +76,9 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         tvCoin = findViewById(R.id.tv_coin);
         btnReturn = findViewById(R.id.btn_main_menu);
 
-        tvToolbar.setTitle("Completed " + category + " - " + questionSetName);
+        String title = "Completed Endless Question Mode";
+        if (!questionSetName.equals("")) title = "Completed " + category + " - " + questionSetName;
+        tvToolbar.setTitle(title);
 
         // get user data from firebase
         mFirestore = FirebaseFirestore.getInstance();
@@ -108,6 +112,12 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                             tvCongrats.setText("You Lose...");
                             coins = 5 + score / 10 + user.getCoin(); // user get 5 bonus coins
                             score = 20 + score + user.getExperience(); // user get 20 bonus experiences
+                            break;
+                        case "endless":
+                            tvCongrats.setText("Congratulations!! You have scored\n" + score +
+                                                "\nmarks in Endless Mode.");
+                            coins = score / 10 + user.getCoin();
+                            score = score + user.getExperience();
                             break;
                         case "":
                             // this part is for single player
@@ -149,7 +159,6 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
             }
         });
 
-        tvLevel.setText("1 -> 2");
         setMenuButtonOnClickListener();
     }
 

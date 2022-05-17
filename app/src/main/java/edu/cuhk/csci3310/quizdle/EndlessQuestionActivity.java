@@ -200,14 +200,12 @@ public class EndlessQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 questionNum++;
-                if (questionNum == questionSet.size()){
-                    /*Intent intent = new Intent(view.getContext(), CompleteQuestionSummaryActivity.class);
+                if (questionNum == questionSet.size() || lifes == 0){
+                    Intent intent = new Intent(view.getContext(), CompleteQuestionSummaryActivity.class);
                     intent.putExtra(CATEGORY, "Endless Mode");
-                    intent.putExtra(SCORE, Integer.toString(score));
-                    view.getContext().startActivity(intent);*/
-                    Log.d(TAG, "Finished!");
-                }else if(lifes == 0){
-                    Log.d(TAG, "Failed");
+                    intent.putExtra("winStatus", "endless");
+                    intent.putExtra(SCORE, score);
+                    view.getContext().startActivity(intent);
                 }
                 else {
                     updateQuestion();
