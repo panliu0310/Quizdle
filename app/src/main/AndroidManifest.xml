@@ -22,7 +22,7 @@
             android:name=".battle.BattleReadyActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingActivity"
+            android:name=".SettingFragment"
             android:exported="false" />
         <activity
             android:name=".QuestionSetActivity"
