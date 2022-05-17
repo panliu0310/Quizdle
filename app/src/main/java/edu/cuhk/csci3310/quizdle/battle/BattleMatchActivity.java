@@ -113,6 +113,16 @@ public class BattleMatchActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), " You cannot leave during battle! ", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (role.equals("host")) {
+            removePlayer1();
+        } else {
+            removePlayer2();
+        }
+    }
+
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
     }
@@ -269,6 +279,11 @@ public class BattleMatchActivity extends AppCompatActivity {
                         winner = "";
                     }
                 }
+
+                // delete battle in database if both players leave
+                if (snapshot.child("player1left").getValue() != null && snapshot.child("player2left").getValue() != null) {
+                    deleteBattle();
+                }
             }
 
             @Override
@@ -386,6 +401,24 @@ public class BattleMatchActivity extends AppCompatActivity {
         roomRef.removeValue();
         roomRef = database.getReference("battles/" + roomName + "/player2choice");
         roomRef.removeValue();
+    }
+
+    private void removePlayer1() {
+        // player 1 exit
+        database.getReference("battles/" + roomName + "/player1").setValue("");
+        if (usernamePlayer2.equals("")) {
+            // if both player exits, delete battles
+            database.getReference("battles/" + roomName).removeValue();
+        }
+    }
+
+    private void removePlayer2() {
+        // player 2 exit
+        database.getReference("battles/" + roomName + "/player2").setValue("");
+        if (usernamePlayer1.equals("")) {
+            // if both player exits, delete battles
+            database.getReference("battles/" + roomName).removeValue();
+        }
     }
 
     private void deleteBattle() {
