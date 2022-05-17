@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import edu.cuhk.csci3310.quizdle.CompleteQuestionSummaryActivity;
+import edu.cuhk.csci3310.quizdle.QuestionActivity;
 import edu.cuhk.csci3310.quizdle.R;
 import edu.cuhk.csci3310.quizdle.model.Question;
 
@@ -46,13 +48,13 @@ public class BattleMatchActivity extends AppCompatActivity {
     private int scorePlayer1 = 0; private int scorePlayer2 = 0;
     private String choicePlayer1 = ""; private String choicePlayer2 = "";
     private int correctAns;
+    private String winner = "";
 
     private FirebaseFirestore mFirestore;
     FirebaseDatabase database;
     DatabaseReference roomNameRef;
     DatabaseReference roomRef;
-    DatabaseReference roomsRef;
-    DatabaseReference questionRef;
+    DatabaseReference choiceRef;
     DatabaseReference scoreRef;
 
     TextView tvScorePlayer1; TextView tvScorePlayer2;
@@ -112,7 +114,7 @@ public class BattleMatchActivity extends AppCompatActivity {
     }
 
     private void createTimers() {
-        countDownTimer15s = new CountDownTimer(15000, 1000) {
+        countDownTimer15s = new CountDownTimer(3000, 1000) {
             public void onTick(long millisUntilFinished) {
                 tvTimer.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
             }
@@ -132,7 +134,35 @@ public class BattleMatchActivity extends AppCompatActivity {
                 questionNum += 1;
                 tvChoicePlayer1.setText(""); tvChoicePlayer2.setText("");
                 choicePlayer1 = ""; choicePlayer2 = "";
-                setQuestionViews();
+                if (questionNum == questionSet.size()) {
+                    // finish all questions
+                    Intent intent = new Intent(BattleMatchActivity.this, CompleteQuestionSummaryActivity.class);
+                    intent.putExtra(QuestionActivity.CATEGORY, category);
+                    intent.putExtra(QuestionActivity.QUESTIONSET, questionSetName);
+                    Log.d(TAG, "role: " + role);
+                    if (role.equals("host")){
+                        intent.putExtra(QuestionActivity.SCORE, scorePlayer1);
+                    } else {
+                        intent.putExtra(QuestionActivity.SCORE, scorePlayer2);
+                    }
+                    if ((winner.equals(usernamePlayer1) && role.equals("host")) || (winner.equals(usernamePlayer2) && role.equals("guest"))){
+                        // user is player 1, and player 1 is winner
+                        // or user is player 2, and player 2 is winner
+                        intent.putExtra("winStatus", "win");
+                        Log.d(TAG, "win status: win");
+                    } else if ((winner.equals(usernamePlayer1) && role.equals("guest")) || (winner.equals(usernamePlayer2) && role.equals("host"))){
+                        // user is player 2, and player 1 is winner
+                        // or user is player 1, and player 2 is winner
+                        intent.putExtra("winStatus", "lose");
+                        Log.d(TAG, "win status: lose");
+                    } else if (winner.equals("")){
+                        intent.putExtra("winStatus", "tie");
+                        Log.d(TAG, "win status: tie");
+                    }
+                    startActivity(intent);
+                } else {
+                    setQuestionViews();
+                }
             }
         };
     }
@@ -211,8 +241,8 @@ public class BattleMatchActivity extends AppCompatActivity {
                     Log.d(TAG, "set tvChoicePlayer1 to: " + snapshot.child("player1correct").getValue().toString());
                     if (tvChoicePlayer1.getText().equals("correct") && role.equals("host")) {
                         scorePlayer1 += 50;
-                        roomRef = database.getReference("battles/" + roomName + "/player1score");
-                        roomRef.setValue(scorePlayer1);
+                        scoreRef = database.getReference("battles/" + roomName + "/player1score");
+                        scoreRef.setValue(scorePlayer1);
                     }
                     // after getting the score, clear the record in database
                     clearDatabase();
@@ -222,11 +252,30 @@ public class BattleMatchActivity extends AppCompatActivity {
                     Log.d(TAG, "set tvChoicePlayer2 to: " + snapshot.child("player2correct").getValue().toString());
                     if (tvChoicePlayer2.getText().equals("correct") && role.equals("guest")) {
                         scorePlayer2 += 50;
-                        roomRef = database.getReference("battles/" + roomName + "/player2score");
-                        roomRef.setValue(scorePlayer2);
+                        scoreRef = database.getReference("battles/" + roomName + "/player2score");
+                        scoreRef.setValue(scorePlayer2);
                     }
                     // after getting the score, clear the record in database
                     clearDatabase();
+                }
+
+                // identify winner
+                if (snapshot.child("player1score").getValue() != null && snapshot.child("player1score").getValue() != null) {
+                    Log.d(TAG, "player1score: " + snapshot.child("player1score").getValue().toString());
+                    Log.d(TAG, "player2score: " + snapshot.child("player2score").getValue().toString());
+
+                    if (Integer.parseInt(snapshot.child("player1score").getValue().toString()) >
+                            Integer.parseInt(snapshot.child("player2score").getValue().toString())) {
+                        winner = usernamePlayer1;
+                        Log.d(TAG, "winner: " + winner);
+                    } else if (Integer.parseInt(snapshot.child("player1score").getValue().toString()) <
+                            Integer.parseInt(snapshot.child("player2score").getValue().toString())) {
+                        winner = usernamePlayer2;
+                        Log.d(TAG, "winner: " + winner);
+                    } else {
+                        winner = "";
+                        Log.d(TAG, "winner: " + winner);
+                    }
                 }
             }
 
@@ -276,8 +325,8 @@ public class BattleMatchActivity extends AppCompatActivity {
                 Button btn = (Button) v;
                 if (role.equals("host")) {
                     choicePlayer1 = (String) btn.getText();
-                    roomRef = database.getReference("battles/" + roomName + "/player1choice");
-                    roomRef.setValue(btn.getText());
+                    choiceRef = database.getReference("battles/" + roomName + "/player1choice");
+                    choiceRef.setValue(btn.getText());
                     if (buttonList[0].equals(btn)) {
                         tvChoicePlayer1.setText("A");
                     } else if (buttonList[1].equals(btn)) {
@@ -289,8 +338,8 @@ public class BattleMatchActivity extends AppCompatActivity {
                     }
                 } else if (role.equals("guest")) {
                     choicePlayer2 = (String) btn.getText();
-                    roomRef = database.getReference("battles/" + roomName + "/player2choice");
-                    roomRef.setValue(btn.getText());
+                    choiceRef = database.getReference("battles/" + roomName + "/player2choice");
+                    choiceRef.setValue(btn.getText());
                     if (buttonList[0].equals(btn)) {
                         tvChoicePlayer2.setText("A");
                     } else if (buttonList[1].equals(btn)) {
@@ -331,15 +380,12 @@ public class BattleMatchActivity extends AppCompatActivity {
             Log.d(TAG, "set player2wrong!");
         }
         tvExplanation.setText(questionSet.get(questionNum).getExplanation());
-        if (questionNum == questionSet.size()) {
-            // finish all questions
-            // TODO: end game
-        } else {
-            for (Button choice_btn: buttonList ){
-                choice_btn.setEnabled(false);
-            }
-            countDownTimer3s.start();
+
+        for (Button choice_btn : buttonList) {
+            choice_btn.setEnabled(false);
         }
+        countDownTimer3s.start();
+
     }
 
     private void clearDatabase() {

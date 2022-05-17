@@ -11,6 +11,7 @@
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_battle_lobby.xml" value="0.24230072463768115" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_battle_match.xml" value="0.22871376811594202" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_battle_ready.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_complete_question_summary.xml" value="0.2" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_create_question.xml" value="0.22308749427393496" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_login.xml" value="0.1296875" />
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/layout/activity_main.xml" value="0.176" />
@@ -37,7 +38,6 @@
         <entry key="app/src/main/res/layout/activity_question_set.xml" value="0.2675033569335938" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/fragment_battle.xml" value="0.1693840579710145" />
-        <entry key="app/src/main/res/layout/fragment_level.xml" value="0.27190856933593754" />
         <entry key="app/src/main/res/layout/fragment_create.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_discuss.xml" value="0.11875" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17618560791015625" />
