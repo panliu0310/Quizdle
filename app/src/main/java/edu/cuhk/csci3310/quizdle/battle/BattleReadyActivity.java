@@ -234,6 +234,7 @@ public class BattleReadyActivity extends AppCompatActivity {
                         intent.putExtra("usernamePlayer1", usernamePlayer1);
                         intent.putExtra("usernamePlayer2", usernamePlayer2);
                         startActivity(intent);
+                        database.getReference("rooms/" + roomName + "/start").removeValue();
                     }
                 }
             }

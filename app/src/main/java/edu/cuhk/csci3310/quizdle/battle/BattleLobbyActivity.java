@@ -96,6 +96,18 @@ public class BattleLobbyActivity extends AppCompatActivity {
                 roomRef = database.getReference("rooms/" + roomName + "/player1");
                 addRoomEventListener();
                 roomRef.setValue(username);
+                Intent intent = new Intent(BattleLobbyActivity.this, BattleReadyActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("roomName", roomName);
+                startActivity(intent);
+                /*
+                roomRef = database.getReference("rooms/" + roomName + "/player1ready");
+                roomRef.setValue("false");
+                roomRef = database.getReference("rooms/" + roomName + "/player2ready");
+                roomRef.setValue("false");
+                roomRef = database.getReference("rooms/" + roomName + "/start");
+                roomRef.setValue("false");
+                 */
             }
         });
     }
@@ -109,6 +121,10 @@ public class BattleLobbyActivity extends AppCompatActivity {
                 roomRef = database.getReference("rooms/" + roomName + "/player2");
                 addRoomEventListener();
                 roomRef.setValue(username);
+                Intent intent = new Intent(BattleLobbyActivity.this, BattleReadyActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("roomName", roomName);
+                startActivity(intent);
             }
         });
     }
@@ -116,18 +132,13 @@ public class BattleLobbyActivity extends AppCompatActivity {
     // this listener will be triggered when user created room or join other room
     // which means when btnCreateRoom or lvRooms are being clicked
     private void addRoomEventListener(){
-        Log.d(TAG, "addRoomEventListener being called");
         roomRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // join the room
+                Log.d(TAG, "addRoomEventListener() onDataChange() being called");
                 btnCreateRoom.setText("CREATE ROOM");
                 btnCreateRoom.setEnabled(true);
-                Intent intent = new Intent(BattleLobbyActivity.this, BattleReadyActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("roomName", roomName);
-                startActivity(intent);
-
             }
 
             @Override
