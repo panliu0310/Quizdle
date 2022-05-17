@@ -95,6 +95,7 @@
         android:layout_marginTop="@dimen/margintop_common"
         android:layout_marginStart="80dp"
         android:src="@drawable/check"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_username_player_1"/>
 
@@ -105,6 +106,7 @@
         android:layout_marginTop="@dimen/margintop_common"
         android:layout_marginEnd="80dp"
         android:src="@drawable/check"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_username_player_1"/>
 

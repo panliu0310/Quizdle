@@ -96,12 +96,6 @@ public class BattleLobbyActivity extends AppCompatActivity {
                 roomRef = database.getReference("rooms/" + roomName + "/player1");
                 addRoomEventListener();
                 roomRef.setValue(username);
-                roomRef = database.getReference("rooms/" + roomName + "/player1ready");
-                roomRef.setValue("false");
-                roomRef = database.getReference("rooms/" + roomName + "/player2ready");
-                roomRef.setValue("false");
-                roomRef = database.getReference("rooms/" + roomName + "/start");
-                roomRef.setValue("false");
             }
         });
     }

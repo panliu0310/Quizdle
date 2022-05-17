@@ -162,6 +162,7 @@ public class BattleMatchActivity extends AppCompatActivity {
                         Log.d(TAG, "win status: tie");
                     }
                     startActivity(intent);
+                    deleteBattle();
                 } else {
                     setQuestionViews();
                 }
@@ -384,6 +385,11 @@ public class BattleMatchActivity extends AppCompatActivity {
         roomRef = database.getReference("battles/" + roomName + "/player1choice");
         roomRef.removeValue();
         roomRef = database.getReference("battles/" + roomName + "/player2choice");
+        roomRef.removeValue();
+    }
+
+    private void deleteBattle() {
+        roomRef = database.getReference("battles/" + roomName);
         roomRef.removeValue();
     }
 

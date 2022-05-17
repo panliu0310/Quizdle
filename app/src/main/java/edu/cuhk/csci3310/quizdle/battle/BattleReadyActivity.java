@@ -42,6 +42,7 @@ public class BattleReadyActivity extends AppCompatActivity {
     boolean player2Ready;
 
     FirebaseDatabase database;
+    DatabaseReference roomRef;
     DatabaseReference roomNameRef;
     DatabaseReference readyRef;
     DatabaseReference startRef;
@@ -153,6 +154,11 @@ public class BattleReadyActivity extends AppCompatActivity {
                 startRef = database.getReference("rooms/" + roomName + "/start");
                 startRef.setValue("true");
 
+                // delete the waiting ready room
+                roomRef = database.getReference("rooms/" + roomName);
+                roomRef.removeValue();
+
+                // create battle
                 battleRef = database.getReference("battles/" + roomName + "/player1");
                 battleRef.setValue(usernamePlayer1);
                 battleRef = database.getReference("battles/" + roomName + "/player2");
