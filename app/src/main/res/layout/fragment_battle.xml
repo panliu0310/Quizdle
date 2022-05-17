@@ -10,6 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="進入對戰大廳"/>
+        android:text="Enter Lobby"/>
 
 </FrameLayout>

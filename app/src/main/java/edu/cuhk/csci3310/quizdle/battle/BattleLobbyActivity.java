@@ -74,6 +74,7 @@ public class BattleLobbyActivity extends AppCompatActivity {
     private void setToolbar(){
         // assigning ID of the toolbar to a variable
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Battle Lobby");
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -100,14 +101,6 @@ public class BattleLobbyActivity extends AppCompatActivity {
                 intent.putExtra("username", username);
                 intent.putExtra("roomName", roomName);
                 startActivity(intent);
-                /*
-                roomRef = database.getReference("rooms/" + roomName + "/player1ready");
-                roomRef.setValue("false");
-                roomRef = database.getReference("rooms/" + roomName + "/player2ready");
-                roomRef.setValue("false");
-                roomRef = database.getReference("rooms/" + roomName + "/start");
-                roomRef.setValue("false");
-                 */
             }
         });
     }
