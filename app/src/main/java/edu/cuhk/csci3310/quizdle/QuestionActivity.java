@@ -164,7 +164,7 @@ public class QuestionActivity extends AppCompatActivity {
                     Intent intent = new Intent(view.getContext(), CompleteQuestionSummaryActivity.class);
                     intent.putExtra(CATEGORY, category);
                     intent.putExtra(QUESTIONSET, questionSetName);
-                    intent.putExtra(SCORE, Integer.toString(score));
+                    intent.putExtra(SCORE, score);
                     view.getContext().startActivity(intent);
                 }else {
                     updateQuestion();
