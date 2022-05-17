@@ -50,7 +50,6 @@ public class QuestionActivity extends AppCompatActivity {
 
     TextView tvScore;
     TextView tvQuestion;
-    TextView TvExplanation;
     Button btnA, btnB, btnC, btnD, btnNextQuestion;
     Button[] buttonList;
     TextView tvExplanation;

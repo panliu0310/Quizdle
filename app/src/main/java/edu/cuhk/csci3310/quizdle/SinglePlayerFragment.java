@@ -65,7 +65,7 @@ public class SinglePlayerFragment extends Fragment {
         question_set_mode.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 Log.d(TAG,"Clicked Question Set Mode");
+                 Log.d(TAG,"Chosen Question Set Mode");
                  Intent intent = new Intent(getContext(), QuestionSetActivity.class);
                  startActivity(intent);
              }
@@ -76,7 +76,8 @@ public class SinglePlayerFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Chosen Endless Mode");
-                // TODO: Link to endless mode
+                Intent intent = new Intent(getContext(), EndlessQuestionActivity.class);
+                startActivity(intent);
             }
         });
 
