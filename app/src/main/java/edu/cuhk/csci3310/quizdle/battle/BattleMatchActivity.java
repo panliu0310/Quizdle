@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -105,6 +106,11 @@ public class BattleMatchActivity extends AppCompatActivity {
 
         setChoiceButtonOnclickListener();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), " You cannot leave during battle! ", Toast.LENGTH_SHORT).show();
     }
 
     private void setToolbar() {

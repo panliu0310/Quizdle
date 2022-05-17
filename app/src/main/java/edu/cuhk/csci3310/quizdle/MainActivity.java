@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setBottomNavigationView();
     }
 
-    private void setToolbar(){
+    private void setToolbar() {
         // assigning ID of the toolbar to a variable
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // using toolbar as ActionBar
@@ -69,14 +71,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         ibSetting.setOnClickListener(new View.OnClickListener() {
             @Override
 
-            public void onClick( View view ) {
+            public void onClick(View view) {
                 // start SettingActivity
                 startSettingActivity();
             }
         });
     }
 
-    private void setBottomNavigationView(){
+    private void setBottomNavigationView() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -92,9 +94,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null){
+                && data != null && data.getData() != null) {
             mImageUri = data.getData();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                finishAffinity();
+                            }
+                        })
+                .create().show();
     }
 
     @Override
@@ -120,11 +136,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
-    private void checkUser(){
+    private void checkUser() {
         // get current user
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
-        if (firebaseUser == null){
+        if (firebaseUser == null) {
             // user not logged in
             startActivity(new Intent(this, LoginActivity.class));
         } else {
@@ -133,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
-    private void startSettingActivity(){
+    private void startSettingActivity() {
         CollectionReference usersRef = mFirestore.collection("users");
         usersRef.whereEqualTo("email", email)
                 .get()

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -178,6 +179,12 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         });
 
         setMenuButtonOnClickListener();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CompleteQuestionSummaryActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void setMenuButtonOnClickListener(){
