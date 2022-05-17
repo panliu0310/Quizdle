@@ -52,6 +52,7 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
     TextView tvExp;
     TextView tvLevel;
     TextView tvCoin;
+    TextView lableVictory; TextView tvVictory;
     Button btnReturn;
 
     @Override
@@ -74,6 +75,7 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         tvExp = findViewById(R.id.tv_exp);
         tvLevel = findViewById(R.id.tv_level);
         tvCoin = findViewById(R.id.tv_coin);
+        lableVictory = findViewById(R.id.lbl_victory); tvVictory = findViewById(R.id.tv_victory);
         btnReturn = findViewById(R.id.btn_main_menu);
 
         String title = "Completed Endless Question Mode";
@@ -102,16 +104,22 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                             tvCongrats.setText("You Win!");
                             coins = 20 + score / 10 + user.getCoin(); // user get 20 bonus coins
                             score = 100 + score + user.getExperience(); // user get 100 bonus experiences
+                            victory = user.getVictory() + 1;
+                            totalMatch = user.getTotalMatch() + 1;
                             break;
                         case "tie":
                             tvCongrats.setText("Tie!");
                             coins = 10 + score / 10 + user.getCoin(); // user get 10 bonus coins
                             score = 50 + score + user.getExperience(); // user get 50 bonus experiences
+                            victory = user.getVictory();
+                            totalMatch = user.getTotalMatch() + 1;
                             break;
                         case "lose":
                             tvCongrats.setText("You Lose...");
                             coins = 5 + score / 10 + user.getCoin(); // user get 5 bonus coins
                             score = 20 + score + user.getExperience(); // user get 20 bonus experiences
+                            victory = user.getVictory();
+                            totalMatch = user.getTotalMatch() + 1;
                             break;
                         case "endless":
                             tvCongrats.setText("Congratulations!! You have scored\n" + score +
@@ -124,6 +132,8 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                             tvCongrats.setText("Congratulations!!");
                             coins = score / 10 + user.getCoin();
                             score = score + user.getExperience();
+                            victory = user.getVictory();
+                            totalMatch = user.getTotalMatch() + 1;
                     }
 
                     level = (int) Math.floor(Math.log(score/100)/Math.log(2)) + 2;
@@ -136,6 +146,10 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                     tvExp.setText(user.getExperience() + " -> " + score);
                     tvCoin.setText(user.getCoin() + " -> " + coins);
                     tvLevel.setText(user.getLevel() + " -> " + level);
+                    if (!winStatus.equals("")) {
+                        lableVictory.setText("Victory");
+                        tvVictory.setText(user.getVictory() + " -> " + victory);
+                    }
                     /* user.setExperience(score);
                     user.setLevel(level);
                     user.setCoin(coins);*/
@@ -144,6 +158,8 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                     userDetail.put("experience", score);
                     userDetail.put("level", level);
                     userDetail.put("expBound", expBound);
+                    userDetail.put("victory", victory);
+                    userDetail.put("totalMatch", totalMatch);
 
                     mFirestore.collection("users").document(documentId)
                             .update(userDetail).addOnSuccessListener(new OnSuccessListener<Void>() {

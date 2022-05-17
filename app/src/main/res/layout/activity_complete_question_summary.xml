@@ -39,15 +39,14 @@
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
 
     <TextView
         android:id="@+id/lbl_exp"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginStart="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="48dp"
         android:text="Experience"
         android:textSize="16sp"
@@ -56,9 +55,9 @@
 
     <TextView
         android:id="@+id/tv_exp"
-        android:layout_width="166dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="48dp"
         android:text="TextView"
         android:textSize="16sp"
@@ -68,10 +67,21 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_congrats" />
 
     <TextView
+        android:id="@+id/lbl_level"
+        android:layout_width="42dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:text="Level"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_exp" />
+
+    <TextView
         android:id="@+id/tv_level"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="20dp"
         android:text="TextView"
         android:textSize="16sp"
@@ -79,52 +89,53 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_exp" />
 
     <TextView
-        android:id="@+id/lbl_level"
-        android:layout_width="41dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="20dp"
-        android:text="Level"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_exp" />
-
-    <Button
-        android:id="@+id/btn_main_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="304dp"
-        android:text="Main Menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.456"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_coin"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
         android:id="@+id/lbl_coin"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="84dp"
+        android:layout_width="42dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:text="Coins"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_main_menu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_level"
-        app:layout_constraintVertical_bias="0.137" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_level" />
 
     <TextView
         android:id="@+id/tv_coin"
         android:layout_width="164dp"
         android:layout_height="20dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/lbl_coin"
         app:layout_constraintTop_toBottomOf="@+id/tv_level" />
+
+    <TextView
+        android:id="@+id/lbl_victory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/lbl_coin"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_coin" />
+
+    <TextView
+        android:id="@+id/tv_victory"
+        android:layout_width="164dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_coin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin" />
+
+    <Button
+        android:id="@+id/btn_main_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
