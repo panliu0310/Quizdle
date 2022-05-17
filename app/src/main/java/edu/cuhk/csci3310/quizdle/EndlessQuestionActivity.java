@@ -1,7 +1,9 @@
 package edu.cuhk.csci3310.quizdle;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -29,6 +33,8 @@ import edu.cuhk.csci3310.quizdle.model.Question;
 public class EndlessQuestionActivity extends AppCompatActivity {
 
     public String TAG = "EndlessQuestionActivity";
+    public static final String CATEGORY = "edu.cuhk.csci3310.quizdle.extra.CATEGORY";
+    public static final String SCORE = "edu.cuhk.csci3310.quizdle.extra.SCORE";
 
     private FirebaseFirestore mFirestore;
 
@@ -41,6 +47,7 @@ public class EndlessQuestionActivity extends AppCompatActivity {
     private int questionNum = 0;
     private int score = 0;
     private int correctAns;
+    private int lifes = 3;
 
     TextView tvScore;
     TextView tvQuestion;
@@ -49,6 +56,7 @@ public class EndlessQuestionActivity extends AppCompatActivity {
     TextView tvExplanation;
     Toolbar toolbar;
     ImageView ivHeart1, ivHeart2, ivHeart3;
+    ImageView[] heartList;
 
 
 
@@ -70,6 +78,7 @@ public class EndlessQuestionActivity extends AppCompatActivity {
         ivHeart1 = findViewById(R.id.iv_heart1);
         ivHeart2 = findViewById(R.id.iv_heart2);
         ivHeart3 = findViewById(R.id.iv_heart3);
+        heartList = new ImageView[]{ivHeart1, ivHeart2, ivHeart3};
 
         mFirestore = FirebaseFirestore.getInstance();
 
@@ -99,9 +108,10 @@ public class EndlessQuestionActivity extends AppCompatActivity {
                                             Log.d(TAG, subCategory);
                                             if (task.getResult() != null){
                                                 questionSet.addAll(task.getResult().toObjects(Question.class));
-                                                Log.d(TAG, questionSet.get(questionSet.size()-1).getQuestion());
                                                 if((finalI == categorySet.size()) && (finalJ == cat.getSubCategory().size())){
                                                     Log.d(TAG, "get all questions");
+                                                    Collections.shuffle(questionSet);
+                                                    updateQuestion();
                                                 }
                                             }
                                         }
@@ -119,10 +129,92 @@ public class EndlessQuestionActivity extends AppCompatActivity {
 
 
         });
+
+        setChoiceButtonOnclickListener();
+        setNextQuestionButtonOnclickListener();
+
     }
 
     private void updateQuestion(){
+        Question question = questionSet.get(questionNum);
+        int displayNum = questionNum + 1;
+        String[] falseAnsList= {question.getFalseAns1(), question.getFalseAns2(), question.getFalseAns3()};
+        correctAns = ran.nextInt(4);
+        int falseAnsNum = 0;
+        Log.d(TAG, "CorrectAns" + correctAns);
+        for (int i = 0; i < buttonList.length; i++){
+            buttonList[i].setEnabled(true);
+            buttonList[i].setBackgroundColor(getColor(R.color.purple_500));
+            Log.d(TAG, falseAnsNum+"");
+            if (i == correctAns){
+                buttonList[i].setText(question.getTrueAns());
+            }else{
+                buttonList[i].setText(falseAnsList[falseAnsNum]);
+                falseAnsNum++;
+            }
+        }
+        toolbar.setTitle( "Endless Mode - " + ": Question " + displayNum);
+        tvQuestion.setText(question.getQuestion());
+        tvExplanation.setVisibility(View.INVISIBLE);
+        btnNextQuestion.setVisibility(View.INVISIBLE);
+    }
 
+    private void setChoiceButtonOnclickListener(){
+        View.OnClickListener btnOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button btn = (Button) v;
+                String btnText = (String) btn.getText();
+                if(btnText.equals(questionSet.get(questionNum).getTrueAns())){
+                    v.setBackgroundColor(getResources().getColor(R.color.correct));
+                    score += 100;
+                    tvScore.setText(score + "");
+                }else {
+                    v.setBackgroundColor(getResources().getColor(R.color.incorrect));
+                    heartList[3-lifes].setVisibility(View.INVISIBLE);
+                    lifes--;
+                }
+                for (Button choice_btn: buttonList ){
+                    choice_btn.setEnabled(false);
+                }
+                tvExplanation.setVisibility(View.VISIBLE);
+                tvExplanation.setText(questionSet.get(questionNum).getExplanation());
+                if (questionNum + 1 == questionSet.size()){
+                    btnNextQuestion.setText("Finish");
+                }else if(lifes == 0){
+                    btnNextQuestion.setText("Game Over");
+                }
+                btnNextQuestion.setVisibility(View.VISIBLE);
+
+            }
+        };
+
+        for (Button button : buttonList) {
+            button.setOnClickListener(btnOnClickListener);
+        }
+
+    }
+
+    private void setNextQuestionButtonOnclickListener(){
+        View.OnClickListener btnOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                questionNum++;
+                if (questionNum == questionSet.size()){
+                    /*Intent intent = new Intent(view.getContext(), CompleteQuestionSummaryActivity.class);
+                    intent.putExtra(CATEGORY, "Endless Mode");
+                    intent.putExtra(SCORE, Integer.toString(score));
+                    view.getContext().startActivity(intent);*/
+                    Log.d(TAG, "Finished!");
+                }else if(lifes == 0){
+                    Log.d(TAG, "Failed");
+                }
+                else {
+                    updateQuestion();
+                }
+            }
+        };
+        btnNextQuestion.setOnClickListener(btnOnClickListener);
     }
 
 }
