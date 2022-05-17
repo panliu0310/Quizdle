@@ -54,18 +54,15 @@ public class SubCategoryListAdapter extends Adapter<SubCategoryListAdapter.SubCa
             subCategoryTextView = itemView.findViewById(R.id.subcategory_item_name);
             this.mAdapter = adapter;
 
-            imageItemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int mPosition = getLayoutPosition();
-                    Intent intent = new Intent(view.getContext(), QuestionActivity.class);
-                    intent.putExtra(CATEGORY, mCategory);
-                    intent.putExtra(SUBCATEGORY, mSubCategoryList.get(mPosition));
-                    view.getContext().startActivity(intent);
+            imageItemView.setOnClickListener(view -> {
+                int mPosition = getLayoutPosition();
+                Intent intent = new Intent(view.getContext(), QuestionActivity.class);
+                intent.putExtra(CATEGORY, mCategory);
+                intent.putExtra(SUBCATEGORY, mSubCategoryList.get(mPosition));
+                view.getContext().startActivity(intent);
 
-                    Log.d(TAG, "Image OnClick "
-                            + mCategory + " " + mSubCategoryList.get(mPosition));
-                }
+                Log.d(TAG, "Image OnClick "
+                        + mCategory + " " + mSubCategoryList.get(mPosition));
             });
         }
     }
@@ -83,7 +80,7 @@ public class SubCategoryListAdapter extends Adapter<SubCategoryListAdapter.SubCa
         holder.subCategoryTextView.setText(mCategoryName);
         holder.imageItemView.setImageURI(Uri.parse(mDrawableFilePath
                 + mCategory.toLowerCase().substring(0,3) + "_"
-                + mCategoryName.toLowerCase().substring(0,3)));
+                + mCategoryName.toLowerCase().substring(0,3).trim()));
         if(mCategory.equals("Customize")){
             holder.imageItemView.setImageURI(Uri.parse(mCustomizeDrawableFilePath));
         }
