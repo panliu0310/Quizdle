@@ -63,12 +63,10 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         category = intent.getStringExtra(QuestionActivity.CATEGORY);
         questionSetName = intent.getStringExtra(QuestionActivity.QUESTIONSET);
-        Log.d(TAG, intent.getStringExtra(QuestionActivity.SCORE));
-        //score = Integer.parseInt(intent.getStringExtra(QuestionActivity.SCORE));
-        score = 100;
-        winStatus = intent.getStringExtra("winStatus");
-        Log.d(TAG, "win status: " + winStatus);
-
+        score = intent.getIntExtra(QuestionActivity.SCORE, 0);
+        if (intent.getStringExtra("winStatus") != null){
+            winStatus = intent.getStringExtra("winStatus");
+        }
         tvToolbar = findViewById(R.id.toolbar);
         tvCongrats = findViewById(R.id.tv_congrats);
         tvExp = findViewById(R.id.tv_exp);

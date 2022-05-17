@@ -85,8 +85,6 @@ public class BattleMatchActivity extends AppCompatActivity {
         roomName = intent.getStringExtra("roomName");
         usernamePlayer1 = intent.getStringExtra("usernamePlayer1");
         usernamePlayer2 = intent.getStringExtra("usernamePlayer2");
-        Log.d(TAG, "Received category: " + category);
-        Log.d(TAG, "Received role: " + role);
 
         // set view name
         tvScorePlayer1 = findViewById(R.id.tv_score_player_1); tvScorePlayer2 = findViewById(R.id.tv_score_player_2);
@@ -114,14 +112,13 @@ public class BattleMatchActivity extends AppCompatActivity {
     }
 
     private void createTimers() {
-        countDownTimer15s = new CountDownTimer(3000, 1000) {
+        countDownTimer15s = new CountDownTimer(15000, 1000) {
             public void onTick(long millisUntilFinished) {
                 tvTimer.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
             }
 
             public void onFinish() {
                 sendResultOfOneQuestion();
-                Log.d(TAG, "timer finish");
             }
         };
 
@@ -139,7 +136,6 @@ public class BattleMatchActivity extends AppCompatActivity {
                     Intent intent = new Intent(BattleMatchActivity.this, CompleteQuestionSummaryActivity.class);
                     intent.putExtra(QuestionActivity.CATEGORY, category);
                     intent.putExtra(QuestionActivity.QUESTIONSET, questionSetName);
-                    Log.d(TAG, "role: " + role);
                     if (role.equals("host")){
                         intent.putExtra(QuestionActivity.SCORE, scorePlayer1);
                     } else {
@@ -221,16 +217,13 @@ public class BattleMatchActivity extends AppCompatActivity {
         roomNameRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG, "onDataChange!");
                 // set textview username with score data
                 if (snapshot.child("player1score").getValue() != null) {
                     scorePlayer1 = ((Long) snapshot.child("player1score").getValue()).intValue();
-                    Log.d(TAG, "usernamePlayer1: " + usernamePlayer1);
                     tvScorePlayer1.setText(usernamePlayer1 + ": " + scorePlayer1);
                 }
                 if (snapshot.child("player2score").getValue() != null) {
                     scorePlayer2 = ((Long) snapshot.child("player2score").getValue()).intValue();
-                    Log.d(TAG, "usernamePlayer2: " + usernamePlayer2);
                     tvScorePlayer2.setText(usernamePlayer2 + ": " + scorePlayer2);
                 }
 
@@ -238,7 +231,6 @@ public class BattleMatchActivity extends AppCompatActivity {
                 // add score to players
                 if (snapshot.child("player1correct").getValue() != null) {
                     tvChoicePlayer1.setText(snapshot.child("player1correct").getValue().toString());
-                    Log.d(TAG, "set tvChoicePlayer1 to: " + snapshot.child("player1correct").getValue().toString());
                     if (tvChoicePlayer1.getText().equals("correct") && role.equals("host")) {
                         scorePlayer1 += 50;
                         scoreRef = database.getReference("battles/" + roomName + "/player1score");
@@ -249,7 +241,6 @@ public class BattleMatchActivity extends AppCompatActivity {
                 }
                 if (snapshot.child("player2correct").getValue() != null) {
                     tvChoicePlayer2.setText(snapshot.child("player2correct").getValue().toString());
-                    Log.d(TAG, "set tvChoicePlayer2 to: " + snapshot.child("player2correct").getValue().toString());
                     if (tvChoicePlayer2.getText().equals("correct") && role.equals("guest")) {
                         scorePlayer2 += 50;
                         scoreRef = database.getReference("battles/" + roomName + "/player2score");
@@ -261,20 +252,14 @@ public class BattleMatchActivity extends AppCompatActivity {
 
                 // identify winner
                 if (snapshot.child("player1score").getValue() != null && snapshot.child("player1score").getValue() != null) {
-                    Log.d(TAG, "player1score: " + snapshot.child("player1score").getValue().toString());
-                    Log.d(TAG, "player2score: " + snapshot.child("player2score").getValue().toString());
-
                     if (Integer.parseInt(snapshot.child("player1score").getValue().toString()) >
                             Integer.parseInt(snapshot.child("player2score").getValue().toString())) {
                         winner = usernamePlayer1;
-                        Log.d(TAG, "winner: " + winner);
                     } else if (Integer.parseInt(snapshot.child("player1score").getValue().toString()) <
                             Integer.parseInt(snapshot.child("player2score").getValue().toString())) {
                         winner = usernamePlayer2;
-                        Log.d(TAG, "winner: " + winner);
                     } else {
                         winner = "";
-                        Log.d(TAG, "winner: " + winner);
                     }
                 }
             }
@@ -363,21 +348,17 @@ public class BattleMatchActivity extends AppCompatActivity {
         if (choicePlayer1.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("host")) {
             roomRef = database.getReference("battles/" + roomName + "/player1correct");
             roomRef.setValue("correct");
-            Log.d(TAG, "set player1correct!");
         } else if (!choicePlayer1.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("host")) {
             roomRef = database.getReference("battles/" + roomName + "/player1correct");
             roomRef.setValue("wrong");
-            Log.d(TAG, "set player1wrong!");
         }
 
         if (choicePlayer2.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("guest")) {
             roomRef = database.getReference("battles/" + roomName + "/player2correct");
             roomRef.setValue("correct");
-            Log.d(TAG, "set player2correct!");
         } else if (!choicePlayer1.equals(questionSet.get(questionNum).getTrueAns()) && role.equals("guest")) {
             roomRef = database.getReference("battles/" + roomName + "/player2correct");
             roomRef.setValue("wrong");
-            Log.d(TAG, "set player2wrong!");
         }
         tvExplanation.setText(questionSet.get(questionNum).getExplanation());
 
@@ -389,21 +370,14 @@ public class BattleMatchActivity extends AppCompatActivity {
     }
 
     private void clearDatabase() {
-        Log.d(TAG, "clearDatabase() is called!");
-        Log.d(TAG, "score of player 1: " + scorePlayer1);
-        Log.d(TAG, "score of player 2: " + scorePlayer2);
         roomRef = database.getReference("battles/" + roomName + "/player1correct");
         roomRef.removeValue();
-        Log.d(TAG, "removed player1correct!");
         roomRef = database.getReference("battles/" + roomName + "/player2correct");
         roomRef.removeValue();
-        Log.d(TAG, "removed player2correct!");
         roomRef = database.getReference("battles/" + roomName + "/player1choice");
         roomRef.removeValue();
-        Log.d(TAG, "removed player1choice!");
         roomRef = database.getReference("battles/" + roomName + "/player2choice");
         roomRef.removeValue();
-        Log.d(TAG, "removed player2choice!");
     }
 
 }
