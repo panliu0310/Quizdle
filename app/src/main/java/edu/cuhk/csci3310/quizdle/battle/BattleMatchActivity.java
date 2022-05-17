@@ -67,7 +67,7 @@ public class BattleMatchActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     CountDownTimer countDownTimer15s;
-    CountDownTimer countDownTimer3s;
+    CountDownTimer countDownTimer5s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +122,7 @@ public class BattleMatchActivity extends AppCompatActivity {
             }
         };
 
-        countDownTimer3s = new CountDownTimer(3000, 1000) {
+        countDownTimer5s = new CountDownTimer(5000, 1000) {
             public void onTick(long millisUntilFinished) {
                 tvTimer.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
             }
@@ -361,11 +361,12 @@ public class BattleMatchActivity extends AppCompatActivity {
             roomRef.setValue("wrong");
         }
         tvExplanation.setText(questionSet.get(questionNum).getExplanation());
+        tvExplanation.setVisibility(View.VISIBLE);
 
         for (Button choice_btn : buttonList) {
             choice_btn.setEnabled(false);
         }
-        countDownTimer3s.start();
+        countDownTimer5s.start();
 
     }
 

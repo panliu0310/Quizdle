@@ -126,6 +126,8 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                                                 "\nmarks in Endless Mode.");
                             coins = score / 10 + user.getCoin();
                             score = score + user.getExperience();
+                            victory = user.getVictory();
+                            totalMatch = user.getTotalMatch();
                             break;
                         case "":
                             // this part is for single player
@@ -133,7 +135,7 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                             coins = score / 10 + user.getCoin();
                             score = score + user.getExperience();
                             victory = user.getVictory();
-                            totalMatch = user.getTotalMatch() + 1;
+                            totalMatch = user.getTotalMatch();
                     }
 
                     level = (int) Math.floor(Math.log(score/100)/Math.log(2)) + 2;
