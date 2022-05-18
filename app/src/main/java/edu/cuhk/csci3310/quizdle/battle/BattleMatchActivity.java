@@ -1,5 +1,6 @@
 package edu.cuhk.csci3310.quizdle.battle;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -44,6 +45,7 @@ public class BattleMatchActivity extends AppCompatActivity {
     private String roomName = "";
     private String category;
     private String questionSetName;
+    private boolean questionSetFetched = false;
     public List<Question> questionSet;
     private int questionNum = 0;
     private int scorePlayer1 = 0; private int scorePlayer2 = 0;
@@ -99,8 +101,10 @@ public class BattleMatchActivity extends AppCompatActivity {
 
         createTimers();
 
-        // getSubcategoryRandom() -> getQuestionSet() -> setQuestionViews()
-        getSubcategoryRandom();
+        if (role.equals("host")) {
+            // getSubcategoryRandom() -> getQuestionSet() -> setQuestionViews()
+            getSubcategoryRandom();
+        }
 
         getRoomData();
 
@@ -174,6 +178,7 @@ public class BattleMatchActivity extends AppCompatActivity {
                     startActivity(intent);
                     deleteBattle();
                 } else {
+                    Log.d(TAG, "line 182 setQuestionView()");
                     setQuestionViews();
                 }
             }
@@ -198,6 +203,9 @@ public class BattleMatchActivity extends AppCompatActivity {
                         int randomInt = rn.nextInt(documentList.size()); // rn.nextInt(max - min + 1) + min
                         questionSetName = documentList.get(randomInt);
                         Log.d(TAG, "questionSetName: " + questionSetName);
+                        database.getReference("battles/" + roomName + "/questionSetName").setValue(questionSetName);
+                        // player 1 doesn't need to fetch question set name
+                        questionSetFetched = true;
                         // getSubcategoryRandom() -> getQuestionSet() -> setQuestionViews()
                         getQuestionSet();
 
@@ -221,6 +229,7 @@ public class BattleMatchActivity extends AppCompatActivity {
                     questionSet = task.getResult().toObjects(Question.class);
                     Log.d(TAG, questionSet.get(0).getQuestion());
                     // getSubcategoryRandom() -> getQuestionSet() -> setQuestionViews()
+                    Log.d(TAG, "line 233 setQuestionView()");
                     setQuestionViews();
                 }else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
@@ -268,7 +277,7 @@ public class BattleMatchActivity extends AppCompatActivity {
                 }
 
                 // identify winner
-                if (snapshot.child("player1score").getValue() != null && snapshot.child("player1score").getValue() != null) {
+                if (snapshot.child("player1score").getValue() != null && snapshot.child("player2score").getValue() != null) {
                     if (Integer.parseInt(snapshot.child("player1score").getValue().toString()) >
                             Integer.parseInt(snapshot.child("player2score").getValue().toString())) {
                         winner = usernamePlayer1;
@@ -278,6 +287,13 @@ public class BattleMatchActivity extends AppCompatActivity {
                     } else {
                         winner = "";
                     }
+                }
+
+                // get question set name
+                if (snapshot.child("questionSetName").getValue() != null && !questionSetFetched) {
+                    questionSetName = snapshot.child("questionSetName").getValue().toString();
+                    questionSetFetched = true;
+                    getQuestionSet();
                 }
 
                 // delete battle in database if both players leave
