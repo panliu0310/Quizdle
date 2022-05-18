@@ -22,14 +22,14 @@
         <entry key="..\:/Users/liuho/AndroidStudioProjects/Quizdle/app/src/main/res/menu/top_app_bar.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/liuho/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/layout/activity_battle_lobby.xml" value="0.23014018691588786" />
-        <entry key="app/src/main/res/layout/activity_battle_match.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/activity_battle_match.xml" value="0.13173980712890615" />
         <entry key="app/src/main/res/layout/activity_battle_ready.xml" value="0.2287073771158854" />
         <entry key="app/src/main/res/layout/activity_complete_question_summary.xml" value="0.4106674194335937" />
         <entry key="app/src/main/res/layout/activity_create_question.xml" value="0.4322860717773437" />
-        <entry key="app/src/main/res/layout/activity_endless_question.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_endless_question.xml" value="0.26148529052734376" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3575607299804688" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
-        <entry key="app/src/main/res/layout/activity_question.xml" value="0.17511520737327188" />
+        <entry key="app/src/main/res/layout/activity_question.xml" value="0.10240020751953136" />
         <entry key="app/src/main/res/layout/activity_question_set.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/activity_subcategory_select.xml" value="0.16197916666666667" />
@@ -48,6 +48,7 @@
         <entry key="app/src/main/res/layout/view_profile_pair.xml" value="0.11875" />
         <entry key="app/src/main/res/layout/view_text_input.xml" value="0.11875" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2296875" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>

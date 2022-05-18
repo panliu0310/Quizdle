@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:clipToPadding="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -51,61 +52,75 @@
 
     <Button
         android:id="@+id/btn_choice_a"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="0dp"
+        android:layout_height="80sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="10dp"
         android:backgroundTint="@color/button"
         android:text="A"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btn_choice_b"
-        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_question" />
 
     <Button
         android:id="@+id/btn_choice_b"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/button"
         android:text="B"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/btn_choice_d"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_choice_a"
         app:layout_constraintTop_toBottomOf="@+id/tv_question" />
 
     <Button
         android:id="@+id/btn_choice_c"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="55dp"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:backgroundTint="@color/button"
         android:text="C"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btn_choice_d"
-        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_choice_a" />
 
     <Button
         android:id="@+id/btn_choice_d"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="30dp"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/button"
         android:text="D"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_choice_c"
         app:layout_constraintTop_toBottomOf="@+id/btn_choice_b" />
 
     <TextView
         android:id="@+id/tv_explanation"
         android:layout_width="366dp"
         android:layout_height="141dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="36dp"
         android:text="Explanation"
         android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_choice_c" />
 
@@ -140,11 +155,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:text="Next Question"
+        android:textAllCaps="false"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_explanation" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_explanation"
+        app:layout_constraintVertical_bias="0.706" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
