@@ -307,7 +307,7 @@ public class BattleMatchActivity extends AppCompatActivity {
         // set text with 4 buttons
         for (int i = 0; i < buttonList.length; i++) {
             buttonList[i].setEnabled(true);
-            buttonList[i].setBackgroundColor(getColor(R.color.purple_500));
+            buttonList[i].setBackgroundColor(getColor(R.color.button));
             // if i is the correctAns, set text with true answer
             // else set text with false answers
             if (i == correctAns){

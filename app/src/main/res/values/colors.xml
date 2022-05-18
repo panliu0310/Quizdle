@@ -13,4 +13,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="correct">#B6FF61</color>
     <color name="incorrect">#FF5722</color>
+
+    <color name="background">#FFFCDC</color>
+    <color name="toolbar">#92B4EC</color>
+    <color name="button">#516BEB</color>
+    <!--#92B4EC-->
+    <!-->color name="background">#FFFFFF</color>-->
 </resources>

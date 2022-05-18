@@ -10,17 +10,17 @@
         android:id="@+id/cl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purple_200">
+        android:background="@color/background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margintop_common"
             android:layout_marginStart="@dimen/marginstart_common"
+            android:layout_marginTop="@dimen/margintop_common"
             android:layout_marginEnd="@dimen/marginend_common"
-            android:paddingBottom="16dp"
             android:background="@drawable/bg_corner_white"
+            android:paddingBottom="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -28,54 +28,54 @@
                 android:id="@+id/ib_icon"
                 android:layout_width="87dp"
                 android:layout_height="87dp"
-                android:layout_marginTop="@dimen/margintop_common"
                 android:layout_marginStart="@dimen/marginstart_common"
-                android:src="@drawable/home"
-                android:scaleType="fitCenter"
+                android:layout_marginTop="@dimen/margintop_common"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/home"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
                 android:id="@+id/ppv_username"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintop_common"
-                app:profileName="username"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:profileName="username" />
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
                 android:id="@+id/ppv_level"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:profileName="level"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
-                app:layout_constraintTop_toBottomOf="@id/ppv_username"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_username"
+                app:profileName="level" />
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
                 android:id="@+id/ppv_experience"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:profileName="experience"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
-                app:layout_constraintTop_toBottomOf="@id/ppv_level"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_level"
+                app:profileName="experience" />
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
                 android:id="@+id/ppv_victory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:profileName="victory"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
-                app:layout_constraintTop_toBottomOf="@id/ppv_experience"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_experience"
+                app:profileName="victory" />
 
             <edu.cuhk.csci3310.quizdle.customview.ProfilePairView
                 android:id="@+id/ppv_coin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:profileName="coin"
                 app:layout_constraintStart_toEndOf="@id/ib_icon"
-                app:layout_constraintTop_toBottomOf="@id/ppv_victory"/>
+                app:layout_constraintTop_toBottomOf="@id/ppv_victory"
+                app:profileName="coin" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

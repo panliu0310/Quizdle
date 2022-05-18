@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
+    android:background="@color/background"
     tools:context=".CreateQuestionActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -24,14 +24,12 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/purple_500"
+                android:background="@color/toolbar"
                 android:theme="@style/Theme.Quizdle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:titleTextColor="@color/white"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
+                app:titleTextColor="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -41,15 +39,15 @@
         android:id="@+id/cl_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margintop_common"
         android:layout_marginStart="@dimen/marginstart_common"
+        android:layout_marginTop="@dimen/margintop_common"
         android:layout_marginEnd="@dimen/marginend_common"
         android:layout_marginBottom="16dp"
-        android:paddingBottom="16dp"
         android:background="@drawable/bg_corner_white"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
         <ScrollView
             android:id="@+id/sv_create_question_form"
@@ -69,12 +67,12 @@
                     android:id="@+id/tv_greeting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margintop_common"
                     android:layout_marginStart="@dimen/marginstart_common"
+                    android:layout_marginTop="@dimen/margintop_common"
                     android:layout_marginEnd="@dimen/marginend_common"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_set_name"
@@ -83,7 +81,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_greeting"
-                    app:textInputName="Question Set Name"/>
+                    app:textInputName="Question Set Name" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_set_description"
@@ -92,7 +90,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_set_name"
-                    app:textInputName="Brief Description"/>
+                    app:textInputName="Brief Description" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_1"
@@ -101,7 +99,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_set_description"
-                    app:textInputName="Question 1"/>
+                    app:textInputName="Question 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_1_true_answer"
@@ -110,7 +108,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_1"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_1_false_answer_1"
@@ -119,7 +117,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_1_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_1_false_answer_2"
@@ -128,7 +126,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_1_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_1_false_answer_3"
@@ -137,7 +135,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_1_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_1_explanation"
@@ -146,7 +144,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_1_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_2"
@@ -155,7 +153,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_1_explanation"
-                    app:textInputName="Question 2"/>
+                    app:textInputName="Question 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_2_true_answer"
@@ -164,7 +162,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_2"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_2_false_answer_1"
@@ -173,7 +171,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_2_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_2_false_answer_2"
@@ -182,7 +180,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_2_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_2_false_answer_3"
@@ -191,7 +189,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_2_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_2_explanation"
@@ -200,7 +198,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_2_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_3"
@@ -209,7 +207,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_2_explanation"
-                    app:textInputName="Question 3"/>
+                    app:textInputName="Question 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_3_true_answer"
@@ -218,7 +216,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_3"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_3_false_answer_1"
@@ -227,7 +225,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_3_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_3_false_answer_2"
@@ -236,7 +234,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_3_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_3_false_answer_3"
@@ -245,7 +243,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_3_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_3_explanation"
@@ -254,7 +252,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_3_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_4"
@@ -263,7 +261,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_3_explanation"
-                    app:textInputName="Question 4"/>
+                    app:textInputName="Question 4" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_4_true_answer"
@@ -272,7 +270,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_4"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_4_false_answer_1"
@@ -281,7 +279,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_4_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_4_false_answer_2"
@@ -290,7 +288,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_4_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_4_false_answer_3"
@@ -299,7 +297,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_4_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_4_explanation"
@@ -308,7 +306,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_4_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_5"
@@ -317,7 +315,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_4_explanation"
-                    app:textInputName="Question 5"/>
+                    app:textInputName="Question 5" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_5_true_answer"
@@ -326,7 +324,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_5"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_5_false_answer_1"
@@ -335,7 +333,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_5_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_5_false_answer_2"
@@ -344,7 +342,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_5_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_5_false_answer_3"
@@ -353,7 +351,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_5_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_5_explanation"
@@ -362,7 +360,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_5_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_6"
@@ -371,7 +369,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_5_explanation"
-                    app:textInputName="Question 6"/>
+                    app:textInputName="Question 6" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_6_true_answer"
@@ -380,7 +378,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_6"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_6_false_answer_1"
@@ -389,7 +387,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_6_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_6_false_answer_2"
@@ -398,7 +396,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_6_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_6_false_answer_3"
@@ -407,7 +405,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_6_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_6_explanation"
@@ -416,7 +414,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_6_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_7"
@@ -425,7 +423,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_6_explanation"
-                    app:textInputName="Question 7"/>
+                    app:textInputName="Question 7" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_7_true_answer"
@@ -434,7 +432,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_7"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_7_false_answer_1"
@@ -443,7 +441,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_7_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_7_false_answer_2"
@@ -452,7 +450,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_7_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_7_false_answer_3"
@@ -461,7 +459,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_7_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_7_explanation"
@@ -470,7 +468,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_7_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_8"
@@ -479,7 +477,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_7_explanation"
-                    app:textInputName="Question 8"/>
+                    app:textInputName="Question 8" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_8_true_answer"
@@ -488,7 +486,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_8"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_8_false_answer_1"
@@ -497,7 +495,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_8_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_8_false_answer_2"
@@ -506,7 +504,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_8_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_8_false_answer_3"
@@ -515,7 +513,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_8_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_8_explanation"
@@ -524,7 +522,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_8_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_9"
@@ -533,7 +531,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_8_explanation"
-                    app:textInputName="Question 9"/>
+                    app:textInputName="Question 9" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_9_true_answer"
@@ -542,7 +540,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_9"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_9_false_answer_1"
@@ -551,7 +549,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_9_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_9_false_answer_2"
@@ -560,7 +558,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_9_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_9_false_answer_3"
@@ -569,7 +567,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_9_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_9_explanation"
@@ -578,7 +576,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_9_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_10"
@@ -587,7 +585,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_9_explanation"
-                    app:textInputName="Question 10"/>
+                    app:textInputName="Question 10" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_10_true_answer"
@@ -596,7 +594,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_10"
-                    app:textInputName="True Answer"/>
+                    app:textInputName="True Answer" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_10_false_answer_1"
@@ -605,7 +603,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_10_true_answer"
-                    app:textInputName="False Answer 1"/>
+                    app:textInputName="False Answer 1" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_10_false_answer_2"
@@ -614,7 +612,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_10_false_answer_1"
-                    app:textInputName="False Answer 2"/>
+                    app:textInputName="False Answer 2" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_10_false_answer_3"
@@ -623,7 +621,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_10_false_answer_2"
-                    app:textInputName="False Answer 3"/>
+                    app:textInputName="False Answer 3" />
 
                 <edu.cuhk.csci3310.quizdle.customview.TextInputView
                     android:id="@+id/tiv_question_10_explanation"
@@ -632,7 +630,7 @@
                     android:layout_marginTop="@dimen/margintop_common"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tiv_question_10_false_answer_3"
-                    app:textInputName="Explanation"/>
+                    app:textInputName="Explanation" />
 
                 <Button
                     android:id="@+id/btn_submit"
@@ -640,9 +638,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margintop_common"
                     android:text="submit"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tiv_question_10_explanation"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tiv_question_10_explanation" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

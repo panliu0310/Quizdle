@@ -108,7 +108,7 @@ public class QuestionActivity extends AppCompatActivity {
         Log.d(TAG, "CorrectAns" + correctAns);
         for (int i = 0; i < buttonList.length; i++){
             buttonList[i].setEnabled(true);
-            buttonList[i].setBackgroundColor(getColor(R.color.purple_500));
+            buttonList[i].setBackgroundColor(getColor(R.color.button));
             Log.d(TAG, falseAnsNum+"");
             if (i == correctAns){
                 buttonList[i].setText(question.getTrueAns());

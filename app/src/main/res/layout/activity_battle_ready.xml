@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -22,15 +23,13 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/purple_500"
+                android:background="@color/toolbar"
                 android:theme="@style/Theme.Quizdle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:title="Battle Mode"
-                app:titleTextColor="@color/white"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
+                app:titleTextColor="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -42,20 +41,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margintop_common"
         app:dropDownMenuName="category"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
 
     <TextView
         android:id="@+id/tv_player_1"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margintop_common"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="@dimen/margintop_common"
         android:gravity="center_horizontal"
         android:text="player 1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ddmv_category"/>
+        app:layout_constraintTop_toBottomOf="@+id/ddmv_category" />
 
     <TextView
         android:id="@+id/tv_player_2"
@@ -66,7 +65,7 @@
         android:gravity="center_horizontal"
         android:text="player 2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ddmv_category"/>
+        app:layout_constraintTop_toBottomOf="@+id/ddmv_category" />
 
     <TextView
         android:id="@+id/tv_username_player_1"
@@ -74,9 +73,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margintop_common"
         android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="@id/tv_player_1"
         app:layout_constraintEnd_toEndOf="@id/tv_player_1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_player_1"/>
+        app:layout_constraintStart_toStartOf="@id/tv_player_1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_1" />
 
     <TextView
         android:id="@+id/tv_username_player_2"
@@ -84,20 +83,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margintop_common"
         android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="@id/tv_player_2"
         app:layout_constraintEnd_toEndOf="@id/tv_player_2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_player_2"/>
-    
+        app:layout_constraintStart_toStartOf="@id/tv_player_2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_2" />
+
     <ImageView
         android:id="@+id/iv_ready_player_1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="@dimen/margintop_common"
         android:layout_marginStart="80dp"
+        android:layout_marginTop="@dimen/margintop_common"
         android:src="@drawable/check"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_username_player_1"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_username_player_1" />
 
     <ImageView
         android:id="@+id/iv_ready_player_2"
@@ -108,7 +107,7 @@
         android:src="@drawable/check"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_username_player_1"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_username_player_1" />
 
     <Button
         android:id="@+id/btn_ready"
@@ -116,6 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/button"
         android:text="Ready"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

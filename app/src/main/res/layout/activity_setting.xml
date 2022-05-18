@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".SettingFragment">
 
     <Button
@@ -11,6 +12,7 @@
         android:layout_width="351dp"
         android:layout_height="0dp"
         android:layout_marginTop="144dp"
+        android:backgroundTint="@color/button"
         android:text="Modify Username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +26,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="150dp"
+        android:backgroundTint="@color/button"
         android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

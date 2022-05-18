@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -22,7 +23,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/purple_500"
+                android:background="@color/toolbar"
                 android:theme="@style/Theme.Quizdle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +55,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
+        android:backgroundTint="@color/button"
         android:text="A"
         app:layout_constraintEnd_toStartOf="@+id/btn_choice_b"
         app:layout_constraintHorizontal_bias="0.197"
@@ -66,6 +68,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="28dp"
+        android:backgroundTint="@color/button"
         android:text="B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_question" />
@@ -76,6 +79,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="55dp"
+        android:backgroundTint="@color/button"
         android:text="C"
         app:layout_constraintEnd_toStartOf="@+id/btn_choice_d"
         app:layout_constraintHorizontal_bias="0.197"
@@ -88,6 +92,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="55dp"
         android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/button"
         android:text="D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_choice_b" />
