@@ -8,18 +8,28 @@
 
     <Button
         android:id="@+id/btn_modify_username"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="351dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="144dp"
         android:text="Modify Username"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="150dp"
         android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_modify_username"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_modify_username"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
