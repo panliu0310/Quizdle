@@ -47,6 +47,7 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
     private int totalMatch = 0;
     private int coins = 0;
     private String winStatus = "";
+    private String title = "";
 
     Toolbar tvToolbar;
     TextView tvCongrats;
@@ -61,16 +62,7 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_question_summary);
 
-        // get information from intent
-        Intent intent = getIntent();
-        category = intent.getStringExtra(QuestionActivity.CATEGORY);
-        if (intent.getStringExtra("questionSetName") != null){
-            questionSetName = intent.getStringExtra(QuestionActivity.QUESTIONSET);
-        }
-        score = intent.getIntExtra(QuestionActivity.SCORE, 0);
-        if (intent.getStringExtra("winStatus") != null){
-            winStatus = intent.getStringExtra("winStatus");
-        }
+        // set view
         tvToolbar = findViewById(R.id.toolbar);
         tvCongrats = findViewById(R.id.tv_congrats);
         tvExp = findViewById(R.id.tv_exp);
@@ -79,14 +71,30 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
         lableVictory = findViewById(R.id.lbl_victory); tvVictory = findViewById(R.id.tv_victory);
         btnReturn = findViewById(R.id.btn_main_menu);
 
-        String title = "Completed Endless Question Mode";
-        if (!questionSetName.equals("")) title = "Completed " + category + " - " + questionSetName;
-        tvToolbar.setTitle(title);
+        // get information from intent
+        Intent intent = getIntent();
+        category = intent.getStringExtra(QuestionActivity.CATEGORY);
+
+        if (intent.getStringExtra(QuestionActivity.QUESTIONSET) != null){
+            questionSetName = intent.getStringExtra(QuestionActivity.QUESTIONSET);
+            Log.d(TAG, questionSetName);
+            title = "Completed " + category + " - " + questionSetName;
+            tvToolbar.setTitle(title);
+        }else{
+            title = "Completed Endless Question Mode";
+            tvToolbar.setTitle(title);
+        }
+
+        score = intent.getIntExtra(QuestionActivity.SCORE, 0);
+        if (intent.getStringExtra("winStatus") != null){
+            winStatus = intent.getStringExtra("winStatus");
+        }
 
         // get user data from firebase
         mFirestore = FirebaseFirestore.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
         assert firebaseUser != null;
         email = firebaseUser.getEmail();
 
