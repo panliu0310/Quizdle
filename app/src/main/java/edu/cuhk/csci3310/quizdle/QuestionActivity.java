@@ -239,20 +239,26 @@ public class QuestionActivity extends AppCompatActivity {
         View.OnClickListener btnOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int setDisable = 0;
-                for(int i = 0; i < 4; i++){
-                    if (setDisable >= 2){
-                        break;
+                if (coin >= 100) {
+                    int setDisable = 0;
+                    for (int i = 0; i < 4; i++) {
+                        if (setDisable >= 2) {
+                            break;
+                        }
+                        if (i != correctAns) {
+                            buttonList[i].setEnabled(false);
+                            setDisable++;
+                        }
                     }
-                    if (i != correctAns){
-                        buttonList[i].setEnabled(false);
-                        setDisable++;
-                    }
+                    btnHalf.setEnabled(false);
+                    coin -= 100;
+                    tvCoin.setText(coin + "");
+                    updateCoin();
+                }else{
+                    MessageDialogFragment fragment = MessageDialogFragment.newInstance("You don't have enough coins to buy hint");
+                    fragment.show(getSupportFragmentManager(), TAG);
                 }
-                btnHalf.setEnabled(false);
-                coin -= 100;
-                tvCoin.setText(coin + "");
-                updateCoin();
+
             }
         };
         btnHalf.setOnClickListener(btnOnClickListener);
