@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/tv_question"
         android:layout_width="342dp"
-        android:layout_height="136dp"
+        android:layout_height="100dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="30dp"
@@ -55,7 +55,6 @@
         android:layout_width="0dp"
         android:layout_height="80sp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="44dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="@color/button"
         android:text="A"
@@ -63,14 +62,13 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_choice_b"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_halfhalf" />
 
     <Button
         android:id="@+id/btn_choice_b"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="44dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/button"
         android:text="B"
@@ -79,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_choice_a"
-        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_halfhalf" />
 
     <Button
         android:id="@+id/btn_choice_c"
@@ -163,6 +161,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_explanation"
         app:layout_constraintVertical_bias="0.706" />
+
+    <TextView
+        android:id="@+id/lbl_coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:text="Total Coins:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_question"
+        app:layout_constraintStart_toEndOf="@+id/tv_score"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
+
+    <TextView
+        android:id="@+id/tv_coin"
+        android:layout_width="69dp"
+        android:layout_height="23dp"
+        android:text="0"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/lbl_coin"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <Button
+        android:id="@+id/btn_halfhalf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#FAC3E5"
+        android:text="50 / 50"
+        app:layout_constraintEnd_toStartOf="@+id/lbl_halfhalf"
+        app:layout_constraintHorizontal_bias="0.963"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+
+    <TextView
+        android:id="@+id/lbl_halfhalf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="(100 coins!)"
+        app:layout_constraintBottom_toTopOf="@+id/btn_choice_b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question"
+        app:layout_constraintVertical_bias="0.764" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

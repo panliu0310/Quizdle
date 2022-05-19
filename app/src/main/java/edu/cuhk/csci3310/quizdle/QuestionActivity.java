@@ -1,5 +1,7 @@
 package edu.cuhk.csci3310.quizdle;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import android.content.Intent;
@@ -16,7 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -39,7 +46,9 @@ public class QuestionActivity extends AppCompatActivity {
     public static final String SCORE = "edu.cuhk.csci3310.quizdle.extra.SCORE";
 
     private FirebaseFirestore mFirestore;
+    private FirebaseAuth mFirebaseAuth;
 
+    private String email = "";
     private String category;
     private String questionSetName;
     public List<Question> questionSet;
@@ -47,9 +56,12 @@ public class QuestionActivity extends AppCompatActivity {
     private int questionNum = 0;
     private int score = 0;
     private int correctAns;
+    private int coin = 0;
 
     TextView tvScore;
     TextView tvQuestion;
+    TextView tvCoin;
+    Button btnHalf;
     Button btnA, btnB, btnC, btnD, btnNextQuestion;
     Button[] buttonList;
     TextView tvExplanation;
@@ -64,6 +76,8 @@ public class QuestionActivity extends AppCompatActivity {
         tvScore = findViewById(R.id.tv_score);
         tvQuestion = findViewById(R.id.tv_question);
         tvExplanation = findViewById(R.id.tv_explanation);
+        tvCoin = findViewById(R.id.tv_coin);
+        btnHalf = findViewById(R.id.btn_halfhalf);
         btnA = findViewById(R.id.btn_choice_a);
         btnB = findViewById(R.id.btn_choice_b);
         btnC = findViewById(R.id.btn_choice_c);
@@ -92,6 +106,9 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
+        getCoins();
+
+        setHalfButtonOnClickListener();
         setChoiceButtonOnclickListener();
         setNextQuestionButtonOnclickListener();
 
@@ -121,6 +138,7 @@ public class QuestionActivity extends AppCompatActivity {
         tvQuestion.setText(question.getQuestion());
         tvExplanation.setVisibility(View.INVISIBLE);
         btnNextQuestion.setVisibility(View.INVISIBLE);
+        btnHalf.setEnabled(true);
     }
 
     private void setChoiceButtonOnclickListener(){
@@ -174,19 +192,83 @@ public class QuestionActivity extends AppCompatActivity {
         btnNextQuestion.setOnClickListener(btnOnClickListener);
     }
 
-    /*private void setToolbar(String title){
-        // assigning ID of the toolbar to a variable
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(title);
-        // using toolbar as ActionBar
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+    private void getCoins(){
+        // initialize Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+        assert firebaseUser != null;
+        email = firebaseUser.getEmail();
+
+        CollectionReference usersRef = mFirestore.collection("users");
+        usersRef.whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                coin = ((Number)document.getData().get("coin")).intValue();
+                                tvCoin.setText(coin + "");
+                                Log.d(TAG, coin + " coooin");
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting user document: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void setHalfButtonOnClickListener(){
+        View.OnClickListener btnOnClickListener = new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //What to do on back clicked
-                finish();
+            public void onClick(View view) {
+                int setDisable = 0;
+                for(int i = 0; i < 4; i++){
+                    if (setDisable >= 2){
+                        break;
+                    }
+                    if (i != correctAns){
+                        buttonList[i].setEnabled(false);
+                        setDisable++;
+                    }
+                }
+                btnHalf.setEnabled(false);
+                coin -= 100;
+                tvCoin.setText(coin + "");
+                updateCoin();
             }
-        });
-    }*/
+        };
+        btnHalf.setOnClickListener(btnOnClickListener);
+    }
+
+    private void updateCoin(){
+        Map<String, Object> coinUpdate = new HashMap<>();
+        coinUpdate.put("coin", coin);
+
+        CollectionReference usersRef = mFirestore.collection("users");
+        usersRef.whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                            String documentId = documentSnapshot.getId();
+                            Log.d(TAG, documentSnapshot.getData().toString());
+                            mFirestore.collection("users")
+                                    .document(documentId)
+                                    .update(coinUpdate)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Log.d(TAG, "successfully update coin");
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
 }

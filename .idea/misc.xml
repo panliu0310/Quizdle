@@ -27,15 +27,15 @@
         <entry key="app/src/main/res/layout/activity_complete_question_summary.xml" value="0.4106674194335937" />
         <entry key="app/src/main/res/layout/activity_create_question.xml" value="0.4322860717773437" />
         <entry key="app/src/main/res/layout/activity_endless_question.xml" value="0.26148529052734376" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3575607299804688" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
-        <entry key="app/src/main/res/layout/activity_question.xml" value="0.10240020751953136" />
+        <entry key="app/src/main/res/layout/activity_question.xml" value="0.6049667358398438" />
         <entry key="app/src/main/res/layout/activity_question_set.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/activity_subcategory_select.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/layout/activty_question.xml" value="0.24115905761718753" />
         <entry key="app/src/main/res/layout/category_list_item.xml" value="0.23037628173828123" />
-        <entry key="app/src/main/res/layout/fragment_battle.xml" value="0.1693840579710145" />
+        <entry key="app/src/main/res/layout/fragment_battle.xml" value="0.7475823001585146" />
         <entry key="app/src/main/res/layout/fragment_create.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_discuss.xml" value="0.11875" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17618560791015625" />
