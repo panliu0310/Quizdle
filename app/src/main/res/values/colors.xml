@@ -17,6 +17,6 @@
     <color name="background">#FFFCDC</color>
     <color name="toolbar">#92B4EC</color>
     <color name="button">#516BEB</color>
-    <!--#92B4EC-->
+    <color name="hint">#FAC3E5</color>
     <!-->color name="background">#FFFFFF</color>-->
 </resources>

@@ -191,7 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:backgroundTint="#FAC3E5"
+        android:backgroundTint="@color/hint"
         android:text="50 / 50"
         app:layout_constraintEnd_toStartOf="@+id/lbl_halfhalf"
         app:layout_constraintHorizontal_bias="0.963"
