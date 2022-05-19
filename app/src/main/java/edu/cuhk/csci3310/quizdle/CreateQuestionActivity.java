@@ -173,7 +173,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             // create a HashMap to store subcategory
             Map<String, Object> subcategoryDetail = new HashMap<>();
 
-            DocumentReference customizeRef = mFirestore.collection("questions").document("Mathematics");
+            DocumentReference customizeRef = mFirestore.collection("questions").document("Customize");
 
             customizeRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -225,7 +225,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             explanations[i] = tivExplanationList.get(i).etInput.getText().toString();
         }
 
-        CollectionReference questionSetRef = mFirestore.collection("questions").document("Mathematics").collection(questionSetName);
+        CollectionReference questionSetRef = mFirestore.collection("questions").document("Customize").collection(questionSetName);
 
         // if success, toast
         final boolean[] success = {false};
