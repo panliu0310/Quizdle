@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -114,6 +116,19 @@ public class QuestionActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit?")
+                .setMessage("Are you sure you want to exit?\nYou cannot get any exp and coins if exited!")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        QuestionActivity.super.onBackPressed();
+                    }
+                })
+                .create().show();
+    }
 
     private void updateQuestion(){
         Question question = questionSet.get(questionNum);
@@ -270,5 +285,7 @@ public class QuestionActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
 }

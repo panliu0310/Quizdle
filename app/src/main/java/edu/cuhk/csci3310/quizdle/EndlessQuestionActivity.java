@@ -1,5 +1,7 @@
 package edu.cuhk.csci3310.quizdle;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -133,6 +135,20 @@ public class EndlessQuestionActivity extends AppCompatActivity {
         setChoiceButtonOnclickListener();
         setNextQuestionButtonOnclickListener();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit?")
+                .setMessage("Are you sure you want to exit?\nYou cannot get any exp and coins if exited!")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        EndlessQuestionActivity.super.onBackPressed();
+                    }
+                })
+                .create().show();
     }
 
     private void updateQuestion(){
