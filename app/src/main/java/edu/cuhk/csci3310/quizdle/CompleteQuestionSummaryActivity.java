@@ -124,7 +124,7 @@ public class CompleteQuestionSummaryActivity extends AppCompatActivity {
                             break;
                         case "endless":
                             tvCongrats.setText("Congratulations!! You have scored\n" + score +
-                                                "\nmarks in Endless Mode.");
+                                                " marks\n in Endless Mode.");
                             coins = score / 10 + user.getCoin();
                             score = score + user.getExperience();
                             victory = user.getVictory();

@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import edu.cuhk.csci3310.quizdle.dialogfragment.MessageDialogFragment;
 import edu.cuhk.csci3310.quizdle.model.Category;
 import edu.cuhk.csci3310.quizdle.model.Question;
 
@@ -50,9 +51,12 @@ public class EndlessQuestionActivity extends AppCompatActivity {
     private int score = 0;
     private int correctAns;
     private int lifes = 3;
+    private int hints = 3;
 
     TextView tvScore;
     TextView tvQuestion;
+    TextView tvHint;
+    Button btnHalf;
     Button btnA, btnB, btnC, btnD, btnNextQuestion;
     Button[] buttonList;
     TextView tvExplanation;
@@ -70,6 +74,8 @@ public class EndlessQuestionActivity extends AppCompatActivity {
         tvScore = findViewById(R.id.tv_score);
         tvQuestion = findViewById(R.id.tv_question);
         tvExplanation = findViewById(R.id.tv_explanation);
+        tvHint = findViewById(R.id.tv_hint);
+        btnHalf = findViewById(R.id.btn_halfhalf);
         btnA = findViewById(R.id.btn_choice_a);
         btnB = findViewById(R.id.btn_choice_b);
         btnC = findViewById(R.id.btn_choice_c);
@@ -132,6 +138,7 @@ public class EndlessQuestionActivity extends AppCompatActivity {
 
         });
 
+        setHalfButtonOnClickListener();
         setChoiceButtonOnclickListener();
         setNextQuestionButtonOnclickListener();
 
@@ -171,6 +178,7 @@ public class EndlessQuestionActivity extends AppCompatActivity {
         }
         toolbar.setTitle( "Endless Mode - " + ": Question " + displayNum);
         tvQuestion.setText(question.getQuestion());
+        btnHalf.setEnabled(true);
         tvExplanation.setVisibility(View.INVISIBLE);
         btnNextQuestion.setVisibility(View.INVISIBLE);
     }
@@ -229,6 +237,34 @@ public class EndlessQuestionActivity extends AppCompatActivity {
             }
         };
         btnNextQuestion.setOnClickListener(btnOnClickListener);
+    }
+
+    private void setHalfButtonOnClickListener(){
+        View.OnClickListener btnOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hints > 0) {
+                    int setDisable = 0;
+                    for (int i = 0; i < 4; i++) {
+                        if (setDisable >= 2) {
+                            break;
+                        }
+                        if (i != correctAns) {
+                            buttonList[i].setEnabled(false);
+                            setDisable++;
+                        }
+                    }
+                    btnHalf.setEnabled(false);
+                    hints--;
+                    tvHint.setText("(" + hints + "/3)");
+                }else{
+                    MessageDialogFragment fragment = MessageDialogFragment.newInstance("All hints are used D:");
+                    fragment.show(getSupportFragmentManager(), TAG);
+                }
+
+            }
+        };
+        btnHalf.setOnClickListener(btnOnClickListener);
     }
 
 }
